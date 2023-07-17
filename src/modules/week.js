@@ -1,7 +1,7 @@
-import { contentHolder } from "..";
+import { contentHeader } from "..";
 
 const loadWeek = () => {
-    contentHolder.textContent = "loading weeekly";
+    contentHeader.textContent = "loading weeekly";
 }
 
 export default loadWeek;

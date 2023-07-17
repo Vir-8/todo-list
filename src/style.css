@@ -1,0 +1,139 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+
+    background-color: grey;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#header {
+    height: 100px;
+    background-color: rgb(138, 138, 138);
+}
+
+#container {
+    display: flex;
+}
+
+#sideBar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: calc(100vh - 100px);
+    width: 200px;
+    flex: 1;
+    background-color: rgb(48, 48, 48);
+}
+
+#sideBar .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#sideBar .buttons button {
+    height: 40px;
+}
+
+#content {
+    width: calc(100vw - 200px);
+    height: calc(100vh - 100px);
+    margin-left: 200px;
+    background-color: rgb(163, 163, 163);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+}
+
+#content .taskContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.newTaskButton {
+    height: 50px;
+    width: calc(100vw - 270px);
+}
+
+.newTask {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    width: calc(100vw - 270px);
+    background-color: rgb(219, 218, 218);
+    vertical-align: middle;
+}
+
+.taskDetails {
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 200px;
+    width: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    background-color: aqua;
+}
+
+.newTaskForm {
+    display: block;
+    position: absolute;
+    visibility: hidden;
+    width: calc(100vw - 270px);
+    border: 1px solid black;
+}
+
+.newTaskForm h1 {
+    margin-top: 0px;
+}
+
+.projects {
+    display: flex;
+    flex-direction: column;
+}
+
+.projectHeader {
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+
+#projectContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.projectForm {
+    display: none;
+}
+
+#projectName {
+    width: 200px;
+}
+
+.projectButtons {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.projectButtons button {
+    flex: 1;
+}
+
+#projectContainer .newProject {
+    height: 40px;
+}
