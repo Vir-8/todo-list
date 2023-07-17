@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <script src="main.js" defer></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="header">
@@ -18,14 +17,46 @@
                 <button class="inbox">inbox</button>
                 <button class="today">today</button>
                 <button class="week">this week</button>
-                <button>projects</button>
+            </div>
+
+            <div class="projects">
+                    
+                <div class="projectHeader">
+                    <h4>Projects</h4>
+                    <button class="newProject">+</button>
+                </div>
+
+                <form action="" class="projectForm">
+                    <input type="text" name="projectName" id="projectName" required>
+                    <div class="projectButtons">
+                        <button type="submit" id="addProject">add</button>
+                        <button type="button" id="cancelProject">cancel</button>
+                    </div>
+                </form>
+
+                <div id="projectContainer">
+
+                </div>
             </div>
         </div>
     
         <div id="content">
-    
+            <div class="contentHeader">
+
+            </div>
+            <div class="taskContainer">
+
+            </div>
         </div>
     </div>
 
+    <form action="" class="newTaskForm" method="post">
+        <div class="formContainer">
+            <input type="text" name="taskName" id="taskName" placeholder="Enter task name..." required>
+            <input type="date" name="taskDate" id="taskDate" required>
+            <button type="submit" id="submitNewTask">submit</button>
+            <button type="button" id="cancelTask">cancel</button>
+        </div>
+    </form>
 </body>
 </html>
