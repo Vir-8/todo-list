@@ -1,8 +1,12 @@
-import { myTasks, taskContainer, contentHeader, newTaskForm, submitNewTask } from "..";
-import { newTask, addNewTask } from "./tasks/tasks";
+import { myTasks, taskContainer, contentHeader, taskList } from "..";
+import { newTask } from "./tasks/tasks";
+
+let newTaskButtonCreated = false;
 
 const loadInbox = () => {
-    contentHeader.textContent = "";
+    if(!newTaskButtonCreated) {
+        createButton();
+    }
     showAllTasks();
 }
 
@@ -12,19 +16,28 @@ function createButton() {
     newTaskButton.onclick = function() {
         newTask(newTaskButton);
     };
-    return newTaskButton;
+    
+    newTaskButton.classList.add('newTaskButton');
+    newTaskButtonCreated = true;
+    contentHeader.append(newTaskButton);
 }
 
 
 export function showAllTasks() {
-    taskContainer.textContent = "";
+    taskList.textContent = "";
+
     for (let i = 0; i < myTasks.length; i++)
     {
-        taskContainer.append(myTasks[i]);
+        let mainTaskDiv = myTasks[i].mainTaskDiv;
+        let newTaskDiv = myTasks[i].newTaskDiv;
+        let subTaskDiv = myTasks[i].subTaskDiv;
+
+        mainTaskDiv.append(newTaskDiv);
+        mainTaskDiv.append(subTaskDiv);
+        taskList.append(mainTaskDiv);
+
+        console.log(myTasks[i]);
     }
-    let newTaskButton = createButton();
-    newTaskButton.classList.add('newTaskButton');
-    taskContainer.append(newTaskButton);
 }
 
 export default loadInbox;

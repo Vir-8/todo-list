@@ -1,5 +1,6 @@
-import { myTasks, newTaskForm, cancelTask } from "../..";
-import { showAllTasks } from "../inbox";
+import { myTasks, newTaskForm, cancelTask, taskContainer } from "../..";
+import loadInbox from "../inbox";
+import { displayMenu } from "./taskMenu";
 
 
 function newTask(newTaskButton) {
@@ -16,7 +17,7 @@ function newTask(newTaskButton) {
 
     newTaskForm.onsubmit = function(e) {
         console.log('submit new task clicked')
-        addNewTask(); //create new task card
+        addNewTask(newTaskButton); //create new task card
         e.preventDefault();
     };
 
@@ -27,63 +28,76 @@ function newTask(newTaskButton) {
     }
 }
 
-function addNewTask() {
-    let newTask = document.createElement('div');
-    newTask.classList.add('newTask');
+function addNewTask(newTaskButton) {
+    let mainTaskContainer = document.createElement('div');
+    mainTaskContainer.classList.add('mainTaskContainer');
+
+    let newTaskContainer = document.createElement('div');
+    newTaskContainer.classList.add('newTask');
 
     let check = document.createElement('input');
     check.type = "checkbox";
-    newTask.append(check);
+    newTaskContainer.append(check);
 
-    let taskName = document.createElement('h3');
-    taskName.textContent = document.getElementById('taskName').value;
-    newTask.append(taskName);
+    let taskName = document.createElement('input');
+    taskName.type = 'text';
+    taskName.value = document.getElementById('taskName').value;
+    newTaskContainer.append(taskName);
 
-    let taskDate = getTaskDate();
-    newTask.setAttribute("data-date", taskDate);
-    newTask.setAttribute("data-index", myTasks.length);
+    let taskDate = document.createElement('input');
+    taskDate.type = 'date';
+    taskDate.value = document.getElementById('taskDate').value;
+    newTaskContainer.append(taskDate);
 
-    // let taskDetails = createTaskDetails();
-    // newTask.append(taskDetails);
-    // newTask.onclick = function() {
-    //     showTaskDetails(taskDetails);
-    // }
+    taskDate.addEventListener('change', function() {
+        let newTaskDate = new Date(taskDate.value);
+        // Update the task object with the new task date
+        task.taskDate = newTaskDate;
+    });
 
-    myTasks.push(newTask);
+    let subTaskContainer = document.createElement('div');
+    subTaskContainer.classList.add('subTaskContainer');
+
+    let task = {
+        id: myTasks.length,
+        mainTaskDiv: mainTaskContainer,
+        newTaskDiv: newTaskContainer,
+        subTaskDiv: subTaskContainer,
+        taskDate: getTaskDate(),
+        subTasks: []
+    }
+
+    displayMenu(task);
+    myTasks.push(task);
+
+    check.addEventListener('change', function() {
+        if (check.checked) {
+          // Mark task as completed
+          myTasks.splice(task.id, 1);
+          loadInbox();
+          console.log(myTasks);
+        } 
+    });
+
     document.getElementById('taskName').value = "";
     newTaskForm.style.visibility = 'hidden';
-    showAllTasks();
+    newTaskButton.style.display = 'block';
+    loadInbox();
     console.log(myTasks);
 }
 
 
-
-
-function getTaskDate() {
+export function getTaskDate() {
     let date = document.getElementById('taskDate').value;
     let taskDate = new Date(date);
 
-    let day = taskDate.getDate();
-    let month = taskDate.getMonth() + 1; // January is 0, so we add 1
-    let year = taskDate.getFullYear();
+    // let day = taskDate.getDate();
+    // let month = taskDate.getMonth() + 1; // January is 0, so we add 1
+    // let year = taskDate.getFullYear();
   
-    taskDate = day + '-' + month + '-' + year;
+    // taskDate = day + '-' + month + '-' + year;
     return taskDate;
 }
-
-// function createTaskDetails() {
-//     let taskDetails = document.createElement('div');
-//     taskDetails.classList.add('taskDetails');
-//     let taskDesc = document.createElement('p'); 
-//     taskDesc.textContent = document.getElementById('taskDesc').value;
-//     taskDetails.append(taskDesc);
-
-//     return taskDetails;
-// }
-
-// function showTaskDetails(taskDetails) {
-//     taskDetails.style.visibility = 'visible';
-// }
 
 function cancelTaskCreation(newTaskButton) {
     newTaskButton.style.display = 'block';

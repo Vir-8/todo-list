@@ -1,4 +1,4 @@
-import { myProjects, projectForm, addProject, cancelProject, projectContainer } from "../..";
+import { myProjects, projectForm, cancelProject, projectContainer } from "../..";
 import { loadProject } from "./loadProject";
 
 export function showProjectForm() {
@@ -6,14 +6,16 @@ export function showProjectForm() {
     
     projectForm.onsubmit = function(e) {
         createNewProject();
+        projectForm.reset();
         e.preventDefault();
     };
     cancelProject.onclick = hideProjectForm;
 }
 
 function hideProjectForm(e) {
-  projectForm.style.display = 'none';
-  e.preventDefault();
+    projectForm.reset();
+    projectForm.style.display = 'none';
+    e.preventDefault();
 }
 
 function createNewProject() {
@@ -23,7 +25,9 @@ function createNewProject() {
     
     let newProject = {
         id: myProjects.length,
-        tasks: []
+        tasks: {
+            subTasks: []
+        }
     }
     
     newProjectButton.addEventListener('click', function() {

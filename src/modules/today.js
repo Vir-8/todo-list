@@ -1,27 +1,32 @@
-import { contentHeader, taskContainer, myTasks } from "..";
+import { taskContainer, myTasks, taskList } from "..";
 
 const loadToday = () => {
-    taskContainer.textContent = "";
+    taskList.textContent = "";
 
-    let date = new Date();
-    let day = date.getDate();
-    let month = date.getMonth() + 1; // January is 0, so we add 1
-    let year = date.getFullYear();
-  
-    let todayDate = day + '-' + month + '-' + year;
-    console.log('todayDate is ' + todayDate);
+    let currentDate = new Date();
+
+    console.log('todayDate is ' + currentDate);
 
     for (let i = 0; i < myTasks.length; i++)
     {
         let task = myTasks[i];
-        console.log('this task data-date is ' + task.getAttribute('data-date') )
-        if (todayDate == task.getAttribute('data-date'))
-        {
-            taskContainer.append(task);
+        let taskDate = task.taskDate;
+
+        console.log('this task data-date is ' + taskDate)
+        if (
+            currentDate.getFullYear() === taskDate.getFullYear() &&
+            currentDate.getMonth() === taskDate.getMonth() &&
+            currentDate.getDate() === taskDate.getDate()
+        ) {
+            let mainTaskDiv = task.mainTaskDiv;
+            let newTaskDiv = task.newTaskDiv;
+            let subTaskDiv = task.subTaskDiv;
+    
+            mainTaskDiv.append(newTaskDiv);
+            mainTaskDiv.append(subTaskDiv);
+            taskList.append(mainTaskDiv);
         }
     }
-
-
 }
 
 export default loadToday;

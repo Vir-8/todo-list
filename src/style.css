@@ -55,8 +55,16 @@ body {
     padding: 15px;
 }
 
-#content .taskContainer {
+#content .taskContainer .taskList {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#content .contentHeader {
+    display: flex;
+    min-height: 50px;
     flex-direction: column;
     align-items: center;
     gap: 10px;
@@ -76,22 +84,11 @@ body {
     vertical-align: middle;
 }
 
-.taskDetails {
-    visibility: hidden;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 200px;
-    width: 200px;
-    margin-top: -100px;
-    margin-left: -100px;
-    background-color: aqua;
-}
-
 .newTaskForm {
     display: block;
     position: absolute;
     visibility: hidden;
+    height: 50px;
     width: calc(100vw - 270px);
     border: 1px solid black;
 }
@@ -99,6 +96,26 @@ body {
 .newTaskForm h1 {
     margin-top: 0px;
 }
+
+
+.subTaskContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border: 1px solid black;
+}
+
+.subTaskContainer .subTask {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
+}
+
+
+
+
+
+
 
 .projects {
     display: flex;
@@ -136,4 +153,27 @@ body {
 
 #projectContainer .newProject {
     height: 40px;
+}
+
+#custom-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+  
+#custom-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+  
+#custom-menu li {
+    cursor: pointer;
+    padding: 5px;
+}
+  
+#custom-menu li:hover {
+    background-color: #f0f0f0;
 }
