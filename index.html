@@ -46,6 +46,16 @@
             </div>
             <div class="taskContainer">
 
+                <div class="taskList">
+
+                </div>
+                <div id="custom-menu">
+                    <ul>
+                      <li id="menu-item-1">Add Subtask</li>
+                      <li id="menu-item-2">Delete</li>
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
@@ -53,10 +63,20 @@
     <form action="" class="newTaskForm" method="post">
         <div class="formContainer">
             <input type="text" name="taskName" id="taskName" placeholder="Enter task name..." required>
-            <input type="date" name="taskDate" id="taskDate" required>
+            <input type="date" name="taskDate" id="taskDate" value="2023-07-18">
             <button type="submit" id="submitNewTask">submit</button>
             <button type="button" id="cancelTask">cancel</button>
         </div>
     </form>
+
+
+    <form action="" class="subTaskForm" method="post">
+        <div class="formContainer">
+            <input type="text" name="subTaskName" id="subTaskName" placeholder="Enter subtask name..." required>
+            <button type="submit" id="submitSubTask">submit</button>
+            <button type="button" id="cancelSubTask">cancel</button>
+        </div>
+    </form>
+
 </body>
 </html>
