@@ -20,7 +20,6 @@ function newTask(newTaskButton) {
 
     function updateWidth() {
         newTaskForm.style.width = getComputedStyle(newTaskButton).width;
-
     }
 
     newTaskForm.onsubmit = function(e) {

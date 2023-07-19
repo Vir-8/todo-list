@@ -156,6 +156,11 @@ body {
     background-color: red;
 }
 
+.subTask input {
+    background-color: #ffffff00;
+    border: none;
+}
+
 .subTaskContainer .subTaskDone {
     background-color: aquamarine;
 }
