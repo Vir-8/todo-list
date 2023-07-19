@@ -5,11 +5,18 @@ import { highLightButton } from "./sideBar.js";
 const loadInbox = () => {
 
     contentHeader.textContent = "";
-    createButton();
+    inboxHeader();
     showAllTasks();
 }
 
-function createButton() {
+function inboxHeader() {
+
+    let header = document.createElement('h1')
+    header.textContent = "inbox";
+    header.classList.add('pageHeader');
+
+    contentHeader.append(header);
+
     let newTaskButton = document.createElement('button');
     newTaskButton.textContent = "new button!";
     newTaskButton.onclick = function() {

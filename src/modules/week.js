@@ -1,7 +1,14 @@
-import { taskContainer, myTasks, taskList } from "..";
+import { contentHeader, myTasks, taskList } from "..";
 
 const loadWeek = () => {
     taskList.textContent = "";
+    contentHeader.textContent = "";
+
+    let header = document.createElement('h1')
+    header.textContent = "this week";
+    header.classList.add('pageHeader');
+
+    contentHeader.append(header);
 
     let currentDate = new Date();
     let currentDayOfWeek = currentDate.getDay();

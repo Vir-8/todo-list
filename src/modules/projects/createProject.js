@@ -23,10 +23,13 @@ function createNewProject() {
     let newProjectButton = document.createElement('button');
     newProjectButton.classList.add('newProject');
     newProjectButton.classList.add('sideBarButton');
-    newProjectButton.textContent = document.getElementById('projectName').value;
+
+    let projectName = document.getElementById('projectName').value;
+    newProjectButton.textContent = projectName;
     
     let newProject = {
         id: myProjects.length,
+        name: projectName,
         tasks: []
     }
 

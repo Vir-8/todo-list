@@ -6,11 +6,20 @@ export const loadProject = (newProject) => {
     taskList.textContent = "";
     contentHeader.textContent = "";
 
-    createProjectTaskButton(newProject);
+    projectHeader(newProject);
     showProjectTasks(newProject);
 }
 
-function createProjectTaskButton(newProject) {
+function projectHeader(newProject) {
+
+    contentHeader.textContent = "";
+
+    let header = document.createElement('h1')
+    header.textContent = newProject.name;
+    header.classList.add('pageHeader');
+
+    contentHeader.append(header);
+
     let newProjectTaskButton = document.createElement('button');
     newProjectTaskButton.textContent = "new button!";
 

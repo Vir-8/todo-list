@@ -12,8 +12,16 @@ function newTask(newTaskButton) {
     newTaskForm.style.top = buttonTop + 'px';
     newTaskForm.style.left = buttonLeft + 'px';
 
-    newTaskButton.style.display = 'none';
-    newTaskForm.style.visibility = 'visible';
+    newTaskForm.style.display = 'block';
+    newTaskForm.style.width = getComputedStyle(newTaskButton).width;
+    newTaskButton.style.visibility = 'hidden';
+
+    window.addEventListener('resize', updateWidth);
+
+    function updateWidth() {
+        newTaskForm.style.width = getComputedStyle(newTaskButton).width;
+
+    }
 
     newTaskForm.onsubmit = function(e) {
         console.log('submit new task clicked')
@@ -35,19 +43,25 @@ function addNewTask(newTaskButton) {
     let newTaskContainer = document.createElement('div');
     newTaskContainer.classList.add('newTask');
 
+
     let check = document.createElement('input');
     check.type = "checkbox";
     newTaskContainer.append(check);
 
+    let newTaskContent = document.createElement('div');
+    newTaskContent.classList.add('newTaskContent');
+
     let taskName = document.createElement('input');
     taskName.type = 'text';
     taskName.value = document.getElementById('taskName').value;
-    newTaskContainer.append(taskName);
+    newTaskContent.append(taskName);
 
     let taskDate = document.createElement('input');
     taskDate.type = 'date';
     taskDate.value = document.getElementById('taskDate').value;
-    newTaskContainer.append(taskDate);
+    newTaskContent.append(taskDate);
+
+    newTaskContainer.append(newTaskContent);
 
     taskDate.addEventListener('change', function() {
         let newTaskDate = new Date(taskDate.value);
@@ -80,8 +94,8 @@ function addNewTask(newTaskButton) {
     });
 
     document.getElementById('taskName').value = "";
-    newTaskForm.style.visibility = 'hidden';
-    newTaskButton.style.display = 'block';
+    newTaskForm.style.display = 'none';
+    newTaskButton.style.visibility = 'visible';
     loadInbox();
     console.log(myTasks);
 }
@@ -100,8 +114,8 @@ export function getTaskDate() {
 }
 
 function cancelTaskCreation(newTaskButton) {
-    newTaskButton.style.display = 'block';
-    newTaskForm.style.visibility = 'hidden';
+    newTaskButton.style.visibility = 'visible';
+    newTaskForm.style.display = 'none';
 }
 
 export { newTask };
