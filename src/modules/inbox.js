@@ -1,12 +1,11 @@
 import { myTasks, taskContainer, contentHeader, taskList } from "..";
 import { newTask } from "./tasks/tasks";
-
-let newTaskButtonCreated = false;
+import { highLightButton } from "./sideBar.js";
 
 const loadInbox = () => {
-    if(!newTaskButtonCreated) {
-        createButton();
-    }
+
+    contentHeader.textContent = "";
+    createButton();
     showAllTasks();
 }
 
@@ -18,7 +17,6 @@ function createButton() {
     };
     
     newTaskButton.classList.add('newTaskButton');
-    newTaskButtonCreated = true;
     contentHeader.append(newTaskButton);
 }
 

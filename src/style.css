@@ -15,21 +15,37 @@ body {
 }
 
 #header {
-    height: 100px;
+    display: flex;
+    height: 55px;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
     background-color: rgb(138, 138, 138);
+}
+
+#header h1 {
+    align-self: center;
+    margin: 0;
+    margin-left: 100px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 #container {
     display: flex;
+    position: relative;
+    top: 55px;
 }
 
 #sideBar {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    height: calc(100vh - 100px);
-    width: 200px;
     flex: 1;
+    position: fixed;
+    height: calc(100vh - 55px);
+    width: 250px;
+    padding: 20px;
+    gap: 20px;
     background-color: rgb(48, 48, 48);
 }
 
@@ -37,16 +53,21 @@ body {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    margin-top: 15px;
 }
 
 #sideBar .buttons button {
-    height: 40px;
+    padding: 8px;
+}
+
+.highlight-button {
+    background-color: red;
 }
 
 #content {
-    width: calc(100vw - 200px);
-    height: calc(100vh - 100px);
-    margin-left: 200px;
+    width: calc(100vw - 250px);
+    height: calc(100vh - 55px);
+    margin-left: 250px;
     background-color: rgb(163, 163, 163);
 
     display: flex;
@@ -111,7 +132,9 @@ body {
     border: 1px solid red;
 }
 
-
+.subTaskContainer .subTaskDone {
+    background-color: aquamarine;
+}
 
 
 
@@ -120,31 +143,34 @@ body {
 .projects {
     display: flex;
     flex-direction: column;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid red;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
+
 
 .projectHeader {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     color: white;
 }
 
-
-#projectContainer {
-    display: flex;
-    flex-direction: column;
+.projectHeader h4, button {
+    margin: 0;
 }
 
 .projectForm {
     display: none;
+    flex-direction: column;
+    padding-top: 10px;
 }
 
-#projectName {
-    width: 200px;
-}
 
 .projectButtons {
     display: flex;
-    margin-bottom: 8px;
 }
 
 .projectButtons button {
@@ -154,6 +180,16 @@ body {
 #projectContainer .newProject {
     height: 40px;
 }
+
+
+#projectContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 10px;
+}
+
+
 
 #custom-menu {
     display: none;

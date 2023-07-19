@@ -4,6 +4,7 @@ import loadInbox from "./modules/inbox";
 import loadToday from "./modules/today";
 import loadWeek from "./modules/week";
 import { showProjectForm, hideProjectForm, createNewProject } from './modules/projects/createProject';
+import { highLightButton } from './modules/sideBar.js';
 
 const contentHolder = document.querySelector('#content');
 const contentHeader = document.querySelector('.contentHeader');
@@ -31,17 +32,18 @@ const myTasks = [];
 const myProjects = [];
 
 let inboxButton = document.querySelector('.inbox');
-inboxButton.onclick = loadInbox;
+inboxButton.addEventListener('click', loadInbox);
 
 let todayButton = document.querySelector('.today');
-todayButton.onclick = loadToday;
+todayButton.addEventListener('click', loadToday);
 
 let weeklyButton = document.querySelector('.week');
-weeklyButton.onclick = loadWeek;
+weeklyButton.addEventListener('click', loadWeek);
 
 let newProjectButton = document.querySelector('.newProject');
 newProjectButton.onclick = showProjectForm;
 
+highLightButton();
 console.log("works lol");
 
 export { contentHolder, myTasks, taskContainer, taskList, contentHeader, newTaskForm, submitNewTask, cancelTask,

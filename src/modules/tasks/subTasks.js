@@ -1,4 +1,4 @@
-import { subTaskForm, cancelSubTask } from "../..";
+import { subTaskForm, cancelSubTask, myTasks } from "../..";
 import { showAllTasks } from "../inbox";
 
 
@@ -6,7 +6,7 @@ export function newSubTask(task) {
 
     task.subTaskDiv.insertAdjacentElement('afterend', subTaskForm);
 
-    subTaskForm.style.visibility = 'visible';
+    subTaskForm.style.display = 'block';
 
     subTaskForm.onsubmit = function(e) {
         console.log('submit subtask clicked')
@@ -29,17 +29,28 @@ function addNewSubTask(task) {
     check.type = "checkbox";
     newSubTask.append(check);
 
-    let taskName = document.createElement('h3');
-    taskName.textContent = document.getElementById('subTaskName').value;
+    let taskName = document.createElement('input');
+    taskName.type = 'text';
+    taskName.value = document.getElementById('subTaskName').value;
     newSubTask.append(taskName);
 
     newSubTask.setAttribute("data-index", task.subTasks.length);
 
     task.subTasks.push(newSubTask);
     task.subTaskDiv.append(newSubTask);
-    showAllTasks();
+
+    check.addEventListener('change', function() {
+        if (check.checked) {
+          // Mark task as completed
+          newSubTask.classList.add('subTaskDone');
+          
+          console.log(myTasks);
+        } else {
+            newSubTask.classList.remove('subTaskDone');
+        }
+    });
 
     subTaskForm.reset();
-    subTaskForm.style.visibility = 'hidden';
+    subTaskForm.style.display = 'none';
     console.log(task.subTasks);
 }
