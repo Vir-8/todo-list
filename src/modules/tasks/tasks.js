@@ -33,8 +33,10 @@ function newTask(newTaskButton) {
 
     cancelTask.onclick = function(e) {
         console.log('cancel task clicked')
+        newTaskButton.style.display = 'block';
+        newTaskForm.reset();
+        newTaskForm.style.display = 'none';
         e.preventDefault();
-        cancelTaskCreation(newTaskButton);
     }
 }
 
@@ -113,11 +115,6 @@ export function getTaskDate() {
   
     // taskDate = day + '-' + month + '-' + year;
     return taskDate;
-}
-
-function cancelTaskCreation(newTaskButton) {
-    newTaskButton.style.display = 'block';
-    newTaskForm.style.display = 'none';
 }
 
 export { newTask };

@@ -16,6 +16,8 @@ export function newSubTask(task) {
 
     cancelSubTask.onclick = function(e) {
         console.log('cancel task clicked')
+        subTaskForm.reset();
+        subTaskForm.style.display = 'none';
         e.preventDefault();
     }
 }
