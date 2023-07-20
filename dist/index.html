@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <script src="main.js" defer></script>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css2?family=Trebuchet+MS' rel='stylesheet'>
 </head>
 <body>
     <div id="header">
@@ -55,20 +57,18 @@
 
             </div>
 
-            <div class="newTaskButtonContainer">
+            <div class="newTaskDiv">
+
+                <div class="newTaskButtonContainer"> </div>
 
                 <form action="" class="newTaskForm" method="post">
                     <div class="formContainer">
-                        <div class="formElement">
-                            <label for="taskName">New Task</label>
-                        </div>
-                        
-                        <div class="formElement">
+                        <div class="formElement taskInfoForm">
                             <input type="text" name="taskName" id="taskName" placeholder="Enter task name..." required>
                             <input type="date" name="taskDate" id="taskDate" value="2023-07-18">
                         </div>
     
-                        <div class="formElement">
+                        <div class="formElement taskButtonForm">
                             <button type="submit" id="submitNewTask">submit</button>
                             <button type="button" id="cancelTask">cancel</button>
                         </div>
@@ -83,7 +83,7 @@
 
 
     <form action="" class="subTaskForm" method="post">
-        <div class="formContainer">
+        <div class="subTaskFormContainer">
             <input type="text" name="subTaskName" id="subTaskName" placeholder="Enter subtask name..." required>
             <button type="submit" id="submitSubTask">submit</button>
             <button type="button" id="cancelSubTask">cancel</button>

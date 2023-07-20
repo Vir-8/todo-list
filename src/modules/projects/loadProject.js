@@ -1,9 +1,18 @@
-import { contentHeader, taskContainer, newTaskForm, cancelTask, taskList } from "../..";
+import { contentHeader, taskContainer, newTaskForm, cancelTask, taskList, newTaskButtonContainer, subTaskForm } from "../..";
 import { newProjectTask } from "./projectTask";
 
 
 export const loadProject = (newProject) => {
+
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+
     taskList.textContent = "";
+
+    contentHeader.style.display = "flex";
     contentHeader.textContent = "";
 
     projectHeader(newProject);
@@ -22,6 +31,7 @@ function projectHeader(newProject) {
 }
 
 export function showProjectTasks(newProject) {
+    newTaskButtonContainer.textContent = "";
     taskList.textContent = "";
     for (let i = 0; i < newProject.tasks.length; i++)
     {
@@ -45,5 +55,5 @@ export function showProjectTasks(newProject) {
     };
 
     newProjectTaskButton.classList.add('newTaskButton');
-    taskList.append(newProjectTaskButton);
+    newTaskButtonContainer.append(newProjectTaskButton);
 }

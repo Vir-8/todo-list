@@ -1,7 +1,16 @@
-import { contentHeader, myTasks, taskList } from "..";
+import { contentHeader, myTasks, taskList, newTaskForm, subTaskForm } from "..";
 
 const loadWeek = () => {
+
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+    
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+
     taskList.textContent = "";
+
+    contentHeader.style.display = "flex";
     contentHeader.textContent = "";
 
     let header = document.createElement('h1')

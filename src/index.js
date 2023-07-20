@@ -10,6 +10,7 @@ const contentHolder = document.querySelector('#content');
 const contentHeader = document.querySelector('.contentHeader');
 
 const taskContainer = document.querySelector('.taskContainer');
+const newTaskButtonContainer = document.querySelector('.newTaskButtonContainer');
 const taskList = document.querySelector('.taskList');
 const projectContainer = document.getElementById('projectContainer')
 
@@ -48,4 +49,4 @@ console.log("works lol");
 
 export { contentHolder, myTasks, taskContainer, taskList, contentHeader, newTaskForm, submitNewTask, cancelTask,
     myProjects, projectForm, addProject, cancelProject, projectContainer,
-    subTaskForm, submitSubTask, cancelSubTask, menu };
+    subTaskForm, submitSubTask, cancelSubTask, menu, newTaskButtonContainer };

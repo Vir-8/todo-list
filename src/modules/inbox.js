@@ -1,10 +1,18 @@
-import { myTasks, taskContainer, contentHeader, taskList } from "..";
+import { myTasks, taskContainer, contentHeader, taskList, newTaskButtonContainer, newTaskForm, subTaskForm } from "..";
 import { newTask } from "./tasks/tasks";
 import { highLightButton } from "./sideBar.js";
 
 const loadInbox = () => {
 
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+
+    contentHeader.style.display = "flex";
     contentHeader.textContent = "";
+
     inboxHeader();
     showAllTasks();
 }
@@ -20,6 +28,7 @@ function inboxHeader() {
 
 
 export function showAllTasks() {
+    newTaskButtonContainer.textContent = "";
     taskList.textContent = "";
 
     for (let i = 0; i < myTasks.length; i++)
@@ -42,7 +51,7 @@ export function showAllTasks() {
     };
     
     newTaskButton.classList.add('newTaskButton');
-    taskList.append(newTaskButton);
+    newTaskButtonContainer.append(newTaskButton);
 }
 
 export default loadInbox;

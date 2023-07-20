@@ -2,6 +2,7 @@
     box-sizing: border-box;
 }
 
+
 body {
     margin: 0;
     padding: 0;
@@ -44,7 +45,7 @@ body {
     flex: 1;
     position: fixed;
     height: calc(100vh - 55px);
-    width: 250px;
+    width: 25vw;
     padding: 20px;
     gap: 20px;
     background-color: #030712;
@@ -56,7 +57,7 @@ body {
     margin-top: 15px;
 }
 
-#sideBar .buttons button {
+#sideBar .buttons button, #projectContainer button {
     background-color: #1f293757;
     padding: 8px;
     text-align: left;
@@ -65,17 +66,19 @@ body {
     color: white;
 }
 
-#sideBar .buttons button:hover {
+#sideBar .buttons button:hover, #projectContainer button:hover {
     background-color: #bbbbbb3b;
 }
 
-#sideBar .buttons .highlight-button {
+#sideBar .buttons .highlight-button, #projectContainer .highlight-button  {
     background-color: #bbbbbb54;
 }
 
-#sideBar .buttons .highlight-button:hover {
+#sideBar .buttons .highlight-button:hover, #projectContainer .highlight-button:hover {
     background-color: #bbbbbb54;
 }
+
+
 
 #content {
     display: flex;
@@ -83,20 +86,21 @@ body {
     position: fixed;
     overflow-y: auto;
     height: calc(100vh - 55px);
-    width: calc(100vw - 250px);
+    width: calc(100vw - 25vw);
 
     color: white;
-    margin-left: 250px;
+    margin-left: 25vw;
     gap: 10px;
     padding: 80px;
     padding-top: 15px;
 }
 
 #content .contentHeader {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    border-bottom: 1px solid white;
 }
 
 .pageHeader {
@@ -109,12 +113,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     margin-top: 30px;
 }
 
 .mainTaskContainer {
-    width: 100%
+    width: 100%;
+    border-top: 2px solid white;
 }
 
 .newTaskButton {
@@ -125,9 +130,9 @@ body {
 .newTask {
     display: flex;
     flex-direction: row;
-    height: 35px;
+    height: 40px;
     width: 100%;
-    background-color: #d4d4d8;
+    background-color: #d4d4d812;
     vertical-align: middle;
 }
 
@@ -136,18 +141,50 @@ body {
     width: 100%;
     justify-content: space-between;
     padding-right: 30px;
+    padding-left: 15px;
 }
 
 .newTask input {
     background-color: #ffffff00;
     border: none;
+    color: white;
+    font-size: 17px;
+    font-family: 'Open Sans';
+}
+
+.newTask input[type=checkbox] {
+    margin-left: 10px;
+    width: 20px;
 }
 
 .newTaskForm {
     display: none;
     border: 1px solid black;
+    background-color: #d4d4d812;
 }
 
+.formElement {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.formElement input[type=text] {
+    height: 40px;
+    width: 70%;
+}
+
+.formElement input[type=date] {
+    height: 40px;
+    width: 30%;
+}
+
+.formElement button {
+    height: 25px;
+    width: 50%;
+}
+ 
 .newTaskForm .formContainer {
     display: flex;
     flex-direction: column;
@@ -159,25 +196,53 @@ body {
     display: none;
 }
 
+.subTaskForm .subTaskFormContainer {
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    margin-left: 35px;
+    color: white;
+}
+
+.subTaskFormContainer input[type=text] {
+    width: 60%;
+}
+
+.subTaskFormContainer button {
+    width: 20%;
+}
+
 .subTaskContainer {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
+    margin-left: 35px;
 }
 
 .subTaskContainer .subTask {
     display: flex;
     flex-direction: row;
-    background-color: red;
+    height: 30px;
+    background-color: #d4d4d812;
+    border-top: 1px solid #ffffff75;
 }
 
 .subTask input {
     background-color: #ffffff00;
     border: none;
+    color: white;
+    font-size: 15px;
+    font-family: 'Open Sans';
 }
 
-.subTaskContainer .subTaskDone {
-    background-color: aquamarine;
+.subTask input[type=checkbox] {
+    margin-left: 10px;
+    margin-right: 20px;
+    width: 15px;
+}
+
+.subTaskContainer .subTaskDone input {
+    text-decoration: line-through;
 }
 
 
@@ -224,13 +289,6 @@ body {
     height: 40px;
 }
 
-#projectContainer button {
-    background-color: #d4d4d8;
-}
-
-#projectContainer .highlight-button {
-    background-color: #71717a;
-}
 
 
 
