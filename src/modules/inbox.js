@@ -12,19 +12,10 @@ const loadInbox = () => {
 function inboxHeader() {
 
     let header = document.createElement('h1')
-    header.textContent = "inbox";
+    header.textContent = "Inbox";
     header.classList.add('pageHeader');
 
     contentHeader.append(header);
-
-    let newTaskButton = document.createElement('button');
-    newTaskButton.textContent = "new button!";
-    newTaskButton.onclick = function() {
-        newTask(newTaskButton);
-    };
-    
-    newTaskButton.classList.add('newTaskButton');
-    contentHeader.append(newTaskButton);
 }
 
 
@@ -43,6 +34,15 @@ export function showAllTasks() {
 
         console.log(myTasks[i]);
     }
+
+    let newTaskButton = document.createElement('button');
+    newTaskButton.textContent = "new button!";
+    newTaskButton.onclick = function() {
+        newTask(newTaskButton);
+    };
+    
+    newTaskButton.classList.add('newTaskButton');
+    taskList.append(newTaskButton);
 }
 
 export default loadInbox;

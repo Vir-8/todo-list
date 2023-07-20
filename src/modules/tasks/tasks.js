@@ -14,12 +14,15 @@ function newTask(newTaskButton) {
 
     newTaskForm.style.display = 'block';
     newTaskForm.style.width = getComputedStyle(newTaskButton).width;
-    newTaskButton.style.visibility = 'hidden';
+    newTaskButton.style.display = 'none';
 
     window.addEventListener('resize', updateWidth);
 
     function updateWidth() {
+        newTaskButton.style.display = 'block';
         newTaskForm.style.width = getComputedStyle(newTaskButton).width;
+        newTaskButton.style.display = 'none';
+    
     }
 
     newTaskForm.onsubmit = function(e) {
@@ -94,7 +97,7 @@ function addNewTask(newTaskButton) {
 
     document.getElementById('taskName').value = "";
     newTaskForm.style.display = 'none';
-    newTaskButton.style.visibility = 'visible';
+    newTaskButton.style.display = 'block';
     loadInbox();
     console.log(myTasks);
 }
@@ -113,7 +116,7 @@ export function getTaskDate() {
 }
 
 function cancelTaskCreation(newTaskButton) {
-    newTaskButton.style.visibility = 'visible';
+    newTaskButton.style.display = 'block';
     newTaskForm.style.display = 'none';
 }
 

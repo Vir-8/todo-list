@@ -5,7 +5,7 @@ const loadWeek = () => {
     contentHeader.textContent = "";
 
     let header = document.createElement('h1')
-    header.textContent = "this week";
+    header.textContent = "This Week";
     header.classList.add('pageHeader');
 
     contentHeader.append(header);

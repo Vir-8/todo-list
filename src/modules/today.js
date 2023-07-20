@@ -5,7 +5,7 @@ const loadToday = () => {
     contentHeader.textContent = "";
 
     let header = document.createElement('h1')
-    header.textContent = "today";
+    header.textContent = "Today";
     header.classList.add('pageHeader');
 
     contentHeader.append(header);

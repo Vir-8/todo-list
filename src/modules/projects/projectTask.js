@@ -14,19 +14,21 @@ export function newProjectTask(newProjectTaskButton, newProject) {
 
     newTaskForm.style.display = 'block';
     newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
-    newProjectTaskButton.style.visibility = 'hidden';
+    newProjectTaskButton.style.display = 'none';
 
     window.addEventListener('resize', updateWidth);
 
     function updateWidth() {
+        newProjectTaskButton.style.display = 'block';
         newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
+        newProjectTaskButton.style.display = 'none';
     }
 
     newTaskForm.onsubmit = function(e) {
         console.log('submit new task clicked')
         addNewProjectTask(newProject); //create new task card
 
-        newProjectTaskButton.style.visibility = 'visible';
+        newProjectTaskButton.style.display = 'block';
         newTaskForm.reset();
         newTaskForm.style.display = 'none';
         e.preventDefault();

@@ -19,16 +19,6 @@ function projectHeader(newProject) {
     header.classList.add('pageHeader');
 
     contentHeader.append(header);
-
-    let newProjectTaskButton = document.createElement('button');
-    newProjectTaskButton.textContent = "new button!";
-
-    newProjectTaskButton.onclick = function() {
-        newProjectTask(newProjectTaskButton, newProject);
-    };
-
-    newProjectTaskButton.classList.add('newTaskButton');
-    contentHeader.append(newProjectTaskButton);
 }
 
 export function showProjectTasks(newProject) {
@@ -45,4 +35,15 @@ export function showProjectTasks(newProject) {
         mainTaskDiv.append(subTaskDiv);
         taskList.append(mainTaskDiv);
     }
+
+
+    let newProjectTaskButton = document.createElement('button');
+    newProjectTaskButton.textContent = "new button!";
+
+    newProjectTaskButton.onclick = function() {
+        newProjectTask(newProjectTaskButton, newProject);
+    };
+
+    newProjectTaskButton.classList.add('newTaskButton');
+    taskList.append(newProjectTaskButton);
 }
