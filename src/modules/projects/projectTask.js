@@ -56,15 +56,20 @@ function addNewProjectTask(newProject) {
     check.type = "checkbox";
     newTaskContainer.append(check);
 
+    let newTaskContent = document.createElement('div');
+    newTaskContent.classList.add('newTaskContent');
+
     let taskName = document.createElement('input');
     taskName.type = 'text';
     taskName.value = document.getElementById('taskName').value;
-    newTaskContainer.append(taskName);
+    newTaskContent.append(taskName);
 
     let taskDate = document.createElement('input');
     taskDate.type = 'date';
     taskDate.value = document.getElementById('taskDate').value;
-    newTaskContainer.append(taskDate);
+    newTaskContent.append(taskDate);
+
+    newTaskContainer.append(newTaskContent);
 
     let projectTask = {
         id: newProject.tasks.length,
@@ -74,8 +79,6 @@ function addNewProjectTask(newProject) {
         newTaskDiv: newTaskContainer,
         subTaskDiv: subTaskContainer
     }
-
-    //displayMenu(projectTask);
 
     taskDate.addEventListener('change', function() {
         let newTaskDate = new Date(taskDate.value);
