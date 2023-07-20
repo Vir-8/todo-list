@@ -37,7 +37,7 @@ export function newProjectTask(newProjectTaskButton, newProject) {
     cancelTask.onclick = function(e) {
         console.log('cancel task clicked')
 
-        newProjectTaskButton.style.visibility = 'visible';
+        newProjectTaskButton.style.display = 'block';
         newTaskForm.reset();
         newTaskForm.style.display = 'none';
         e.preventDefault();
