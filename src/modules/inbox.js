@@ -1,6 +1,8 @@
 import { myTasks, taskContainer, contentHeader, taskList, newTaskButtonContainer, newTaskForm, subTaskForm } from "..";
 import { newTask } from "./tasks/tasks";
 import { highLightButton } from "./sideBar.js";
+import { displayMenu } from "./tasks/taskMenu";
+import { createTasks } from "./tasks/taskCreation";
 
 const loadInbox = () => {
 
@@ -33,15 +35,7 @@ export function showAllTasks() {
 
     for (let i = 0; i < myTasks.length; i++)
     {
-        let mainTaskDiv = myTasks[i].mainTaskDiv;
-        let newTaskDiv = myTasks[i].newTaskDiv;
-        let subTaskDiv = myTasks[i].subTaskDiv;
-
-        mainTaskDiv.append(newTaskDiv);
-        mainTaskDiv.append(subTaskDiv);
-        taskList.append(mainTaskDiv);
-
-        console.log(myTasks[i]);
+        createTasks(i, 'inbox');
     }
 
     let newTaskButton = document.createElement('button');

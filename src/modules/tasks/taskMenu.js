@@ -3,8 +3,8 @@ import loadInbox from "../inbox";
 import { newSubTask } from "./subTasks";
 import { showProjectTasks } from "../projects/loadProject";
 
-export function displayMenu(task) {
-  task.newTaskDiv.addEventListener('contextmenu', function(e) {
+export function displayMenu(mainTaskContainer, projectID) {
+  mainTaskContainer.addEventListener('contextmenu', function(e) {
       e.preventDefault(); // Prevent the default right-click menu from appearing
       
       // Set the position of the custom menu based on the mouse coordinates
@@ -16,7 +16,7 @@ export function displayMenu(task) {
       const menuItem2 = menu.querySelector('#menu-item-2');
     
       menuItem1.onclick = function() {
-        newSubTask(task);
+        newSubTask(mainTaskContainer, projectID);
         menu.style.display = 'none';
       };
     
@@ -24,12 +24,10 @@ export function displayMenu(task) {
       {
         if (myTasks.includes(task)) {
           myTasks.splice(task.id, 1);
+          localStorage.setItem('myTasks', JSON.stringify(myTasks));
           loadInbox();
         }
         else {
-          // let projectId = newProject.id;
-          // let taskIndex = newProject.tasks.indexOf(projectTask);
-
           let taskID = task.id;
           let parentProject = myProjects.find(project => project.tasks && project.tasks.includes(task));
         
@@ -44,5 +42,13 @@ export function displayMenu(task) {
       // Append the menu to the document body
       document.body.appendChild(menu);
   });
+
+  document.body.onclick = (e) => {
+    console.log("clicked");
+    if (!menu.contains(e.target)) {
+      console.log("clicked outside task");
+      menu.style.display = 'none'; // Hide the custom menu
+    }
+  }
 
 }

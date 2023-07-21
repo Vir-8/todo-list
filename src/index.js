@@ -3,8 +3,9 @@ import './style.css';
 import loadInbox from "./modules/inbox";
 import loadToday from "./modules/today";
 import loadWeek from "./modules/week";
-import { showProjectForm, hideProjectForm, createNewProject } from './modules/projects/createProject';
+import { showProjectForm } from './modules/projects/createProject';
 import { highLightButton } from './modules/sideBar.js';
+import { getStoredData } from './modules/localStorage';
 
 const contentHolder = document.querySelector('#content');
 const contentHeader = document.querySelector('.contentHeader');
@@ -31,6 +32,9 @@ const menu = document.getElementById('custom-menu');
 
 const myTasks = [];
 const myProjects = [];
+
+//getStoredData();
+
 
 let inboxButton = document.querySelector('.inbox');
 inboxButton.addEventListener('click', loadInbox);

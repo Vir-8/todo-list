@@ -1,4 +1,5 @@
 import { contentHeader, myTasks, taskList, newTaskForm, subTaskForm } from "..";
+import { createTasks } from "./tasks/taskCreation";
 
 const loadWeek = () => {
 
@@ -38,18 +39,11 @@ const loadWeek = () => {
     for (let i = 0; i < myTasks.length; i++)
     {
         let task = myTasks[i];
-        let taskDate = task.taskDate;
-        console.log('this task data-date is ' + taskDate )
+        let taskDate = new Date(task.mainTaskData.mainTaskDate);
 
         if (taskDate >= startOfWeek && taskDate <= endOfWeek)
         {
-            let mainTaskDiv = task.mainTaskDiv;
-            let newTaskDiv = task.newTaskDiv;
-            let subTaskDiv = task.subTaskDiv;
-    
-            mainTaskDiv.append(newTaskDiv);
-            mainTaskDiv.append(subTaskDiv);
-            taskList.append(mainTaskDiv);
+            createTasks(i, 'week');
         }
     }
 }

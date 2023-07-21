@@ -1,6 +1,6 @@
 import { myProjects, projectForm, cancelProject, projectContainer } from "../..";
 import { loadProject } from "./loadProject";
-import { highLightButton } from "../sideBar.js";
+import { highLightButton, loadProjectSideBar } from "../sideBar.js";
 
 export function showProjectForm() {
     projectForm.style.display = 'flex';
@@ -20,27 +20,18 @@ function hideProjectForm(e) {
 }
 
 function createNewProject() {
-    let newProjectButton = document.createElement('button');
-    newProjectButton.classList.add('newProject');
-    newProjectButton.classList.add('sideBarButton');
 
-    let projectName = document.getElementById('projectName').value;
-    newProjectButton.textContent = projectName;
-    
     let newProject = {
         id: myProjects.length,
-        name: projectName,
+        name: document.getElementById('projectName').value,
         tasks: []
     }
 
-    projectContainer.append(newProjectButton);
     myProjects.push(newProject);
 
     highLightButton();
+    loadProjectSideBar();
 
-    newProjectButton.addEventListener('click', function() {
-        loadProject(newProject);
-    });
 }
 
 

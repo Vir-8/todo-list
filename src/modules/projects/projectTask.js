@@ -1,5 +1,5 @@
 import { newTaskForm, cancelTask, myProjects } from "../..";
-import { showProjectTasks } from "./loadProject";
+import { loadProject, showProjectTasks } from "./loadProject";
 import { getTaskDate } from "../tasks/tasks";
 import { displayMenu } from "../tasks/taskMenu";
 
@@ -45,66 +45,18 @@ export function newProjectTask(newProjectTaskButton, newProject) {
 }
 
 function addNewProjectTask(newProject) {
-    let mainTaskContainer = document.createElement('div');
-    mainTaskContainer.classList.add('mainTaskContainer');
-
-    let newTaskContainer = document.createElement('div');
-    newTaskContainer.classList.add('newTask');
-
-    let subTaskContainer = document.createElement('div');
-    subTaskContainer.classList.add('subTaskContainer');
-
-    let check = document.createElement('input');
-    check.type = "checkbox";
-    newTaskContainer.append(check);
-
-    let newTaskContent = document.createElement('div');
-    newTaskContent.classList.add('newTaskContent');
-
-    let taskName = document.createElement('input');
-    taskName.type = 'text';
-    taskName.value = document.getElementById('taskName').value;
-    newTaskContent.append(taskName);
-
-    let taskDate = document.createElement('input');
-    taskDate.type = 'date';
-    taskDate.value = document.getElementById('taskDate').value;
-    newTaskContent.append(taskDate);
-
-    newTaskContainer.append(newTaskContent);
 
     let projectTask = {
         id: newProject.tasks.length,
-        taskDate: getTaskDate(),
-        subTasks: [],
-        mainTaskDiv: mainTaskContainer,
-        newTaskDiv: newTaskContainer,
-        subTaskDiv: subTaskContainer
+        mainTaskData: {
+            mainTaskName: document.getElementById('taskName').value,
+            mainTaskDate: document.getElementById('taskDate').value,
+        },
+        subTasks: []
     }
 
-    taskDate.addEventListener('change', function() {
-        let newTaskDate = new Date(taskDate.value);
-        // Update the task object with the new task date
-        projectTask.taskDate = newTaskDate;
-    });
-
-
-    check.addEventListener('change', function() {
-        if (check.checked) {
-          // Mark task as completed
-          let projectId = newProject.id;
-          let taskIndex = newProject.tasks.indexOf(projectTask);
-      
-          if (taskIndex > -1) {
-            myProjects[projectId].tasks.splice(taskIndex, 1);
-          }
-
-          showProjectTasks(newProject);
-        } 
-    });
-
-    displayMenu(projectTask);
     newProject.tasks.push(projectTask);
+    localStorage.setItem('myProjects', JSON.stringify(myProjects));
 
-    showProjectTasks(newProject);
+    loadProject(newProject);
 }

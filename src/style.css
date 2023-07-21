@@ -170,13 +170,17 @@ body {
     flex: 1;
 }
 
-.formElement input[type=text] {
+.formElement input {
     height: 40px;
+    font-size: 17px;
+    font-family: 'Open Sans';
+}
+
+.formElement input[type=text] {
     width: 70%;
 }
 
 .formElement input[type=date] {
-    height: 40px;
     width: 30%;
 }
 
@@ -206,6 +210,7 @@ body {
 
 .subTaskFormContainer input[type=text] {
     width: 60%;
+    font-size: 15px;
 }
 
 .subTaskFormContainer button {

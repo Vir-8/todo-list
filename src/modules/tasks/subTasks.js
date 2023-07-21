@@ -1,16 +1,17 @@
-import { subTaskForm, cancelSubTask, myTasks } from "../..";
+import { subTaskForm, cancelSubTask, myTasks, myProjects } from "../..";
 import { showAllTasks } from "../inbox";
+import loadInbox from "../inbox";
+import { loadProject } from "../projects/loadProject";
 
+export function newSubTask(mainTaskContainer, projectID) {
 
-export function newSubTask(task) {
-
-    task.subTaskDiv.insertAdjacentElement('afterend', subTaskForm);
+    mainTaskContainer.insertAdjacentElement('afterend', subTaskForm);
 
     subTaskForm.style.display = 'block';
 
     subTaskForm.onsubmit = function(e) {
         console.log('submit subtask clicked')
-        addNewSubTask(task); //create new subtask card
+        addNewSubTask(mainTaskContainer, projectID); //create new subtask card
         e.preventDefault();
     };
 
@@ -22,37 +23,40 @@ export function newSubTask(task) {
     }
 }
 
-function addNewSubTask(task) {
+function addNewSubTask(mainTaskContainer, projectID) {
 
-    let newSubTask = document.createElement('div');
-    newSubTask.classList.add('subTask');
+    let taskContainerID = mainTaskContainer.getAttribute("data-index");
 
-    let check = document.createElement('input');
-    check.type = "checkbox";
-    newSubTask.append(check);
-
-    let taskName = document.createElement('input');
-    taskName.type = 'text';
-    taskName.value = document.getElementById('subTaskName').value;
-    newSubTask.append(taskName);
-
-    newSubTask.setAttribute("data-index", task.subTasks.length);
-
-    task.subTasks.push(newSubTask);
-    task.subTaskDiv.append(newSubTask);
-
-    check.addEventListener('change', function() {
-        if (check.checked) {
-          // Mark task as completed
-          newSubTask.classList.add('subTaskDone');
-          
-          console.log(myTasks);
-        } else {
-            newSubTask.classList.remove('subTaskDone');
+    if(projectID == 'none') {
+        let subTask = {
+            id: myTasks[taskContainerID].subTasks.length,
+            name: document.getElementById('subTaskName').value,
+            isChecked: false
         }
-    });
+    
+        myTasks[taskContainerID].subTasks.push(subTask);
+    
+        loadInbox();
+        localStorage.setItem('myTasks', JSON.stringify(myTasks));
+    }
+    else {
+
+        console.log("project subtask???/")
+        let subTask = {
+            id: myProjects[projectID].tasks[taskContainerID].subTasks.length,
+            name: document.getElementById('subTaskName').value,
+            isChecked: false
+        }
+    
+        myProjects[projectID].tasks[taskContainerID].subTasks.push(subTask);
+        localStorage.setItem('myProjects', JSON.stringify(myProjects));
+
+        let newProject = myProjects[projectID];
+        loadProject(newProject);
+        
+    }
+
 
     subTaskForm.reset();
     subTaskForm.style.display = 'none';
-    console.log(task.subTasks);
 }
