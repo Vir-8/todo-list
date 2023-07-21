@@ -103,10 +103,21 @@ body {
     border-bottom: 1px solid white;
 }
 
-.pageHeader {
+.pageHeader, .projectPageHeader {
     align-self: flex-start;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin-bottom: 0px;
+    margin-top: 22px;
+}
+
+.projectPageHeader {
+    font-size: 2em;
+    font-weight: bold;
+    height: 37px;
+    color: white;
+    background-color: #ffffff00;
+    border: none;
+    outline: none;
 }
 
 #content .taskContainer .taskList {

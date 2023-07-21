@@ -1,6 +1,7 @@
 import { contentHeader, taskContainer, newTaskForm, cancelTask, taskList, newTaskButtonContainer, subTaskForm, myProjects } from "../..";
 import { newProjectTask } from "./projectTask";
 import { displayMenu } from "../tasks/taskMenu";
+import { loadProjectSideBar } from "../sideBar";
 
 export const loadProject = (newProject) => {
 
@@ -14,30 +15,28 @@ function projectHeader(newProject) {
 
     contentHeader.textContent = "";
 
-    let header = document.createElement('h1')
-    header.textContent = newProject.name;
-    header.classList.add('pageHeader');
-
+    let header = document.createElement('input')
+    header.type = "text";
+    header.value = newProject.name;
+    header.classList.add('projectPageHeader');
     contentHeader.append(header);
-}
 
-function cleanPage() {
+    header.addEventListener('change', function(){
+        const inputValue = header.value.trim();
 
-    newTaskForm.reset();
-    newTaskForm.style.display = 'none';
+        if (inputValue.length < 1)
+        {
+            alert("Project name cannot be empty!");
+            header.value = newProject.name;
+        }
+        else 
+        {
+            newProject.name = header.value;
+            localStorage.setItem('myProjects', JSON.stringify(myProjects));
+            loadProjectSideBar();
+        }
 
-    subTaskForm.reset();
-    subTaskForm.style.display = 'none';
-
-    taskList.textContent = "";
-
-    contentHeader.style.display = "flex";
-    contentHeader.textContent = "";
-
-    const dateInput = document.getElementById('taskDate');
-
-    dateInput.removeAttribute('min');
-    dateInput.removeAttribute('max');
+    });
 }
 
 function showProjectTasks(newProject) {
@@ -148,4 +147,24 @@ function showProjectTasks(newProject) {
 
     newProjectTaskButton.classList.add('newTaskButton');
     newTaskButtonContainer.append(newProjectTaskButton);
+}
+
+
+function cleanPage() {
+
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+
+    taskList.textContent = "";
+
+    contentHeader.style.display = "flex";
+    contentHeader.textContent = "";
+
+    const dateInput = document.getElementById('taskDate');
+
+    dateInput.removeAttribute('min');
+    dateInput.removeAttribute('max');
 }
