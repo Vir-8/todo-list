@@ -1,17 +1,21 @@
-import { subTaskForm, cancelSubTask, myTasks, myProjects } from "../..";
-import { showAllTasks } from "../inbox";
+import { subTaskForm, cancelSubTask, myTasks, myProjects, newTaskForm } from "../..";
 import loadInbox from "../inbox";
+import loadToday from "../today";
+import loadWeek from "../week";
 import { loadProject } from "../projects/loadProject";
 
-export function newSubTask(mainTaskContainer, projectID) {
+export function newSubTask(mainTaskContainer, pageID) {
 
-    mainTaskContainer.insertAdjacentElement('afterend', subTaskForm);
-
+    mainTaskContainer.append(subTaskForm);
     subTaskForm.style.display = 'block';
+
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+    document.querySelector('.newTaskButton').style.display = 'block';
 
     subTaskForm.onsubmit = function(e) {
         console.log('submit subtask clicked')
-        addNewSubTask(mainTaskContainer, projectID); //create new subtask card
+        addNewSubTask(mainTaskContainer, pageID); //create new subtask card
         e.preventDefault();
     };
 
@@ -23,11 +27,12 @@ export function newSubTask(mainTaskContainer, projectID) {
     }
 }
 
-function addNewSubTask(mainTaskContainer, projectID) {
+function addNewSubTask(mainTaskContainer, pageID) {
 
     let taskContainerID = mainTaskContainer.getAttribute("data-index");
 
-    if(projectID == 'none') {
+    if(pageID === 'inbox' || pageID === 'today' || pageID === 'week') {
+
         let subTask = {
             id: myTasks[taskContainerID].subTasks.length,
             name: document.getElementById('subTaskName').value,
@@ -36,24 +41,30 @@ function addNewSubTask(mainTaskContainer, projectID) {
     
         myTasks[taskContainerID].subTasks.push(subTask);
     
-        loadInbox();
+        if (pageID == 'inbox') {
+            loadInbox();
+        } else if (pageID == 'today') {
+            loadToday();
+        } else if (pageID == 'week') {
+            loadWeek();
+        }
+
         localStorage.setItem('myTasks', JSON.stringify(myTasks));
     }
     else {
 
         console.log("project subtask???/")
         let subTask = {
-            id: myProjects[projectID].tasks[taskContainerID].subTasks.length,
+            id: myProjects[pageID].tasks[taskContainerID].subTasks.length,
             name: document.getElementById('subTaskName').value,
             isChecked: false
         }
     
-        myProjects[projectID].tasks[taskContainerID].subTasks.push(subTask);
+        myProjects[pageID].tasks[taskContainerID].subTasks.push(subTask);
         localStorage.setItem('myProjects', JSON.stringify(myProjects));
 
-        let newProject = myProjects[projectID];
+        let newProject = myProjects[pageID];
         loadProject(newProject);
-        
     }
 
 

@@ -1,24 +1,11 @@
-import { contentHeader, myTasks, taskList, newTaskForm, subTaskForm } from "..";
+import { contentHeader, myTasks, taskList, newTaskForm, subTaskForm, newTaskButtonContainer } from "..";
 import { createTasks } from "./tasks/taskCreation";
+import { setCurrentProject } from "./projects/createProject";
+import { newTask } from "./tasks/tasks";
 
 const loadWeek = () => {
 
-    newTaskForm.reset();
-    newTaskForm.style.display = 'none';
-    
-    subTaskForm.reset();
-    subTaskForm.style.display = 'none';
-
-    taskList.textContent = "";
-
-    contentHeader.style.display = "flex";
-    contentHeader.textContent = "";
-
-    let header = document.createElement('h1')
-    header.textContent = "This Week";
-    header.classList.add('pageHeader');
-
-    contentHeader.append(header);
+    cleanPage();
 
     let currentDate = new Date();
     let currentDayOfWeek = currentDate.getDay();
@@ -33,8 +20,21 @@ const loadWeek = () => {
     endOfWeek.setDate(currentDate.getDate() + (6 - currentDayOfWeek) + 1);
     endOfWeek.setHours(23, 59, 59, 999);
 
-    console.log('todayDate is ' + currentDate);
-    console.log('week start is ' + startOfWeek + ' and week end is ' + endOfWeek);
+    //set date input limit
+    const dateInput = document.getElementById('taskDate');
+
+    const minYear = startOfWeek.getFullYear();
+    const minMonth = String(startOfWeek.getMonth() + 1).padStart(2, '0');
+    const minDay = String(startOfWeek.getDate()).padStart(2, '0');
+    const minDate = `${minYear}-${minMonth}-${minDay}`;
+
+    const maxYear = endOfWeek.getFullYear();
+    const maxMonth = String(endOfWeek.getMonth() + 1).padStart(2, '0');
+    const maxDay = String(endOfWeek.getDate()).padStart(2, '0');
+    const maxDate = `${maxYear}-${maxMonth}-${maxDay}`;
+
+    dateInput.min = minDate;
+    dateInput.max = maxDate;
 
     for (let i = 0; i < myTasks.length; i++)
     {
@@ -46,6 +46,44 @@ const loadWeek = () => {
             createTasks(i, 'week');
         }
     }
+}
+
+
+function cleanPage() {
+    setCurrentProject('');
+    
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+    newTaskButtonContainer.textContent = "";
+
+    const dateInput = document.getElementById('taskDate');
+
+    // Remove the min and max attributes to allow selecting any date
+    dateInput.removeAttribute('min');
+    dateInput.removeAttribute('max');
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+
+    taskList.textContent = "";
+
+    contentHeader.style.display = "flex";
+    contentHeader.textContent = "";
+
+    let header = document.createElement('h1')
+    header.textContent = "This Week";
+    header.classList.add('pageHeader');
+
+    contentHeader.append(header);
+
+    let newTaskButton = document.createElement('button');
+    newTaskButton.textContent = "new button!";
+    newTaskButton.onclick = function() {
+        newTask(newTaskButton, 'week');
+    };
+    
+    newTaskButton.classList.add('newTaskButton');
+    newTaskButtonContainer.append(newTaskButton);
 }
 
 export default loadWeek;

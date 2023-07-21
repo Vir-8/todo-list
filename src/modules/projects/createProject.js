@@ -2,6 +2,14 @@ import { myProjects, projectForm, cancelProject, projectContainer } from "../.."
 import { loadProject } from "./loadProject";
 import { highLightButton, loadProjectSideBar } from "../sideBar.js";
 
+let currentProject;
+
+export const getCurrentProject = () => currentProject;
+
+export const setCurrentProject = (newProject) => {
+  currentProject = newProject;
+};
+
 export function showProjectForm() {
     projectForm.style.display = 'flex';
     
@@ -28,6 +36,7 @@ function createNewProject() {
     }
 
     myProjects.push(newProject);
+    localStorage.setItem('myProjects', JSON.stringify(myProjects));
 
     highLightButton();
     loadProjectSideBar();

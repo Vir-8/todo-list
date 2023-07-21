@@ -3,7 +3,7 @@ import loadInbox from "../inbox";
 import { newSubTask } from "./subTasks";
 import { showProjectTasks } from "../projects/loadProject";
 
-export function displayMenu(mainTaskContainer, projectID) {
+export function displayMenu(mainTaskContainer, pageID) {
   mainTaskContainer.addEventListener('contextmenu', function(e) {
       e.preventDefault(); // Prevent the default right-click menu from appearing
       
@@ -16,7 +16,7 @@ export function displayMenu(mainTaskContainer, projectID) {
       const menuItem2 = menu.querySelector('#menu-item-2');
     
       menuItem1.onclick = function() {
-        newSubTask(mainTaskContainer, projectID);
+        newSubTask(mainTaskContainer, pageID);
         menu.style.display = 'none';
       };
     
@@ -25,7 +25,15 @@ export function displayMenu(mainTaskContainer, projectID) {
         if (myTasks.includes(task)) {
           myTasks.splice(task.id, 1);
           localStorage.setItem('myTasks', JSON.stringify(myTasks));
-          loadInbox();
+
+          if (page == 'inbox') {
+            loadInbox();
+          } else if (page == 'today') {
+            loadToday();
+          } else if (page == 'week') {
+            loadWeek();
+          }
+
         }
         else {
           let taskID = task.id;

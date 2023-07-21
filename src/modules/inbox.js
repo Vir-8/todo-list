@@ -3,18 +3,10 @@ import { newTask } from "./tasks/tasks";
 import { highLightButton } from "./sideBar.js";
 import { displayMenu } from "./tasks/taskMenu";
 import { createTasks } from "./tasks/taskCreation";
+import { setCurrentProject } from "./projects/createProject";
 
 const loadInbox = () => {
-
-    newTaskForm.reset();
-    newTaskForm.style.display = 'none';
-
-    subTaskForm.reset();
-    subTaskForm.style.display = 'none';
-
-    contentHeader.style.display = "flex";
-    contentHeader.textContent = "";
-
+    cleanPage();
     inboxHeader();
     showAllTasks();
 }
@@ -41,11 +33,29 @@ export function showAllTasks() {
     let newTaskButton = document.createElement('button');
     newTaskButton.textContent = "new button!";
     newTaskButton.onclick = function() {
-        newTask(newTaskButton);
+        newTask(newTaskButton, 'inbox');
     };
     
     newTaskButton.classList.add('newTaskButton');
     newTaskButtonContainer.append(newTaskButton);
+}
+
+function cleanPage() {
+    setCurrentProject('');
+
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+
+    contentHeader.style.display = "flex";
+    contentHeader.textContent = "";
+
+    const dateInput = document.getElementById('taskDate');
+
+    dateInput.removeAttribute('min');
+    dateInput.removeAttribute('max');
 }
 
 export default loadInbox;

@@ -33,7 +33,7 @@ const menu = document.getElementById('custom-menu');
 const myTasks = [];
 const myProjects = [];
 
-//getStoredData();
+getStoredData();
 
 
 let inboxButton = document.querySelector('.inbox');

@@ -45,8 +45,7 @@ export function createTasks(i, page) {
     mainTaskContainer.append(newTaskContainer);
     mainTaskContainer.append(subTaskContainer);
 
-    let projectID = 'none';
-    displayMenu(mainTaskContainer, projectID);
+    displayMenu(mainTaskContainer, page);
     taskList.append(mainTaskContainer);
 
     for (let j = 0; j < task.subTasks.length; j++) 

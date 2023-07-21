@@ -4,16 +4,7 @@ import { displayMenu } from "../tasks/taskMenu";
 
 export const loadProject = (newProject) => {
 
-    newTaskForm.reset();
-    newTaskForm.style.display = 'none';
-
-    subTaskForm.reset();
-    subTaskForm.style.display = 'none';
-
-    taskList.textContent = "";
-
-    contentHeader.style.display = "flex";
-    contentHeader.textContent = "";
+    cleanPage();
 
     projectHeader(newProject);
     showProjectTasks(newProject);
@@ -30,7 +21,26 @@ function projectHeader(newProject) {
     contentHeader.append(header);
 }
 
-export function showProjectTasks(newProject) {
+function cleanPage() {
+
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+
+    taskList.textContent = "";
+
+    contentHeader.style.display = "flex";
+    contentHeader.textContent = "";
+
+    const dateInput = document.getElementById('taskDate');
+
+    dateInput.removeAttribute('min');
+    dateInput.removeAttribute('max');
+}
+
+function showProjectTasks(newProject) {
     newTaskButtonContainer.textContent = "";
     taskList.textContent = "";
     for (let i = 0; i < newProject.tasks.length; i++)

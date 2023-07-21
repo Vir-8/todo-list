@@ -198,6 +198,7 @@ body {
 
 .subTaskForm {
     display: none;
+    width: 100%;
 }
 
 .subTaskForm .subTaskFormContainer {

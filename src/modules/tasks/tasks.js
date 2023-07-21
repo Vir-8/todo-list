@@ -1,33 +1,20 @@
-import { myTasks, newTaskForm, cancelTask, taskContainer } from "../..";
+import { myTasks, newTaskForm, cancelTask, taskContainer, subTaskForm } from "../..";
 import loadInbox from "../inbox";
+import loadToday from "../today";
+import loadWeek from "../week";
 import { displayMenu } from "./taskMenu";
 
 
-function newTask(newTaskButton) {
+function newTask(newTaskButton, page) {
     // Position the form exactly where the button is
-    var buttonRect = newTaskButton.getBoundingClientRect();
-    
-    var buttonTop = buttonRect.top;
-    var buttonLeft = buttonRect.left;
-    newTaskForm.style.top = buttonTop + 'px';
-    newTaskForm.style.left = buttonLeft + 'px';
 
-    newTaskForm.style.display = 'block';
-    newTaskForm.style.width = getComputedStyle(newTaskButton).width;
-    newTaskButton.style.display = 'none';
+    cleanPage(newTaskButton);
 
-    window.addEventListener('resize', updateWidth);
-
-    function updateWidth() {
-        newTaskButton.style.display = 'block';
-        newTaskForm.style.width = getComputedStyle(newTaskButton).width;
-        newTaskButton.style.display = 'none';
-    
-    }
+    window.addEventListener('resize', updateWidth(newTaskButton));
 
     newTaskForm.onsubmit = function(e) {
         console.log('submit new task clicked')
-        addNewTask(newTaskButton); //create new task card
+        addNewTask(newTaskButton, page); //create new task card
         e.preventDefault();
     };
 
@@ -40,7 +27,7 @@ function newTask(newTaskButton) {
     }
 }
 
-function addNewTask(newTaskButton) {
+function addNewTask(newTaskButton, page) {
 
     let task = {
         id: myTasks.length,
@@ -54,12 +41,41 @@ function addNewTask(newTaskButton) {
     myTasks.push(task);
     localStorage.setItem('myTasks', JSON.stringify(myTasks));
 
-
     document.getElementById('taskName').value = "";
     newTaskForm.style.display = 'none';
     newTaskButton.style.display = 'block';
-    loadInbox();
+    
+    if (page == 'inbox') {
+        loadInbox();
+    } else if (page == 'today') {
+        loadToday();
+    } else if (page == 'week') {
+        loadWeek();
+    }
     console.log(myTasks);
+}
+
+function cleanPage(newTaskButton) {
+    var buttonRect = newTaskButton.getBoundingClientRect();
+    
+    var buttonTop = buttonRect.top;
+    var buttonLeft = buttonRect.left;
+    newTaskForm.style.top = buttonTop + 'px';
+    newTaskForm.style.left = buttonLeft + 'px';
+
+    newTaskForm.style.display = 'block';
+    newTaskForm.style.width = getComputedStyle(newTaskButton).width;
+    newTaskButton.style.display = 'none';
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+}
+
+function updateWidth(newTaskButton) {
+    newTaskButton.style.display = 'block';
+    newTaskForm.style.width = getComputedStyle(newTaskButton).width;
+    newTaskButton.style.display = 'none';
+
 }
 
 export { newTask };

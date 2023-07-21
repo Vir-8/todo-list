@@ -1,6 +1,7 @@
 import { myTasks, myProjects } from "..";
 import { displayMenu } from "./tasks/taskMenu";
 import loadInbox from "./inbox";
+import { loadProjectSideBar } from "./sideBar";
 
 export function getStoredData() {
     try {
@@ -22,9 +23,33 @@ export function getStoredData() {
                     taskDate: parsedTask.taskDate,
                     subTasks: parsedTask.subTasks,
                 }
-            
-                //displayMenu(task);
                 myTasks.push(task);
+            });
+        } else {
+          console.error('The stored data is not a valid array.');
+        }
+    } catch (error) {
+        console.error('Error retrieving or parsing myTasks from localStorage:', error);
+    }
+
+
+    try {
+        const storedProjects = localStorage.getItem('myProjects');
+        const parsedProjects = JSON.parse(storedProjects);
+        console.log(parsedProjects);
+
+        if (Array.isArray(parsedProjects)) {
+            myProjects.splice(0);
+
+            parsedProjects.forEach((parsedProject) => {
+
+                let newProject = {
+                    id: parsedProject.id,
+                    name: parsedProject.name,
+                    tasks: parsedProject.tasks
+                }
+
+                myProjects.push(newProject);
             });
 
         } else {
@@ -33,18 +58,8 @@ export function getStoredData() {
     } catch (error) {
         console.error('Error retrieving or parsing myTasks from localStorage:', error);
     }
-    
-    try {
-        const storedProjects = localStorage.getItem('myProjects');
-        const parsedProjects = JSON.parse(storedProjects);
-    
-        if (Array.isArray(parsedProjects)) {
-            myProjects.splice(0);
-            myProjects.push(...parsedProjects);
-        } else {
-          console.error('The stored data is not a valid array.');
-        }
-    } catch (error) {
-        console.error('Error retrieving or parsing myProjects from localStorage:', error);
-    }
+
+    loadInbox();
+    document.querySelector('.inbox').classList.add('highlight-button')
+    loadProjectSideBar();
 }

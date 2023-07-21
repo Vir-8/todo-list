@@ -1,28 +1,14 @@
-import { newTaskForm, cancelTask, myProjects } from "../..";
+import { newTaskForm, cancelTask, myProjects, subTaskForm } from "../..";
 import { loadProject, showProjectTasks } from "./loadProject";
 import { getTaskDate } from "../tasks/tasks";
 import { displayMenu } from "../tasks/taskMenu";
 
 export function newProjectTask(newProjectTaskButton, newProject) {
-    // Position the form exactly where the button is
-    var buttonRect = newProjectTaskButton.getBoundingClientRect();
 
-    var buttonTop = buttonRect.top;
-    var buttonLeft = buttonRect.left;
-    newTaskForm.style.top = buttonTop + 'px';
-    newTaskForm.style.left = buttonLeft + 'px';
 
-    newTaskForm.style.display = 'block';
-    newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
-    newProjectTaskButton.style.display = 'none';
+    window.addEventListener('resize', updateWidth(newProjectTaskButton));
 
-    window.addEventListener('resize', updateWidth);
-
-    function updateWidth() {
-        newProjectTaskButton.style.display = 'block';
-        newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
-        newProjectTaskButton.style.display = 'none';
-    }
+    cleanPage(newProjectTaskButton);
 
     newTaskForm.onsubmit = function(e) {
         console.log('submit new task clicked')
@@ -59,4 +45,27 @@ function addNewProjectTask(newProject) {
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
 
     loadProject(newProject);
+}
+
+function cleanPage(newProjectTaskButton) {
+    // Position the form exactly where the button is
+    var buttonRect = newProjectTaskButton.getBoundingClientRect();
+
+    var buttonTop = buttonRect.top;
+    var buttonLeft = buttonRect.left;
+    newTaskForm.style.top = buttonTop + 'px';
+    newTaskForm.style.left = buttonLeft + 'px';
+    
+    newTaskForm.style.display = 'block';
+    newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
+    newProjectTaskButton.style.display = 'none';
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+}
+
+function updateWidth(newProjectTaskButton) {
+    newProjectTaskButton.style.display = 'block';
+    newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
+    newProjectTaskButton.style.display = 'none';
 }

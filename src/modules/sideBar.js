@@ -1,8 +1,7 @@
 import { myProjects, myTasks, projectContainer } from "..";
 import loadInbox from "./inbox";
 import { loadProject } from "./projects/loadProject";
-
-export let currentProject;
+import { getCurrentProject, setCurrentProject } from "./projects/createProject";
 
 export function highLightButton() {
 
@@ -40,7 +39,7 @@ export function loadProjectSideBar() {
         newProjectButton.addEventListener('click', function(e) {
             if (!deleteProjectButton.contains(e.target)) {
                 loadProject(myProjects[i]);
-                currentProject = i;
+                setCurrentProject(i);
             }
         });
 
@@ -48,10 +47,13 @@ export function loadProjectSideBar() {
             myProjects.splice(i, 1);
             console.log("deleting task " + i);
             loadProjectSideBar();
-
-            if (currentProject == i) {
+            localStorage.setItem('myProjects', JSON.stringify(myProjects));
+            
+            if (getCurrentProject() === i) {
                 loadInbox();
+                document.querySelector('.inbox').classList.add('highlight-button');
             }
         });
     }
+    highLightButton();
 }
