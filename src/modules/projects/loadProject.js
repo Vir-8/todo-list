@@ -157,7 +157,12 @@ function showProjectTasks(newProject) {
             if (check.checked) {
             
             newProject.tasks.splice(i, 1);
-            loadProject(newProject);
+
+            mainTaskContainer.classList.add('start-animation')
+            mainTaskContainer.addEventListener('animationend', function() {
+                loadProject(newProject);
+            }, { once: true });
+              
             localStorage.setItem('myProjects', JSON.stringify(myProjects));
             } 
         });
@@ -192,4 +197,11 @@ function cleanPage() {
 
     dateInput.removeAttribute('min');
     dateInput.removeAttribute('max');
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+
+    dateInput.value = `${year}-${month}-${day}`;
 }

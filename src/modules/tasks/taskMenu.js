@@ -9,7 +9,6 @@ export function displayMenu(mainTaskContainer, pageID) {
     e.preventDefault(); 
     loadMenu(mainTaskContainer, pageID, e);
   });
-
 }
 
 export function loadMenu(mainTaskContainer, pageID, e) {
@@ -22,13 +21,23 @@ export function loadMenu(mainTaskContainer, pageID, e) {
 
   menu.style.display = 'block';
 
+  const viewportWidth = window.innerWidth;
+  const menuWidth = menu.offsetWidth;
+
   if (e === 'menuDropDown') {
-    menu.style.top = (menuDropDownRect.top + topOffset + 30) + 'px';
-    menu.style.left = (menuDropDownRect.left + leftOffset) + 'px';
+    menu.style.top = (menuDropDownRect.top + topOffset + 25) + 'px';
+    menu.style.left = (menuDropDownRect.left + leftOffset - menuWidth + 10) + 'px';
+    
   }
   else {
     menu.style.top = `${e.pageY}px`;
-    menu.style.left = `${e.pageX}px`;
+
+    if (e.pageX + menuWidth < viewportWidth) {
+      menu.style.left = `${e.pageX}px`;
+    } else {
+      menu.style.left = `${e.pageX - menuWidth}px`;
+    }
+  
   }
 
   const menuItem1 = menu.querySelector('#menu-item-1');

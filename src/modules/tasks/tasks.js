@@ -1,4 +1,4 @@
-import { myTasks, newTaskForm, cancelTask, taskContainer, subTaskForm } from "../..";
+import { myTasks, newTaskForm, cancelTask, taskContainer, subTaskForm, projectForm } from "../..";
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
@@ -71,6 +71,12 @@ function cleanPage(newTaskButton) {
 
     subTaskForm.reset();
     subTaskForm.style.display = 'none';
+
+    projectForm.reset();
+    projectForm.style.display = 'none';
+
+    document.getElementById('taskName').focus();
+
 }
 
 function updateWidth(newTaskButton) {

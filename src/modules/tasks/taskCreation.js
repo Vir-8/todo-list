@@ -126,10 +126,7 @@ export function createTasks(i, page) {
         myTasks.splice(i, 1);
 
         mainTaskContainer.classList.add('start-animation')
-
         mainTaskContainer.addEventListener('animationend', function() {
-            // This code will run once the animation is complete
-            console.log('Animation is complete! You can proceed further.');
             if (page == 'inbox') {
                 loadInbox();
             } else if (page == 'today') {
