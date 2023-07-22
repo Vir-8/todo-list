@@ -19,6 +19,7 @@ body {
     display: flex;
     height: 55px;
     width: 100vw;
+    padding: 5px;
     position: absolute;
     top: 0;
     left: 0;
@@ -29,7 +30,7 @@ body {
 #header h1 {
     align-self: center;
     margin: 0;
-    margin-left: 15px;
+    margin-left: 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -238,6 +239,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .formElement input[type=date] {
     width: 30%;
+    text-align: center;
 }
 
 .formElement input, #projectName {
@@ -258,20 +260,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: white;
 }
 
-#submitNewTask, #submitSubTask, #addProject {
-    background-color: rgb(35, 141, 53);
+#submitNewTask, #submitSubTask, #cancelTask, #cancelSubTask {
+    background-color: #d4d4d812
+}
+
+#addProject, #cancelProject {
+    background-color: #bbbbbb3b;
 }
 
 #submitNewTask:hover, #submitSubTask:hover, #addProject:hover {
-    background-color: rgba(35, 141, 53, 0.658);
-}
-
-#cancelTask, #cancelSubTask, #cancelProject {
-    background-color: rgb(223, 47, 47);
+    transition: 0.2s;
+    background-color: rgb(35, 141, 53)
 }
 
 #cancelTask:hover, #cancelSubTask:hover, #cancelProject:hover {
-    background-color: rgb(223, 47, 47, 0.658);
+    transition: 0.2s;
+    background-color: rgb(223, 47, 47);
 }
  
 .newTaskForm .formContainer {
@@ -354,7 +358,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-decoration: line-through;
 }
 
-
+.subTaskContainer .subTaskDone {
+    transition: 0.2s;
+    background-color: #00ff454a;
+}
 
 
 
@@ -403,7 +410,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .projectForm {
     display: none;
     flex-direction: column;
-    padding-top: 10px;
+    background-color: #bbbbbb3b;
+    margin-top: 10px;
 }
 
 .projectButtons {
@@ -423,7 +431,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 #projectName {
     height: 30px;
-    padding: 6px;
+    padding: 8px;
+    font-size: 17px;
 }
 
 #projectContainer {
@@ -455,31 +464,40 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 #custom-menu {
     display: none;
     position: absolute;
-    background-color: #fff;
+    background-color: #111926;
     border: 1px solid #ccc;
-    padding: 5px;
+    padding: 4px;
 }
   
 #custom-menu ul {
+    display: flex;
+    flex-direction: column;
     list-style: none;
     margin: 0;
     padding: 0;
+    gap: 2px;
 }
   
 #custom-menu li {
     cursor: pointer;
-    padding: 5px;
+    padding: 7px;
+    background-color: #2c3444;
+    opacity: 100%;
+    color: white;
+    font-family: 'Open Sans';
+    text-align: center;
 }
   
 #custom-menu li:hover {
-    background-color: #f0f0f0;
+    background-color: #292d38;
 }
 
 @keyframes deleteAnimation {
-    0% { height: 40px; opacity: 100%; margin-bottom: 0px; border-top: 2px;}
+    0% { height: 40px; opacity: 100%; margin-bottom: 0px; border-top: 2px solid rgba(255, 255, 255, 0.6) }
+    25% { background-color: #00ff454a; }
     100% { height: 0px; opacity: 0%; margin-bottom: -15px; border-top: 0px;}
 }
 
 .start-animation {
-    animation: deleteAnimation 0.4s; /* Apply the animation to the .animated-element when the checkbox is checked */
+    animation: deleteAnimation 0.6s; /* Apply the animation to the .animated-element when the checkbox is checked */
 }
