@@ -135,7 +135,7 @@ body {
 
 .mainTaskContainer {
     width: 100%;
-    border-top: 2px solid white;
+    border-top: 2px solid rgba(255, 255, 255, 0.6);
 }
 
 .newTaskButton {
@@ -193,6 +193,7 @@ body {
 .newTask input {
     background-color: #ffffff00;
     border: none;
+    outline: none;
     color: white;
     font-size: 17px;
     font-family: 'Open Sans';
@@ -205,6 +206,10 @@ body {
 .newTask input[type=checkbox] {
     margin-left: 10px;
     width: 20px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
 }
 
 .newTaskForm {
@@ -289,6 +294,13 @@ body {
     color: white;
 }
 
+@media (max-width: 960px) {
+
+    .subTaskForm .subTaskFormContainer {
+        height: 40px;
+    }
+}
+
 .subTaskFormContainer input[type=text] {
     width: 60%;
     font-size: 15px;
@@ -351,9 +363,9 @@ body {
     flex-direction: column;
     margin-top: 10px;
     padding-top: 14px;
-    border-top: 1px solid rgb(212, 212, 212);
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top: 4px solid rgba(255, 255, 255, 0.8);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 
 
@@ -461,4 +473,13 @@ body {
   
 #custom-menu li:hover {
     background-color: #f0f0f0;
+}
+
+@keyframes deleteAnimation {
+    0% { height: 40px; opacity: 100%; margin-bottom: 0px; border-top: 2px;}
+    100% { height: 0px; opacity: 0%; margin-bottom: -15px; border-top: 0px;}
+}
+
+.start-animation {
+    animation: deleteAnimation 0.4s; /* Apply the animation to the .animated-element when the checkbox is checked */
 }
