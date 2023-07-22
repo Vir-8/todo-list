@@ -61,7 +61,10 @@ function cleanPage(newProjectTaskButton) {
     newProjectTaskButton.style.display = 'none';
 
     document.getElementById('taskName').focus();
-
+    document.getElementById('taskDate').addEventListener('click', function() {
+        taskDate.showPicker();
+    });
+    
     subTaskForm.reset();
     subTaskForm.style.display = 'none';
 }

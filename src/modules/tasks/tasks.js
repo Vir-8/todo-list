@@ -76,7 +76,9 @@ function cleanPage(newTaskButton) {
     projectForm.style.display = 'none';
 
     document.getElementById('taskName').focus();
-
+    document.getElementById('taskDate').addEventListener('click', function() {
+        taskDate.showPicker();
+    });
 }
 
 function updateWidth(newTaskButton) {
