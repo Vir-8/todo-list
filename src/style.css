@@ -15,6 +15,11 @@ body {
     flex-direction: column;
 }
 
+img {
+    user-drag: none;
+    -webkit-user-drag: none; /* For Safari and older versions of Chrome */
+}
+
 #header {
     display: flex;
     height: 55px;
@@ -61,6 +66,17 @@ body {
     flex-direction: column;
     margin-top: 15px;
 }
+
+#sideBar .buttons button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#sideBar .buttons button img {
+    margin-right: 10px;
+}
+
 
 #sideBar .buttons button, #projectContainer button {
     background-color: #1f293757;
@@ -379,12 +395,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .projectHeader {
     display: flex;
+    align-items: center;
     height: 40px;
     padding: 8px;
     flex-direction: row;
     justify-content: space-between;
     color: white;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.projectTitle {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.projectTitle img {
+    margin-right: 10px;
 }
 
 .projectHeader h3, button {
@@ -500,5 +528,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .start-animation {
-    animation: deleteAnimation 0.6s; /* Apply the animation to the .animated-element when the checkbox is checked */
+    animation: deleteAnimation 0.6s;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #2b3849 inset;
+    -webkit-text-fill-color: white;
+    caret-color: white;
+}
+
+/* For Firefox */
+input::-moz-placeholder {
+    color: transparent;
+}
+
+input:-moz-autofill {
+    box-shadow: 0 0 0 1000px #2b3849 inset;
+    color: white;
 }
