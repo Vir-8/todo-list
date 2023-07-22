@@ -1,4 +1,5 @@
 import './style.css';
+import './font.css';
 
 import loadInbox from "./modules/inbox";
 import loadToday from "./modules/today";
