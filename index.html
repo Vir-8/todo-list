@@ -10,6 +10,7 @@
 </head>
 <body>
     <div id="header">
+        <img src="../src/assets/icon.svg" alt="">
         <h1>ToDo List</h1>
     </div>
 
@@ -24,15 +25,15 @@
             <div class="projects">
                     
                 <div class="projectHeader">
-                    <h4>Projects</h4>
+                    <h3>Projects</h3>
                     <button class="newProject">+</button>
                 </div>
 
                 <form action="" class="projectForm">
-                    <input type="text" name="projectName" id="projectName" required>
+                    <input type="text" name="projectName" id="projectName" placeholder="Project Name..." required>
                     <div class="projectButtons">
-                        <button type="submit" id="addProject">add</button>
-                        <button type="button" id="cancelProject">cancel</button>
+                        <button type="submit" id="addProject">Add</button>
+                        <button type="button" id="cancelProject">Cancel</button>
                     </div>
                 </form>
 
@@ -69,8 +70,8 @@
                         </div>
     
                         <div class="formElement taskButtonForm">
-                            <button type="submit" id="submitNewTask">submit</button>
-                            <button type="button" id="cancelTask">cancel</button>
+                            <button type="submit" id="submitNewTask">Add Task</button>
+                            <button type="button" id="cancelTask">Cancel</button>
                         </div>
                     </div>
                 </form>
@@ -80,13 +81,11 @@
         </div>
     </div>
 
-
-
     <form action="" class="subTaskForm" method="post">
         <div class="subTaskFormContainer">
             <input type="text" name="subTaskName" id="subTaskName" placeholder="Enter subtask name..." required>
-            <button type="submit" id="submitSubTask">submit</button>
-            <button type="button" id="cancelSubTask">cancel</button>
+            <button type="submit" id="submitSubTask">Add Subtask</button>
+            <button type="button" id="cancelSubTask">Cancel</button>
         </div>
     </form>
 
