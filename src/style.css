@@ -184,6 +184,7 @@ body {
     align-self: center;
     height: 32px;
     width: 32px;
+    margin-right: 8px;
     align-items: center;
 }
 
