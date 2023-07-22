@@ -1,4 +1,4 @@
-import { myProjects, projectForm, cancelProject, projectContainer } from "../..";
+import { myProjects, projectForm, cancelProject, newTaskForm, subTaskForm } from "../..";
 import { loadProject } from "./loadProject";
 import { highLightButton, loadProjectSideBar } from "../sideBar.js";
 
@@ -11,13 +11,15 @@ export const setCurrentProject = (newProject) => {
 };
 
 export function showProjectForm() {
-    projectForm.style.display = 'flex';
-    
+
+    cleanPage();
+
     projectForm.onsubmit = function(e) {
         createNewProject();
-        projectForm.reset();
+        hideProjectForm(e);
         e.preventDefault();
     };
+
     cancelProject.onclick = hideProjectForm;
 }
 
@@ -40,7 +42,18 @@ function createNewProject() {
 
     highLightButton();
     loadProjectSideBar();
-
 }
 
+function cleanPage() {
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+
+    document.querySelector('.newTaskButton').style.display = 'block';
+
+    subTaskForm.reset();
+    subTaskForm.style.display = 'none';
+
+    projectForm.style.display = 'flex';
+    document.getElementById('projectName').focus();
+}
 

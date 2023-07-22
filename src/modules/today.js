@@ -18,6 +18,8 @@ const loadToday = () => {
     dateInput.min = formattedDate;
     dateInput.max = formattedDate;
 
+    dateInput.value = formattedDate;
+
     for (let i = 0; i < myTasks.length; i++)
     {
         let task = myTasks[i];
@@ -59,7 +61,6 @@ function cleanPage() {
     header.classList.add('pageHeader');
 
     contentHeader.append(header);
-
 
     let newTaskButton = document.createElement('button');
     newTaskButton.textContent = "+ New Task";

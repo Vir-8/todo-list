@@ -60,6 +60,8 @@ function cleanPage(newProjectTaskButton) {
     newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
     newProjectTaskButton.style.display = 'none';
 
+    document.getElementById('taskName').focus();
+
     subTaskForm.reset();
     subTaskForm.style.display = 'none';
 }

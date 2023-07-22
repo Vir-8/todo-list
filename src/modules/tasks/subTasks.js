@@ -1,4 +1,4 @@
-import { subTaskForm, cancelSubTask, myTasks, myProjects, newTaskForm } from "../..";
+import { subTaskForm, cancelSubTask, myTasks, myProjects, newTaskForm, projectForm } from "../..";
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
@@ -7,11 +7,7 @@ import { loadProject } from "../projects/loadProject";
 export function newSubTask(mainTaskContainer, pageID) {
 
     mainTaskContainer.append(subTaskForm);
-    subTaskForm.style.display = 'block';
-
-    newTaskForm.reset();
-    newTaskForm.style.display = 'none';
-    document.querySelector('.newTaskButton').style.display = 'block';
+    cleanPage();
 
     subTaskForm.onsubmit = function(e) {
         console.log('submit subtask clicked')
@@ -67,7 +63,19 @@ function addNewSubTask(mainTaskContainer, pageID) {
         loadProject(newProject);
     }
 
-
     subTaskForm.reset();
     subTaskForm.style.display = 'none';
+}
+
+function cleanPage() {
+    subTaskForm.style.display = 'block';
+    document.getElementById('subTaskName').focus();
+
+    newTaskForm.reset();
+    newTaskForm.style.display = 'none';
+
+    projectForm.reset();
+    projectForm.style.display = 'none';
+
+    document.querySelector('.newTaskButton').style.display = 'block';
 }
