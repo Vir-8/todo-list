@@ -373,6 +373,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 15px;
 }
 
+.subTask input[type=text] {
+    width: 80%;
+    outline: none;
+}
+
 .subTaskContainer .subTaskDone input {
     text-decoration: line-through;
 }
