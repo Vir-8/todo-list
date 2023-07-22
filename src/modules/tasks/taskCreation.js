@@ -3,7 +3,7 @@ import { displayMenu, loadMenu } from "./taskMenu";
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
-
+import menuImg from '../../assets/menu.svg';
 
 export function createTasks(i, page) {
     let task = myTasks[i];
@@ -38,7 +38,7 @@ export function createTasks(i, page) {
     let menuDropDown = document.createElement('div');
     menuDropDown.classList.add('menuDropDown');
     let svgImage = document.createElement('img');
-    svgImage.src = '../src/assets/menu.svg'; 
+    svgImage.src = menuImg; 
 
     menuDropDown.appendChild(svgImage);
     rightSide.append(menuDropDown);

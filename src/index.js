@@ -6,6 +6,9 @@ import loadWeek from "./modules/week";
 import { showProjectForm } from './modules/projects/createProject';
 import { highLightButton } from './modules/sideBar.js';
 import { getStoredData } from './modules/localStorage';
+import loadImages from './modules/imageLoader.js'
+
+loadImages();
 
 const contentHolder = document.querySelector('#content');
 const contentHeader = document.querySelector('.contentHeader');

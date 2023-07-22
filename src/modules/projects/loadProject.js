@@ -2,6 +2,7 @@ import { contentHeader, taskContainer, newTaskForm, cancelTask, taskList, newTas
 import { newProjectTask } from "./projectTask";
 import { displayMenu, loadMenu } from "../tasks/taskMenu";
 import { loadProjectSideBar } from "../sideBar";
+import menuImg from '../../assets/menu.svg';
 
 export const loadProject = (newProject) => {
 
@@ -77,7 +78,7 @@ function showProjectTasks(newProject) {
         let menuDropDown = document.createElement('div');
         menuDropDown.classList.add('menuDropDown');
         let svgImage = document.createElement('img');
-        svgImage.src = '../src/assets/menu.svg'; 
+        svgImage.src = menuImg; 
     
         menuDropDown.appendChild(svgImage);
     
