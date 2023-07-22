@@ -1,1 +1,96 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Todo List</title><script src="main.js" defer="defer"></script><link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet"><script defer="defer" src="main.js"></script></head><body><div id="header"><img id="logoImage" alt=""><h1>ToDo List</h1></div><div id="container"><div id="sideBar"><div class="buttons"><button class="inbox sideBarButton"><img id="inboxImage" alt=""> Inbox</button> <button class="today sideBarButton"><img id="todayImage" alt=""> Today</button> <button class="week sideBarButton"><img id="weekImage" alt=""> This Week</button></div><div class="projects"><div class="projectHeader"><div class="projectTitle"><img id="projectsImage" alt=""> My Projects</div><button class="newProject">+</button></div><form action="" class="projectForm"><input name="projectName" id="projectName" placeholder="Project Name..." required><div class="projectButtons"><button type="submit" id="addProject">Add</button> <button type="button" id="cancelProject">Cancel</button></div></form><div id="projectContainer"></div></div></div><div id="content"><div class="contentHeader"></div><div class="taskContainer"><div class="taskList"></div><div id="custom-menu"><ul><li id="menu-item-1">Add Subtask</li><li id="menu-item-2">Delete</li></ul></div></div><div class="newTaskDiv"><div class="newTaskButtonContainer"></div><form action="" class="newTaskForm" method="post"><div class="formContainer"><div class="formElement taskInfoForm"><input name="taskName" id="taskName" placeholder="Enter task name..." required> <input type="date" name="taskDate" id="taskDate" value="2023-07-18"></div><div class="formElement taskButtonForm"><button type="submit" id="submitNewTask">Add Task</button> <button type="button" id="cancelTask">Cancel</button></div></div></form></div></div></div><form action="" class="subTaskForm" method="post"><div class="subTaskFormContainer"><input name="subTaskName" id="subTaskName" placeholder="Enter subtask name..." required> <button type="submit" id="submitSubTask">Add Subtask</button> <button type="button" id="cancelSubTask">Cancel</button></div></form></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Todo List</title>
+    <script src="main.js" defer="defer"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open Sans" rel="stylesheet">
+<script defer="defer" src="main.js"></script></head>
+<body>
+    <div id="header">
+        <img id="logoImage" alt="">
+        <h1>ToDo List</h1>
+    </div>
+
+    <div id="container">
+        <div id="sideBar">
+            <div class="buttons">
+                <button class="inbox sideBarButton"> <img id="inboxImage" alt=""> Inbox</button>
+                <button class="today sideBarButton"> <img id="todayImage" alt=""> Today</button>
+                <button class="week sideBarButton"> <img id="weekImage" alt=""> This Week</button>
+            </div>
+
+            <div class="projects">
+                    
+                <div class="projectHeader">
+                    <div class="projectTitle">
+                        <img id="projectsImage" alt="">
+                        My Projects
+                    </div>
+
+                    <button class="newProject">+</button>
+                </div>
+
+                <form action="" class="projectForm">
+                    <input type="text" name="projectName" id="projectName" placeholder="Project Name..." required>
+                    <div class="projectButtons">
+                        <button type="submit" id="addProject">Add</button>
+                        <button type="button" id="cancelProject">Cancel</button>
+                    </div>
+                </form>
+
+                <div id="projectContainer">
+
+                </div>
+            </div>
+        </div>
+    
+        <div id="content">
+            <div class="contentHeader"> </div>
+
+            <div class="taskContainer">
+
+                <div class="taskList"> </div>
+                <div id="custom-menu">
+                    <ul>
+                      <li id="menu-item-1">Add Subtask</li>
+                      <li id="menu-item-2">Delete</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="newTaskDiv">
+
+                <div class="newTaskButtonContainer"> </div>
+
+                <form action="" class="newTaskForm" method="post">
+                    <div class="formContainer">
+                        <div class="formElement taskInfoForm">
+                            <input type="text" name="taskName" id="taskName" placeholder="Enter task name..." required>
+                            <input type="date" name="taskDate" id="taskDate" value="2023-07-18">
+                        </div>
+    
+                        <div class="formElement taskButtonForm">
+                            <button type="submit" id="submitNewTask">Add Task</button>
+                            <button type="button" id="cancelTask">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <form action="" class="subTaskForm" method="post">
+        <div class="subTaskFormContainer">
+            <input type="text" name="subTaskName" id="subTaskName" placeholder="Enter subtask name..." required>
+            <button type="submit" id="submitSubTask">Add Subtask</button>
+            <button type="button" id="cancelSubTask">Cancel</button>
+        </div>
+    </form>
+
+</body>
+</html>
