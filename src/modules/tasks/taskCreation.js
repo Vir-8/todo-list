@@ -57,6 +57,16 @@ export function createTasks(i, page) {
     taskDate.addEventListener('change', function() {
         task.mainTaskData.mainTaskDate = taskDate.value;
         localStorage.setItem('myTasks', JSON.stringify(myTasks));
+
+        if (page == 'today') {
+            loadToday();
+        } else if (page == 'week') {
+            loadWeek();
+        }
+    });
+
+    taskDate.addEventListener('click', function() {
+        taskDate.showPicker();
     });
 
     taskName.addEventListener('change', function() {
@@ -115,13 +125,19 @@ export function createTasks(i, page) {
         console.log("checked task with id " + i + " and data-index " + mainTaskContainer.getAttribute("data-index"));
         myTasks.splice(i, 1);
 
-        if (page == 'inbox') {
-            loadInbox();
-        } else if (page == 'today') {
-            loadToday();
-        } else if (page == 'week') {
-            loadWeek();
-        }
+        mainTaskContainer.classList.add('start-animation')
+
+        mainTaskContainer.addEventListener('animationend', function() {
+            // This code will run once the animation is complete
+            console.log('Animation is complete! You can proceed further.');
+            if (page == 'inbox') {
+                loadInbox();
+            } else if (page == 'today') {
+                loadToday();
+            } else if (page == 'week') {
+                loadWeek();
+            }
+          }, { once: true });
 
         localStorage.setItem('myTasks', JSON.stringify(myTasks));
         } 

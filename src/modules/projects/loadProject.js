@@ -99,6 +99,10 @@ function showProjectTasks(newProject) {
             localStorage.setItem('myProjects', JSON.stringify(myProjects));
         });
 
+        taskDate.addEventListener('click', function() {
+            taskDate.showPicker();
+        });
+
         taskName.addEventListener('change', function() {
             projectTask.mainTaskData.mainTaskName = taskName.value;
             localStorage.setItem('myProjects', JSON.stringify(myProjects));
