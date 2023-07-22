@@ -77,7 +77,7 @@ function cleanPage() {
     contentHeader.append(header);
 
     let newTaskButton = document.createElement('button');
-    newTaskButton.textContent = "new button!";
+    newTaskButton.textContent = "+ New Task";
     newTaskButton.onclick = function() {
         newTask(newTaskButton, 'week');
     };

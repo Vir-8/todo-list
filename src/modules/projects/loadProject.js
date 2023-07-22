@@ -1,6 +1,6 @@
 import { contentHeader, taskContainer, newTaskForm, cancelTask, taskList, newTaskButtonContainer, subTaskForm, myProjects } from "../..";
 import { newProjectTask } from "./projectTask";
-import { displayMenu } from "../tasks/taskMenu";
+import { displayMenu, loadMenu } from "../tasks/taskMenu";
 import { loadProjectSideBar } from "../sideBar";
 
 export const loadProject = (newProject) => {
@@ -54,11 +54,9 @@ function showProjectTasks(newProject) {
         let newTaskContainer = document.createElement('div');
         newTaskContainer.classList.add('newTask');
     
-        let subTaskContainer = document.createElement('div');
-        subTaskContainer.classList.add('subTaskContainer');
-    
         let check = document.createElement('input');
         check.type = "checkbox";
+        newTaskContainer.append(check);
     
         let newTaskContent = document.createElement('div');
         newTaskContent.classList.add('newTaskContent');
@@ -66,27 +64,50 @@ function showProjectTasks(newProject) {
         let taskName = document.createElement('input');
         taskName.type = 'text';
         taskName.value = projectTask.mainTaskData.mainTaskName;
+        newTaskContent.append(taskName);
+    
+        let rightSide = document.createElement('div');
+        rightSide.classList.add('right-side');
     
         let taskDate = document.createElement('input');
         taskDate.type = 'date';
         taskDate.value = projectTask.mainTaskData.mainTaskDate;
-
-        newTaskContainer.append(check);
-
-        newTaskContent.append(taskName);
-        newTaskContent.append(taskDate);
+        rightSide.append(taskDate);
     
-        newTaskContainer.append(newTaskContent);
+        let menuDropDown = document.createElement('div');
+        menuDropDown.classList.add('menuDropDown');
+        let svgImage = document.createElement('img');
+        svgImage.src = '../src/assets/menu.svg'; 
+    
+        menuDropDown.appendChild(svgImage);
+    
+        rightSide.append(menuDropDown);
 
+        newTaskContent.append(rightSide);
+        newTaskContainer.append(newTaskContent);
+    
+        let subTaskContainer = document.createElement('div');
+        subTaskContainer.classList.add('subTaskContainer');
+    
         mainTaskContainer.append(newTaskContainer);
         mainTaskContainer.append(subTaskContainer);
+    
+        displayMenu(mainTaskContainer, projectID);
 
         taskDate.addEventListener('change', function() {
             projectTask.mainTaskData.mainTaskDate = taskDate.value;
             localStorage.setItem('myProjects', JSON.stringify(myProjects));
         });
 
-        displayMenu(mainTaskContainer, projectID);
+        taskName.addEventListener('change', function() {
+            projectTask.mainTaskData.mainTaskName = taskName.value;
+            localStorage.setItem('myProjects', JSON.stringify(myProjects));
+        });
+    
+        menuDropDown.addEventListener('click', function() {
+            loadMenu(mainTaskContainer, projectID, 'menuDropDown')
+        });
+
         taskList.append(mainTaskContainer)
 
         for (let j = 0; j < projectTask.subTasks.length; j++) 
@@ -139,7 +160,7 @@ function showProjectTasks(newProject) {
     }
 
     let newProjectTaskButton = document.createElement('button');
-    newProjectTaskButton.textContent = "new button!";
+    newProjectTaskButton.textContent = "+ New Task";
 
     newProjectTaskButton.onclick = function() {
         newProjectTask(newProjectTaskButton, newProject);

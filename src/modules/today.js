@@ -62,7 +62,7 @@ function cleanPage() {
 
 
     let newTaskButton = document.createElement('button');
-    newTaskButton.textContent = "new button!";
+    newTaskButton.textContent = "+ New Task";
     newTaskButton.onclick = function() {
         newTask(newTaskButton, 'today');
     };

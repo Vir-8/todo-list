@@ -10,7 +10,9 @@ function newTask(newTaskButton, page) {
 
     cleanPage(newTaskButton);
 
-    window.addEventListener('resize', updateWidth(newTaskButton));
+    window.addEventListener('resize', function() {
+        updateWidth(newTaskButton);
+    });
 
     newTaskForm.onsubmit = function(e) {
         console.log('submit new task clicked')
@@ -75,7 +77,6 @@ function updateWidth(newTaskButton) {
     newTaskButton.style.display = 'block';
     newTaskForm.style.width = getComputedStyle(newTaskButton).width;
     newTaskButton.style.display = 'none';
-
 }
 
 export { newTask };

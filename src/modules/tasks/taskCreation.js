@@ -1,5 +1,5 @@
 import { myTasks, taskList } from "../..";
-import { displayMenu } from "./taskMenu";
+import { displayMenu, loadMenu } from "./taskMenu";
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
@@ -27,16 +27,23 @@ export function createTasks(i, page) {
     taskName.value = task.mainTaskData.mainTaskName;
     newTaskContent.append(taskName);
 
+    let rightSide = document.createElement('div');
+    rightSide.classList.add('right-side');
+
     let taskDate = document.createElement('input');
     taskDate.type = 'date';
     taskDate.value = task.mainTaskData.mainTaskDate;
-    newTaskContent.append(taskDate);
+    rightSide.append(taskDate);
 
-    taskDate.addEventListener('change', function() {
-        task.mainTaskData.mainTaskDate = taskDate.value;
-        localStorage.setItem('myTasks', JSON.stringify(myTasks));
-    });
+    let menuDropDown = document.createElement('div');
+    menuDropDown.classList.add('menuDropDown');
+    let svgImage = document.createElement('img');
+    svgImage.src = '../src/assets/menu.svg'; 
 
+    menuDropDown.appendChild(svgImage);
+    rightSide.append(menuDropDown);
+
+    newTaskContent.append(rightSide);
     newTaskContainer.append(newTaskContent);
 
     let subTaskContainer = document.createElement('div');
@@ -46,6 +53,21 @@ export function createTasks(i, page) {
     mainTaskContainer.append(subTaskContainer);
 
     displayMenu(mainTaskContainer, page);
+
+    taskDate.addEventListener('change', function() {
+        task.mainTaskData.mainTaskDate = taskDate.value;
+        localStorage.setItem('myTasks', JSON.stringify(myTasks));
+    });
+
+    taskName.addEventListener('change', function() {
+        task.mainTaskData.mainTaskName = taskName.value;
+        localStorage.setItem('myTasks', JSON.stringify(myTasks));
+    });
+
+    menuDropDown.addEventListener('click', function() {
+        loadMenu(mainTaskContainer, page, 'menuDropDown')
+    });
+
     taskList.append(mainTaskContainer);
 
     for (let j = 0; j < task.subTasks.length; j++) 

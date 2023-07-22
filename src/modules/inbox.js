@@ -31,7 +31,7 @@ export function showAllTasks() {
     }
 
     let newTaskButton = document.createElement('button');
-    newTaskButton.textContent = "new button!";
+    newTaskButton.textContent = "+ New Task";
     newTaskButton.onclick = function() {
         newTask(newTaskButton, 'inbox');
     };
@@ -56,6 +56,13 @@ function cleanPage() {
 
     dateInput.removeAttribute('min');
     dateInput.removeAttribute('max');
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+
+    dateInput.value = `${year}-${month}-${day}`;
 }
 
 export default loadInbox;

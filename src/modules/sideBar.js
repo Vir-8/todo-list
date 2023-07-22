@@ -30,6 +30,8 @@ export function loadProjectSideBar() {
         newProjectButton.classList.add('sideBarButton');
     
         let deleteProjectButton = document.createElement('button');
+        deleteProjectButton.textContent = "-";
+        deleteProjectButton.classList.add('deleteProjectButton');
 
         newProjectButton.textContent = myProjects[i].name;
         newProjectButton.append(deleteProjectButton);

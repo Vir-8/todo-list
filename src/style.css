@@ -29,8 +29,12 @@ body {
 #header h1 {
     align-self: center;
     margin: 0;
-    margin-left: 100px;
+    margin-left: 15px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+#header img {
+    margin-left: 100px;
 }
 
 #container {
@@ -59,6 +63,7 @@ body {
 
 #sideBar .buttons button, #projectContainer button {
     background-color: #1f293757;
+    font-size: 17px;
     padding: 8px;
     text-align: left;
     border: none;
@@ -134,8 +139,18 @@ body {
 }
 
 .newTaskButton {
-    height: 50px;
+    height: 40px;
     width: 100%;
+    background-color: #ffffff00;
+    color: white;
+    border: none;
+    text-align: left;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.newTaskButton:hover {
+    background-color: #d4d4d812;
 }
 
 .newTask {
@@ -151,8 +166,28 @@ body {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding-right: 30px;
+    gap: 10px;
+    padding-right: 5px;
     padding-left: 15px;
+}
+
+.right-side {
+    display: flex;
+    gap: 8px;
+}
+
+.menuDropDown {
+    display: flex;
+    visibility: hidden;
+    justify-content: center;
+    align-self: center;
+    height: 32px;
+    width: 32px;
+    align-items: center;
+}
+
+.newTask:hover .menuDropDown {
+    visibility: visible;
 }
 
 .newTask input {
@@ -161,6 +196,10 @@ body {
     color: white;
     font-size: 17px;
     font-family: 'Open Sans';
+}
+
+.newTaskContent input[type=text] {
+    width: 100%;
 }
 
 .newTask input[type=checkbox] {
@@ -189,15 +228,45 @@ body {
 
 .formElement input[type=text] {
     width: 70%;
+    padding: 8px;
 }
 
 .formElement input[type=date] {
     width: 30%;
 }
 
+.formElement input, #projectName {
+    background-color: #d4d4d812;
+    outline: none;
+    border: 1px solid white;
+    color: white;
+}
+
 .formElement button {
-    height: 25px;
+    height: 30px;
     width: 50%;
+    outline: none;
+    border: 1px solid white;
+    border-top: none;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+}
+
+#submitNewTask, #submitSubTask, #addProject {
+    background-color: rgb(35, 141, 53);
+}
+
+#submitNewTask:hover, #submitSubTask:hover, #addProject:hover {
+    background-color: rgba(35, 141, 53, 0.658);
+}
+
+#cancelTask, #cancelSubTask, #cancelProject {
+    background-color: rgb(223, 47, 47);
+}
+
+#cancelTask:hover, #cancelSubTask:hover, #cancelProject:hover {
+    background-color: rgb(223, 47, 47, 0.658);
 }
  
 .newTaskForm .formContainer {
@@ -223,10 +292,21 @@ body {
 .subTaskFormContainer input[type=text] {
     width: 60%;
     font-size: 15px;
+    padding: 8px;
+    outline: none;
+    border: 1px solid white;
+    color: white;
+    background-color: #d4d4d812;
 }
 
 .subTaskFormContainer button {
     width: 20%;
+    outline: none;
+    border: 1px solid white;
+    border-left: none;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
 }
 
 .subTaskContainer {
@@ -270,22 +350,42 @@ body {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    padding-top: 20px;
+    padding-top: 14px;
     border-top: 1px solid rgb(212, 212, 212);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 
 .projectHeader {
     display: flex;
+    height: 40px;
+    padding: 8px;
     flex-direction: row;
     justify-content: space-between;
     color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.projectHeader h4, button {
+.projectHeader h3, button {
     margin: 0;
+}
+
+.projectHeader button {
+    background-color: rgb(35, 141, 53);
+    color: white;
+    height: 25px;
+    width: 25px;
+    padding: 0px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: large;
+    font-weight: bolder;
+    border: none;
+}
+
+.projectHeader button:hover {
+    background-color: #bbbbbb3b;
 }
 
 .projectForm {
@@ -294,6 +394,25 @@ body {
     padding-top: 10px;
 }
 
+.projectButtons {
+    display: flex;
+}
+
+.projectButtons button {
+    width: 50%;
+    height: 20px;
+    outline: none;
+    border: 1px solid white;
+    border-top: none;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+}
+
+#projectName {
+    height: 30px;
+    padding: 6px;
+}
 
 #projectContainer {
     display: flex;
@@ -304,10 +423,21 @@ body {
 
 #projectContainer .newProject {
     height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-
-
+#projectContainer .deleteProjectButton {
+    background-color: rgb(223, 47, 47);
+    height: 25px;
+    width: 25px;
+    padding: 0px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: large;
+    font-weight: bolder;
+}
 
 
 #custom-menu {
