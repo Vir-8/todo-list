@@ -8,6 +8,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'ToDo List',
       template: './src/index.html',
+      minify: {
+        removeRedundantAttributes: false,
+      }
     }),
   ],
   output: {
