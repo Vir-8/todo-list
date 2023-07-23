@@ -48,7 +48,13 @@ export function loadProjectSideBar() {
         deleteProjectButton.addEventListener('click', function() {
             myProjects.splice(i, 1);
             console.log("deleting task " + i);
-            loadProjectSideBar();
+
+            newProjectButton.classList.add('deleteProject-animation');
+            deleteProjectButton.classList.add('deleteProject-animation');
+            newProjectButton.addEventListener('animationend', function() {
+                loadProjectSideBar();
+            }, { once: true });
+
             localStorage.setItem('myProjects', JSON.stringify(myProjects));
             
             if (getCurrentProject() === i) {
