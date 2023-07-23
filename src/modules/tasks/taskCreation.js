@@ -4,6 +4,7 @@ import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
 import menuImg from '../../assets/menu.svg';
+import { newSubTask } from "./subTasks";
 
 export function createTasks(i, page, taskContainerID) {
     let task = myTasks[i];
@@ -116,10 +117,36 @@ export function createTasks(i, page, taskContainerID) {
                 document.getElementById('taskName').focus();
             } else if (projectForm.style.display == 'flex') {
                 document.getElementById('projectName').focus();
-                console.log("focusing")
             }
         });
     }
+
+    let addSubTaskButton = document.createElement('button');
+    addSubTaskButton.classList.add('addSubTaskButton');
+    addSubTaskButton.textContent = "+ Add Subtask";
+    subTaskContainer.append(addSubTaskButton);
+
+    mainTaskContainer.addEventListener('click', function(e) {
+        if (e.target.type !== 'checkbox' && e.target.tagName !== 'BUTTON')
+        {
+            let subTaskButtons = document.querySelectorAll('.addSubTaskButton');
+            subTaskButtons.forEach(button => button.style.display = 'none');
+            if (subTaskForm.style.display !== 'block') {
+                addSubTaskButton.style.display = 'flex';
+            }   
+        }
+    });
+
+    addSubTaskButton.addEventListener('click', function() {
+        newSubTask(mainTaskContainer, page, addSubTaskButton);
+        addSubTaskButton.style.display = 'none';
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!mainTaskContainer.contains(e.target)) {
+            addSubTaskButton.style.display = 'none';
+        }
+    });
 
     taskDate.addEventListener('change', function() {
         task.mainTaskData.mainTaskDate = taskDate.value;

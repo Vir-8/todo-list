@@ -148,7 +148,7 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     margin-top: 30px;
 }
 
@@ -177,13 +177,14 @@ img {
     flex-direction: row;
     height: 40px;
     width: 100%;
+    margin-bottom: 2px;
     background-color: #d4d4d812;
     vertical-align: middle;
 }
 
 .newTaskContent {
     display: flex;
-    width: 100%;
+    width: 90%;
     justify-content: space-between;
     gap: 10px;
     padding-right: 5px;
@@ -226,6 +227,8 @@ img {
 .newTask input[type=checkbox] {
     margin-left: 10px;
     width: 20px;
+    height: 20px;
+    align-self: center;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -303,6 +306,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color: white;
 }
 
+.addSubTaskButton {
+    display: none;
+    align-items: center;
+    min-height: 35px;
+    font-size: 18px;
+    padding-left: 15px;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #ffffff00;
+}
+
+.addSubTaskButton:hover {
+    background-color: #d4d4d80a;
+}
 
 .subTaskForm {
     display: none;
@@ -355,7 +373,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 30px;
+    height: 40px;
     background-color: #d4d4d812;
     border-top: 1px solid #ffffff75;
 }
@@ -368,8 +386,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: none;
     color: white;
     background-color: rgb(223, 47, 47);
-    height: 18px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
     padding: 0px;
     vertical-align: middle;
     text-align: center;
@@ -385,14 +403,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background-color: #ffffff00;
     border: none;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'Open Sans';
 }
 
 .subTask input[type=checkbox] {
     margin-left: 10px;
     margin-right: 20px;
-    width: 15px;
+    width: 20px;
+    height: 20px;
+    align-self: center;
 }
 
 .subTask input[type=text] {
@@ -552,7 +572,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @keyframes doneAnimation {
     0% { height: 40px; opacity: 100%; margin-bottom: 0px; border-top: 2px solid rgba(255, 255, 255, 0.6) }
     25% { background-color: #00ff454a; }
-    100% { height: 0px; opacity: 0%; margin-bottom: -15px; border-top: 0px;}
+    100% { height: 0px; opacity: 0%; margin-bottom: -10px; border-top: 0px;}
 }
 
 .start-animation {
@@ -573,7 +593,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @keyframes taskDeleteAnimation {
     0% { height: 40px; opacity: 100%; margin-bottom: 0px; border-top: 2px solid rgba(255, 255, 255, 0.6) }
     25% { background-color: rgb(223, 47, 47); }
-    100% { height: 0px; opacity: 0%; margin-bottom: -15px; border-top: 0px;}
+    100% { height: 0px; opacity: 0%; margin-bottom: -10px; border-top: 0px;}
 }
 
 .taskDelete-animation {

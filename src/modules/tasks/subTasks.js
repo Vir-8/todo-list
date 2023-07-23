@@ -57,7 +57,7 @@ function addNewSubTask(mainTaskContainer, pageID) {
     }
 }
 
-function cleanPage() {
+function cleanPage(addSubTaskButton) {
     subTaskForm.style.display = 'block';
     document.getElementById('subTaskName').focus();
 

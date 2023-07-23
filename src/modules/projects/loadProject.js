@@ -4,6 +4,7 @@ import { displayMenu, loadMenu } from "../tasks/taskMenu";
 import { loadProjectSideBar } from "../sideBar";
 import menuImg from '../../assets/menu.svg';
 import { resetDate } from "../today";
+import { newSubTask } from "../tasks/subTasks";
 
 export const loadProject = (newProject, taskContainerID) => {
     cleanPage();
@@ -157,6 +158,33 @@ function showProjectTasks(newProject, taskContainerID) {
                 }
             });
         }
+
+        let addSubTaskButton = document.createElement('button');
+        addSubTaskButton.classList.add('addSubTaskButton');
+        addSubTaskButton.textContent = "+ Add Subtask";
+        subTaskContainer.append(addSubTaskButton);
+    
+        mainTaskContainer.addEventListener('click', function(e) {
+            if (e.target.type !== 'checkbox' && e.target.tagName !== 'BUTTON')
+            {
+                let subTaskButtons = document.querySelectorAll('.addSubTaskButton');
+                subTaskButtons.forEach(button => button.style.display = 'none');
+                if (subTaskForm.style.display !== 'block') {
+                    addSubTaskButton.style.display = 'flex';
+                }   
+            }
+        });
+    
+        addSubTaskButton.addEventListener('click', function() {
+            newSubTask(mainTaskContainer, projectID, addSubTaskButton);
+            addSubTaskButton.style.display = 'none';
+        });
+    
+        document.addEventListener('click', function(e) {
+            if (!mainTaskContainer.contains(e.target)) {
+                addSubTaskButton.style.display = 'none';
+            }
+        });
 
         taskDate.addEventListener('change', function() {
             projectTask.mainTaskData.mainTaskDate = taskDate.value;
