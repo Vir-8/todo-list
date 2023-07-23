@@ -7,9 +7,6 @@ import { resetDate } from "../today";
 function newTask(newTaskButton, page) {
 
     cleanPage(newTaskButton);
-    window.addEventListener('resize', function() {
-        updateWidth(newTaskButton);
-    });
 
     newTaskForm.onsubmit = function(e) {
         addNewTask(newTaskButton, page); //create new task card
@@ -60,7 +57,6 @@ function cleanPage(newTaskButton) {
     newTaskForm.style.left = buttonLeft + 'px';
 
     newTaskForm.style.display = 'block';
-    newTaskForm.style.width = getComputedStyle(newTaskButton).width;
     newTaskButton.style.display = 'none';
 
     subTaskForm.reset();
@@ -74,12 +70,6 @@ function cleanPage(newTaskButton) {
     document.getElementById('taskDate').addEventListener('click', function() {
         taskDate.showPicker();
     });
-}
-
-function updateWidth(newTaskButton) {
-    newTaskButton.style.display = 'block';
-    newTaskForm.style.width = getComputedStyle(newTaskButton).width;
-    newTaskButton.style.display = 'none';
 }
 
 export { newTask };

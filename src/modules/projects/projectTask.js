@@ -3,7 +3,6 @@ import { loadProject } from "./loadProject";
 import { resetDate } from "../today";
 
 export function newProjectTask(newProjectTaskButton, newProject) {
-    window.addEventListener('resize', updateWidth(newProjectTaskButton));
 
     cleanPage(newProjectTaskButton);
 
@@ -50,7 +49,6 @@ function cleanPage(newProjectTaskButton) {
     newTaskForm.style.left = buttonLeft + 'px';
     
     newTaskForm.style.display = 'block';
-    newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
     newProjectTaskButton.style.display = 'none';
 
     document.getElementById('taskName').focus();
@@ -62,10 +60,4 @@ function cleanPage(newProjectTaskButton) {
 
     subTaskForm.reset();
     subTaskForm.style.display = 'none';
-}
-
-function updateWidth(newProjectTaskButton) {
-    newProjectTaskButton.style.display = 'block';
-    newTaskForm.style.width = getComputedStyle(newProjectTaskButton).width;
-    newProjectTaskButton.style.display = 'none';
 }
