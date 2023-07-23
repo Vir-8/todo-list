@@ -218,6 +218,11 @@ function loadSubtasks(projectTask, mainTaskContainer, subTaskContainer, projectI
             newSubTask.classList.remove('subTaskDone');
         }
 
+        taskName.addEventListener('change', function() {
+            projectTask.subTasks[j].name = taskName.value;
+            localStorage.setItem('myProjects', JSON.stringify(myProjects));
+        });
+
         check.addEventListener('change', function() {
             if (check.checked) {
                 // Mark task as completed

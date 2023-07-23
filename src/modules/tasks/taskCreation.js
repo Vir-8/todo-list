@@ -168,6 +168,11 @@ function loadSubtasks(task, mainTaskContainer, subTaskContainer, page) {
             check.checked = false;
             newSubTask.classList.remove('subTaskDone');
         }
+
+        taskName.addEventListener('change', function() {
+            task.subTasks[j].name = taskName.value;
+            localStorage.setItem('myTasks', JSON.stringify(myTasks));
+        });
         
         check.addEventListener('change', function() {
             if (check.checked) {
