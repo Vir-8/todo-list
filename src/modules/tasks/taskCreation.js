@@ -61,10 +61,8 @@ export function createTasks(i, page, taskContainerID) {
     displayMenu(mainTaskContainer, page);
     taskList.append(mainTaskContainer);
 
-    if (i == taskContainerID) {
-        mainTaskContainer.append(subTaskForm);
-        subTaskForm.style.display = 'block';
-        document.getElementById('subTaskName').focus();
+    if (typeof taskContainerID !== 'undefined' && taskContainerID == i) {
+        newSubTask(mainTaskContainer, page);
     }
 
     loadSubtasks(task, mainTaskContainer, subTaskContainer, page, addSubTaskButton);
@@ -106,7 +104,7 @@ export function createTasks(i, page, taskContainerID) {
     });
 
     addSubTaskButton.addEventListener('click', function() {
-        newSubTask(mainTaskContainer, page, addSubTaskButton, addSubTaskButton);
+        newSubTask(mainTaskContainer, page);
         addSubTaskButton.style.display = 'none';
     });
 
@@ -114,7 +112,7 @@ export function createTasks(i, page, taskContainerID) {
         if (!mainTaskContainer.contains(e.target)) {
             addSubTaskButton.style.display = 'none';
         }
-    });
+    }, {once: true});
 
     check.addEventListener('change', function() {
         if (check.checked) {

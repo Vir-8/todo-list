@@ -2,17 +2,14 @@ import { subTaskForm, cancelSubTask, myTasks, myProjects, newTaskForm, projectFo
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
-import { loadProject } from "../projects/loadProject";
+import { loadProject, showProjectTasks } from "../projects/loadProject";
 
-export function newSubTask(mainTaskContainer, pageID, addSubTaskButton) {
+export function newSubTask(mainTaskContainer, pageID) {
 
     mainTaskContainer.append(subTaskForm);
     cleanPage();
 
-    if (typeof addSubTaskButton === 'undefined')
-    {
-        addSubTaskButton = subTaskForm.previousElementSibling;
-    }
+    let addSubTaskButton = subTaskForm.previousElementSibling;
 
     subTaskForm.onsubmit = function(e) {
         addNewSubTask(mainTaskContainer, pageID); //create new subtask card
@@ -59,7 +56,8 @@ function addNewSubTask(mainTaskContainer, pageID) {
         localStorage.setItem('myProjects', JSON.stringify(myProjects));
 
         let newProject = myProjects[pageID];
-        loadProject(newProject, taskContainerID);
+        showProjectTasks(newProject, taskContainerID);
+        console.log("loading shit with taskcontainerid " + taskContainerID);
     }
 }
 
@@ -73,5 +71,6 @@ function cleanPage() {
     projectForm.reset();
     projectForm.style.display = 'none';
 
-    document.querySelector('.newTaskButton').style.display = 'block';
+    let newTaskButton = document.querySelector('.newTaskButton');
+    newTaskButton.style.display = 'block';
 }

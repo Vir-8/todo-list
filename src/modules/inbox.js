@@ -23,11 +23,6 @@ export function showAllTasks(taskContainerID) {
     newTaskButtonContainer.textContent = "";
     taskList.textContent = "";
 
-    for (let i = 0; i < myTasks.length; i++)
-    {
-        createTasks(i, 'inbox', taskContainerID);
-    }
-
     let newTaskButton = document.createElement('button');
     newTaskButton.textContent = "+ New Task";
     newTaskButton.onclick = function() {
@@ -36,6 +31,11 @@ export function showAllTasks(taskContainerID) {
     
     newTaskButton.classList.add('newTaskButton');
     newTaskButtonContainer.append(newTaskButton);
+
+    for (let i = 0; i < myTasks.length; i++)
+    {
+        createTasks(i, 'inbox', taskContainerID);
+    }
 }
 
 function cleanPage() {

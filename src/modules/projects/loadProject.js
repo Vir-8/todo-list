@@ -38,8 +38,19 @@ function projectHeader(newProject) {
     });
 }
 
-function showProjectTasks(newProject, taskContainerID) {
+export function showProjectTasks(newProject, taskContainerID) {
     newTaskButtonContainer.textContent = "";
+
+    let newProjectTaskButton = document.createElement('button');
+    newProjectTaskButton.textContent = "+ New Task";
+
+    newProjectTaskButton.onclick = function() {
+        newProjectTask(newProjectTaskButton, newProject);
+    };
+
+    newProjectTaskButton.classList.add('newTaskButton');
+    newTaskButtonContainer.append(newProjectTaskButton);
+
     taskList.textContent = "";
     for (let i = 0; i < newProject.tasks.length; i++)
     {
@@ -99,11 +110,21 @@ function showProjectTasks(newProject, taskContainerID) {
         displayMenu(mainTaskContainer, projectID);
         taskList.append(mainTaskContainer);
 
-        if (i == taskContainerID) {
-            newSubTask(mainTaskContainer, projectID, addSubTaskButton)
+        loadSubtasks(projectTask, mainTaskContainer, subTaskContainer, projectID);
+
+        try {
+            // Code that might cause an error, including the part that uses taskContainerID
+            if (typeof taskContainerID !== 'undefined' && taskContainerID == i) {
+                newSubTask(mainTaskContainer, projectID)
+                console.log("running new subtask");
+            }
+        } catch (error) {
+            // Handle the error here or log it to the console
+            console.error("An error occurred:", error);
         }
 
-        loadSubtasks(projectTask, mainTaskContainer, subTaskContainer, projectID);
+
+        console.log("task container ID is " + taskContainerID);
 
         taskDate.addEventListener('change', function() {
             projectTask.mainTaskData.mainTaskDate = taskDate.value;
@@ -136,7 +157,7 @@ function showProjectTasks(newProject, taskContainerID) {
         });
 
         addSubTaskButton.addEventListener('click', function() {
-            newSubTask(mainTaskContainer, projectID, addSubTaskButton);
+            newSubTask(mainTaskContainer, projectID);
             addSubTaskButton.style.display = 'none';
         });
 
@@ -144,7 +165,7 @@ function showProjectTasks(newProject, taskContainerID) {
             if (!mainTaskContainer.contains(e.target)) {
                 addSubTaskButton.style.display = 'none';
             }
-        });
+        }, {once: true});
 
         check.addEventListener('change', function() {
             if (check.checked) {
@@ -160,16 +181,6 @@ function showProjectTasks(newProject, taskContainerID) {
             } 
         });
     }
-
-    let newProjectTaskButton = document.createElement('button');
-    newProjectTaskButton.textContent = "+ New Task";
-
-    newProjectTaskButton.onclick = function() {
-        newProjectTask(newProjectTaskButton, newProject);
-    };
-
-    newProjectTaskButton.classList.add('newTaskButton');
-    newTaskButtonContainer.append(newProjectTaskButton);
 }
 
 
