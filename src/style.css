@@ -567,6 +567,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .subTaskDelete-animation {
     animation: subTaskDeleteAnimation 0.3s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes taskDeleteAnimation {

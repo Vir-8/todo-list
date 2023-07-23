@@ -1,4 +1,4 @@
-import { myTasks, subTaskForm, taskList } from "../..";
+import { myTasks, subTaskForm, taskList, newTaskForm, projectForm } from "../..";
 import { displayMenu, loadMenu } from "./taskMenu";
 import loadInbox from "../inbox";
 import loadToday from "../today";
@@ -107,18 +107,17 @@ export function createTasks(i, page, taskContainerID) {
 
         deleteSubTaskButton.addEventListener('click', function() {
             task.subTasks.splice(j, 1);
-            
             localStorage.setItem('myTasks', JSON.stringify(myTasks));
             newSubTask.classList.add('subTaskDelete-animation')
-            newSubTask.addEventListener('animationend', function() {
-                if (page == 'inbox') {
-                    loadInbox();
-                } else if (page == 'today') {
-                    loadToday();
-                } else if (page == 'week') {
-                    loadWeek();
-                }
-            }, { once: true });
+
+            if (subTaskForm.style.display == 'block') {
+                document.getElementById('subTaskName').focus();
+            } else if (newTaskForm.style.display == 'block') {
+                document.getElementById('taskName').focus();
+            } else if (projectForm.style.display == 'flex') {
+                document.getElementById('projectName').focus();
+                console.log("focusing")
+            }
         });
     }
 

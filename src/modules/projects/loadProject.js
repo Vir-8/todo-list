@@ -1,4 +1,4 @@
-import { contentHeader, newTaskForm, taskList, newTaskButtonContainer, subTaskForm, myProjects } from "../..";
+import { contentHeader, newTaskForm, taskList, newTaskButtonContainer, subTaskForm, myProjects, projectForm } from "../..";
 import { newProjectTask } from "./projectTask";
 import { displayMenu, loadMenu } from "../tasks/taskMenu";
 import { loadProjectSideBar } from "../sideBar";
@@ -145,12 +145,16 @@ function showProjectTasks(newProject, taskContainerID) {
 
             deleteSubTaskButton.addEventListener('click', function() {
                 projectTask.subTasks.splice(j, 1);
-                
                 localStorage.setItem('myProjects', JSON.stringify(myProjects));
                 newSubTask.classList.add('subTaskDelete-animation')
-                newSubTask.addEventListener('animationend', function() {
-                    loadProject(newProject);
-                }, { once: true });
+
+                if (subTaskForm.style.display == 'block') {
+                    document.getElementById('subTaskName').focus();
+                } else if (newTaskForm.style.display == 'block') {
+                    document.getElementById('taskName').focus();
+                } else if (projectForm.style.display == 'flex') {
+                    document.getElementById('projectName').focus();
+                }
             });
         }
 

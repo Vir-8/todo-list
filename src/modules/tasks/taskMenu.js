@@ -93,10 +93,12 @@ function deleteTask(mainTaskContainer, pageID) {
   }
   else {
     myProjects[pageID].tasks.splice(taskContainerID, 1);
+    mainTaskContainer.classList.add('taskDelete-animation')
+    mainTaskContainer.addEventListener('animationend', function() {
+      let newProject = myProjects[pageID];
+      loadProject(newProject);
+    });
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
-
-    let newProject = myProjects[pageID];
-    loadProject(newProject);
   }
 
   menu.style.display = 'none';  
