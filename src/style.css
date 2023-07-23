@@ -344,16 +344,9 @@ input[type="checkbox"]:checked {
 .subTaskForm .subTaskFormContainer {
     display: flex;
     flex-direction: row;
-    height: 30px;
+    height: 40px;
     margin-left: 35px;
     color: white;
-}
-
-@media (max-width: 960px) {
-
-    .subTaskForm .subTaskFormContainer {
-        height: 40px;
-    }
 }
 
 .subTaskFormContainer input[type=text] {
