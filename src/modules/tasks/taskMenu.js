@@ -3,14 +3,18 @@ import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
 import { newSubTask } from "./subTasks";
-import { showProjectTasks } from "../projects/loadProject";
 import { loadProject } from "../projects/loadProject";
 
 export function displayMenu(mainTaskContainer, pageID) {
   mainTaskContainer.addEventListener('contextmenu', function(e) {
-
     e.preventDefault(); 
-    loadMenu(mainTaskContainer, pageID, e);
+    const subtaskContainers = document.querySelectorAll('.subTaskContainer');
+
+    // Check if any subtask container includes the e.target
+    const isInSubtaskContainer = Array.from(subtaskContainers).some(container => container.contains(e.target));
+    if (!isInSubtaskContainer) {
+      loadMenu(mainTaskContainer, pageID, e);
+    }
   });
 }
 
@@ -31,8 +35,7 @@ export function loadMenu(mainTaskContainer, pageID, e) {
     menu.style.top = (menuDropDownRect.top + topOffset + 25) + 'px';
     menu.style.left = (menuDropDownRect.left + leftOffset - menuWidth + 10) + 'px';
     
-  }
-  else {
+  } else {
     menu.style.top = `${e.pageY}px`;
 
     if (e.pageX + menuWidth < viewportWidth) {
@@ -77,7 +80,6 @@ function deleteTask(mainTaskContainer, pageID) {
   if(pageID === 'inbox' || pageID === 'today' || pageID === 'week') {
 
     myTasks.splice(taskContainerID, 1);
-
     mainTaskContainer.classList.add('taskDelete-animation')
 
     mainTaskContainer.addEventListener('animationend', function() {
@@ -99,30 +101,6 @@ function deleteTask(mainTaskContainer, pageID) {
     let newProject = myProjects[pageID];
     loadProject(newProject);
   }
-
-
-  // if (myTasks.includes(task)) {
-  //   myTasks.splice(task.id, 1);
-  //   localStorage.setItem('myTasks', JSON.stringify(myTasks));
-
-  //   if (page == 'inbox') {
-  //     loadInbox();
-  //   } else if (page == 'today') {
-  //     loadToday();
-  //   } else if (page == 'week') {
-  //     loadWeek();
-  //   }
-  // }
-  // else {
-  //   let taskID = task.id;
-  //   let parentProject = myProjects.find(project => project.tasks && project.tasks.includes(task));
-  
-  //   if (taskID > -1) {
-  //     myProjects[parentProject.id].tasks.splice(taskID, 1);
-  //   }
-  //   showProjectTasks(parentProject);
-  // }  
-
 
   menu.style.display = 'none';  
 }
