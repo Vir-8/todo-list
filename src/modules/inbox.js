@@ -2,6 +2,7 @@ import { myTasks, contentHeader, taskList, newTaskButtonContainer, newTaskForm, 
 import { newTask } from "./tasks/tasks";
 import { createTasks } from "./tasks/taskCreation";
 import { setCurrentProject } from "./projects/createProject";
+import { resetDate } from "./today";
 
 const loadInbox = (taskContainerID) => {
     cleanPage();
@@ -49,17 +50,7 @@ function cleanPage() {
     contentHeader.style.display = "flex";
     contentHeader.textContent = "";
 
-    const dateInput = document.getElementById('taskDate');
-
-    dateInput.removeAttribute('min');
-    dateInput.removeAttribute('max');
-
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-
-    dateInput.value = `${year}-${month}-${day}`;
+    resetDate();
 }
 
 export default loadInbox;

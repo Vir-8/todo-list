@@ -84,22 +84,6 @@ export function createTasks(i, page, taskContainerID) {
 
         newSubTask.append(deleteSubTaskButton);
 
-        deleteSubTaskButton.addEventListener('click', function() {
-            task.subTasks.splice(j, 1);
-            
-            localStorage.setItem('myTasks', JSON.stringify(myTasks));
-            newSubTask.classList.add('subTaskDelete-animation')
-            newSubTask.addEventListener('animationend', function() {
-                if (page == 'inbox') {
-                    loadInbox();
-                } else if (page == 'today') {
-                    loadToday();
-                } else if (page == 'week') {
-                    loadWeek();
-                }
-            }, { once: true });
-        });
-
         if(task.subTasks[j].isChecked) {
             check.checked = true;
             newSubTask.classList.add('subTaskDone');
@@ -119,6 +103,22 @@ export function createTasks(i, page, taskContainerID) {
                 task.subTasks[j].isChecked = false;
                 localStorage.setItem('myTasks', JSON.stringify(myTasks));
             }
+        });
+
+        deleteSubTaskButton.addEventListener('click', function() {
+            task.subTasks.splice(j, 1);
+            
+            localStorage.setItem('myTasks', JSON.stringify(myTasks));
+            newSubTask.classList.add('subTaskDelete-animation')
+            newSubTask.addEventListener('animationend', function() {
+                if (page == 'inbox') {
+                    loadInbox();
+                } else if (page == 'today') {
+                    loadToday();
+                } else if (page == 'week') {
+                    loadWeek();
+                }
+            }, { once: true });
         });
     }
 
@@ -165,5 +165,4 @@ export function createTasks(i, page, taskContainerID) {
         localStorage.setItem('myTasks', JSON.stringify(myTasks));
         } 
     });
-
 }

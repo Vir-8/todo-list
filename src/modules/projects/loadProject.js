@@ -3,6 +3,7 @@ import { newProjectTask } from "./projectTask";
 import { displayMenu, loadMenu } from "../tasks/taskMenu";
 import { loadProjectSideBar } from "../sideBar";
 import menuImg from '../../assets/menu.svg';
+import { resetDate } from "../today";
 
 export const loadProject = (newProject, taskContainerID) => {
     cleanPage();
@@ -115,6 +116,12 @@ function showProjectTasks(newProject, taskContainerID) {
 
             subTaskContainer.append(newSubTask);
 
+            let deleteSubTaskButton = document.createElement('button');
+            deleteSubTaskButton.textContent = "-";
+            deleteSubTaskButton.classList.add('deleteSubTaskButton');
+    
+            newSubTask.append(deleteSubTaskButton);
+
             if(projectTask.subTasks[j].isChecked) {
                 check.checked = true;
                 newSubTask.classList.add('subTaskDone');
@@ -134,6 +141,16 @@ function showProjectTasks(newProject, taskContainerID) {
                     projectTask.subTasks[j].isChecked = false;
                     localStorage.setItem('myProjects', JSON.stringify(myProjects));
                 }
+            });
+
+            deleteSubTaskButton.addEventListener('click', function() {
+                projectTask.subTasks.splice(j, 1);
+                
+                localStorage.setItem('myProjects', JSON.stringify(myProjects));
+                newSubTask.classList.add('subTaskDelete-animation')
+                newSubTask.addEventListener('animationend', function() {
+                    loadProject(newProject);
+                }, { once: true });
             });
         }
 
@@ -194,15 +211,5 @@ function cleanPage() {
     contentHeader.style.display = "flex";
     contentHeader.textContent = "";
 
-    const dateInput = document.getElementById('taskDate');
-
-    dateInput.removeAttribute('min');
-    dateInput.removeAttribute('max');
-
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-
-    dateInput.value = `${year}-${month}-${day}`;
+    resetDate();
 }

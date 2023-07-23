@@ -9,16 +9,8 @@ const loadToday = (taskContainerID) => {
     let currentDate = new Date();
 
     const dateInput = document.getElementById('taskDate');
-
-    const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const day = String(currentDate.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
-
-    dateInput.min = formattedDate;
-    dateInput.max = formattedDate;
-
-    dateInput.value = formattedDate;
+    dateInput.min = dateInput.value;
+    dateInput.max = dateInput.value;
 
     for (let i = 0; i < myTasks.length; i++)
     {
@@ -35,6 +27,18 @@ const loadToday = (taskContainerID) => {
     }        
 }
 
+export function resetDate() {
+    let dateInput = document.getElementById('taskDate');
+    dateInput.removeAttribute('min');
+    dateInput.removeAttribute('max');
+
+    let currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    dateInput.value = `${year}-${month}-${day}`;
+}
+
 function cleanPage() {
     setCurrentProject('');
 
@@ -42,12 +46,7 @@ function cleanPage() {
     newTaskForm.style.display = 'none';
     newTaskButtonContainer.textContent = "";
 
-    const dateInput = document.getElementById('taskDate');
-
-    // Remove the min and max attributes to allow selecting any date
-    dateInput.removeAttribute('min');
-    dateInput.removeAttribute('max');
-
+    resetDate();
     subTaskForm.reset();
     subTaskForm.style.display = 'none';
     

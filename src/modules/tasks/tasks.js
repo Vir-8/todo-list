@@ -2,6 +2,7 @@ import { myTasks, newTaskForm, cancelTask, subTaskForm, projectForm } from "../.
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
+import { resetDate } from "../today";
 
 function newTask(newTaskButton, page) {
 
@@ -68,6 +69,7 @@ function cleanPage(newTaskButton) {
     projectForm.reset();
     projectForm.style.display = 'none';
 
+    resetDate();
     document.getElementById('taskName').focus();
     document.getElementById('taskDate').addEventListener('click', function() {
         taskDate.showPicker();

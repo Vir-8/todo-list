@@ -2,6 +2,7 @@ import { contentHeader, myTasks, taskList, newTaskForm, subTaskForm, newTaskButt
 import { createTasks } from "./tasks/taskCreation";
 import { setCurrentProject } from "./projects/createProject";
 import { newTask } from "./tasks/tasks";
+import { resetDate } from "./today";
 
 const loadWeek = (taskContainerID) => {
 
@@ -56,18 +57,7 @@ function cleanPage() {
     newTaskForm.style.display = 'none';
     newTaskButtonContainer.textContent = "";
 
-    const dateInput = document.getElementById('taskDate');
-
-    // Remove the min and max attributes to allow selecting any date
-    dateInput.removeAttribute('min');
-    dateInput.removeAttribute('max');
-
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-
-    dateInput.value = `${year}-${month}-${day}`;
+    resetDate();
 
     subTaskForm.reset();
     subTaskForm.style.display = 'none';
