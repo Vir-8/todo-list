@@ -2,6 +2,7 @@ import { menu, myTasks, myProjects } from "../..";
 import loadInbox from "../inbox";
 import { newSubTask } from "./subTasks";
 import { showProjectTasks } from "../projects/loadProject";
+import { loadProject } from "../projects/loadProject";
 
 export function displayMenu(mainTaskContainer, pageID) {
   mainTaskContainer.addEventListener('contextmenu', function(e) {
@@ -37,7 +38,6 @@ export function loadMenu(mainTaskContainer, pageID, e) {
     } else {
       menu.style.left = `${e.pageX - menuWidth}px`;
     }
-  
   }
 
   const menuItem1 = menu.querySelector('#menu-item-1');
@@ -48,7 +48,11 @@ export function loadMenu(mainTaskContainer, pageID, e) {
     menu.style.display = 'none';
   };
 
-  menuItem2.onclick = deleteTask();
+  menuItem2.onclick = function() {
+    deleteTask(mainTaskContainer, pageID);
+    menu.style.display = 'none';
+  };
+
   document.body.appendChild(menu);
 
   document.body.onclick = (e) => {
@@ -64,8 +68,33 @@ export function loadMenu(mainTaskContainer, pageID, e) {
   });
 }
 
-function deleteTask() {
-  console.log("deleting task");
+function deleteTask(mainTaskContainer, pageID) {
+
+  let taskContainerID = mainTaskContainer.getAttribute("data-index");
+
+  if(pageID === 'inbox' || pageID === 'today' || pageID === 'week') {
+
+    myTasks.splice(taskContainerID, 1);
+
+    if (pageID == 'inbox') {
+      loadInbox();
+    } else if (pageID == 'today') {
+      loadToday();
+    } else if (pageID == 'week') {
+      loadWeek();
+    }
+
+    localStorage.setItem('myTasks', JSON.stringify(myTasks));
+  }
+  else {
+    myProjects[pageID].tasks.splice(taskContainerID, 1);
+    localStorage.setItem('myProjects', JSON.stringify(myProjects));
+
+    let newProject = myProjects[pageID];
+    loadProject(newProject);
+  }
+
+
   // if (myTasks.includes(task)) {
   //   myTasks.splice(task.id, 1);
   //   localStorage.setItem('myTasks', JSON.stringify(myTasks));
@@ -77,7 +106,6 @@ function deleteTask() {
   //   } else if (page == 'week') {
   //     loadWeek();
   //   }
-
   // }
   // else {
   //   let taskID = task.id;
@@ -88,5 +116,7 @@ function deleteTask() {
   //   }
   //   showProjectTasks(parentProject);
   // }  
-  // menu.style.display = 'none';  
+
+
+  menu.style.display = 'none';  
 }
