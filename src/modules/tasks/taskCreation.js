@@ -1,11 +1,11 @@
-import { myTasks, taskList } from "../..";
+import { myTasks, subTaskForm, taskList } from "../..";
 import { displayMenu, loadMenu } from "./taskMenu";
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
 import menuImg from '../../assets/menu.svg';
 
-export function createTasks(i, page) {
+export function createTasks(i, page, taskContainerID) {
     let task = myTasks[i];
 
     let mainTaskContainer = document.createElement('div');
@@ -80,11 +80,17 @@ export function createTasks(i, page) {
 
     taskList.append(mainTaskContainer);
 
+    if (i == taskContainerID) {
+        mainTaskContainer.append(subTaskForm);
+        subTaskForm.style.display = 'block';
+        document.getElementById('subTaskName').focus();
+    }
+
     for (let j = 0; j < task.subTasks.length; j++) 
     {
         let newSubTask = document.createElement('div');
         newSubTask.classList.add('subTask');
-        newSubTask.setAttribute("data-index", task.subTasks[j].id);
+        newSubTask.setAttribute("data-index", j);
     
         let check = document.createElement('input');
         check.type = "checkbox";
@@ -96,6 +102,29 @@ export function createTasks(i, page) {
         newSubTask.append(taskName);
 
         subTaskContainer.append(newSubTask);
+
+        let deleteSubTaskButton = document.createElement('button');
+        deleteSubTaskButton.textContent = "-";
+        deleteSubTaskButton.classList.add('deleteSubTaskButton');
+
+        newSubTask.append(deleteSubTaskButton);
+
+        deleteSubTaskButton.addEventListener('click', function() {
+            task.subTasks.splice(j, 1);
+            console.log("deleting subtask " + j);
+            
+            localStorage.setItem('myTasks', JSON.stringify(myTasks));
+            newSubTask.classList.add('subTaskDelete-animation')
+            newSubTask.addEventListener('animationend', function() {
+                if (page == 'inbox') {
+                    loadInbox();
+                } else if (page == 'today') {
+                    loadToday();
+                } else if (page == 'week') {
+                    loadWeek();
+                }
+            }, { once: true });
+        });
 
         if(task.subTasks[j].isChecked) {
             check.checked = true;

@@ -5,10 +5,10 @@ import { displayMenu } from "./tasks/taskMenu";
 import { createTasks } from "./tasks/taskCreation";
 import { setCurrentProject } from "./projects/createProject";
 
-const loadInbox = () => {
+const loadInbox = (taskContainerID) => {
     cleanPage();
     inboxHeader();
-    showAllTasks();
+    showAllTasks(taskContainerID);
 }
 
 function inboxHeader() {
@@ -21,13 +21,13 @@ function inboxHeader() {
 }
 
 
-export function showAllTasks() {
+export function showAllTasks(taskContainerID) {
     newTaskButtonContainer.textContent = "";
     taskList.textContent = "";
 
     for (let i = 0; i < myTasks.length; i++)
     {
-        createTasks(i, 'inbox');
+        createTasks(i, 'inbox', taskContainerID);
     }
 
     let newTaskButton = document.createElement('button');

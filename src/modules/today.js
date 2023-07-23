@@ -3,7 +3,7 @@ import { createTasks } from "./tasks/taskCreation";
 import { setCurrentProject } from "./projects/createProject";
 import { newTask } from "./tasks/tasks";
 
-const loadToday = () => {
+const loadToday = (taskContainerID) => {
 
     cleanPage();
     let currentDate = new Date();
@@ -30,7 +30,7 @@ const loadToday = () => {
             currentDate.getMonth() === taskDate.getMonth() &&
             currentDate.getDate() === taskDate.getDate()
         ) {
-            createTasks(i, 'today');
+            createTasks(i, 'today', taskContainerID);
         }
     }        
 }

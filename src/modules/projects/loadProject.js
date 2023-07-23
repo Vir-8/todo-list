@@ -4,12 +4,12 @@ import { displayMenu, loadMenu } from "../tasks/taskMenu";
 import { loadProjectSideBar } from "../sideBar";
 import menuImg from '../../assets/menu.svg';
 
-export const loadProject = (newProject) => {
+export const loadProject = (newProject, taskContainerID) => {
 
     cleanPage();
 
     projectHeader(newProject);
-    showProjectTasks(newProject);
+    showProjectTasks(newProject, taskContainerID);
 }
 
 function projectHeader(newProject) {
@@ -40,7 +40,7 @@ function projectHeader(newProject) {
     });
 }
 
-function showProjectTasks(newProject) {
+function showProjectTasks(newProject, taskContainerID) {
     newTaskButtonContainer.textContent = "";
     taskList.textContent = "";
     for (let i = 0; i < newProject.tasks.length; i++)
@@ -110,10 +110,16 @@ function showProjectTasks(newProject) {
         });
     
         menuDropDown.addEventListener('click', function() {
-            loadMenu(mainTaskContainer, projectID, 'menuDropDown')
+            loadMenu(mainTaskContainer, projectID, 'menuDropDown');
         });
 
-        taskList.append(mainTaskContainer)
+        taskList.append(mainTaskContainer);
+
+        if (i == taskContainerID) {
+            mainTaskContainer.append(subTaskForm);
+            subTaskForm.style.display = 'block';
+            document.getElementById('subTaskName').focus();
+        }
 
         for (let j = 0; j < projectTask.subTasks.length; j++) 
         {

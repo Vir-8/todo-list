@@ -3,7 +3,7 @@ import { createTasks } from "./tasks/taskCreation";
 import { setCurrentProject } from "./projects/createProject";
 import { newTask } from "./tasks/tasks";
 
-const loadWeek = () => {
+const loadWeek = (taskContainerID) => {
 
     cleanPage();
 
@@ -43,7 +43,7 @@ const loadWeek = () => {
 
         if (taskDate >= startOfWeek && taskDate <= endOfWeek)
         {
-            createTasks(i, 'week');
+            createTasks(i, 'week', taskContainerID);
         }
     }
 }
