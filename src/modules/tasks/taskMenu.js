@@ -78,13 +78,17 @@ function deleteTask(mainTaskContainer, pageID) {
 
     myTasks.splice(taskContainerID, 1);
 
-    if (pageID == 'inbox') {
-      loadInbox();
-    } else if (pageID == 'today') {
-      loadToday();
-    } else if (pageID == 'week') {
-      loadWeek();
-    }
+    mainTaskContainer.classList.add('taskDelete-animation')
+
+    mainTaskContainer.addEventListener('animationend', function() {
+        if (pageID == 'inbox') {
+            loadInbox();
+        } else if (pageID == 'today') {
+            loadToday();
+        } else if (pageID == 'week') {
+            loadWeek();
+        }
+    }, { once: true });
 
     localStorage.setItem('myTasks', JSON.stringify(myTasks));
   }
