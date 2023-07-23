@@ -12,12 +12,12 @@ const loadWeek = (taskContainerID) => {
     
     // Calculate the start of the week
     let startOfWeek = new Date(currentDate);
-    startOfWeek.setDate(currentDate.getDate() - currentDayOfWeek + 1);
+    startOfWeek.setDate(currentDate.getDate() - currentDayOfWeek + 1 - (currentDayOfWeek === 0 ? 7 : 0));
     startOfWeek.setHours(0, 0, 0, 0);
     
-    // Calculate the end of the week
+    // Calculate the end of the week (Sunday)
     let endOfWeek = new Date(currentDate);
-    endOfWeek.setDate(currentDate.getDate() + (6 - currentDayOfWeek) + 1);
+    endOfWeek.setDate(currentDate.getDate() + (7 - currentDayOfWeek) - (currentDayOfWeek === 0 ? 7 : 0));
     endOfWeek.setHours(23, 59, 59, 999);
 
     //set date input limit
