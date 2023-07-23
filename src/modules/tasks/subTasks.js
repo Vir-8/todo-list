@@ -38,11 +38,11 @@ function addNewSubTask(mainTaskContainer, pageID) {
         myTasks[taskContainerID].subTasks.push(subTask);
     
         if (pageID == 'inbox') {
-            loadInbox();
+            loadInbox(taskContainerID);
         } else if (pageID == 'today') {
-            loadToday();
+            loadToday(taskContainerID);
         } else if (pageID == 'week') {
-            loadWeek();
+            loadWeek(taskContainerID);
         }
 
         localStorage.setItem('myTasks', JSON.stringify(myTasks));
@@ -60,11 +60,8 @@ function addNewSubTask(mainTaskContainer, pageID) {
         localStorage.setItem('myProjects', JSON.stringify(myProjects));
 
         let newProject = myProjects[pageID];
-        loadProject(newProject);
+        loadProject(newProject, taskContainerID);
     }
-
-    subTaskForm.reset();
-    subTaskForm.style.display = 'none';
 }
 
 function cleanPage() {

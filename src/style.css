@@ -90,7 +90,7 @@ img {
     color: white;
 }
 
-#sideBar .buttons button:hover, #projectContainer button:hover {
+#sideBar .buttons button:hover, #projectContainer button:hover, .subTask .deleteSubTaskButton:hover {
     background-color: #bbbbbb3b;
 }
 
@@ -354,9 +354,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .subTaskContainer .subTask {
     display: flex;
     flex-direction: row;
+    align-items: center;
     height: 30px;
     background-color: #d4d4d812;
     border-top: 1px solid #ffffff75;
+}
+
+.subTask .deleteSubTaskButton {
+    display: flex;
+    visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: white;
+    background-color: rgb(223, 47, 47);
+    height: 18px;
+    width: 18px;
+    padding: 0px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.subTaskContainer .subTask:hover .deleteSubTaskButton {
+    visibility: visible;
 }
 
 .subTask input {
@@ -496,7 +518,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: bolder;
 }
 
-
 #custom-menu {
     display: none;
     position: absolute;
@@ -536,6 +557,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .start-animation {
     animation: deleteAnimation 0.6s;
+}
+
+@keyframes subTaskDeleteAnimation {
+    0% { height: 30px; opacity: 100%; margin-bottom: 0px; border-top: 1px solid rgba(255, 255, 255, 0.75) }
+    25% { background-color: rgb(223, 47, 47); }
+    100% { height: 0px; opacity: 0%; margin-bottom: -3px; border-top: 0px;}
+}
+
+.subTaskDelete-animation {
+    animation: subTaskDeleteAnimation 0.4s;
 }
 
 input:-webkit-autofill {
