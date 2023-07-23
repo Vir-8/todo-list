@@ -1,7 +1,5 @@
-import { myTasks, taskContainer, contentHeader, taskList, newTaskButtonContainer, newTaskForm, subTaskForm } from "..";
+import { myTasks, contentHeader, taskList, newTaskButtonContainer, newTaskForm, subTaskForm } from "..";
 import { newTask } from "./tasks/tasks";
-import { highLightButton } from "./sideBar.js";
-import { displayMenu } from "./tasks/taskMenu";
 import { createTasks } from "./tasks/taskCreation";
 import { setCurrentProject } from "./projects/createProject";
 
@@ -12,7 +10,6 @@ const loadInbox = (taskContainerID) => {
 }
 
 function inboxHeader() {
-
     let header = document.createElement('h1')
     header.textContent = "Inbox";
     header.classList.add('pageHeader');

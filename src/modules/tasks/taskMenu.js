@@ -9,7 +9,6 @@ export function displayMenu(mainTaskContainer, pageID) {
   mainTaskContainer.addEventListener('contextmenu', function(e) {
     e.preventDefault(); 
     const subtaskContainers = document.querySelectorAll('.subTaskContainer');
-
     // Check if any subtask container includes the e.target
     const isInSubtaskContainer = Array.from(subtaskContainers).some(container => container.contains(e.target));
     if (!isInSubtaskContainer) {
@@ -61,9 +60,7 @@ export function loadMenu(mainTaskContainer, pageID, e) {
   document.body.appendChild(menu);
 
   document.body.onclick = (e) => {
-    console.log("clicked");
     if (!menu.contains(e.target) && !menuDropDown.contains(e.target)) {
-      console.log("clicked outside task");
       menu.style.display = 'none'; // Hide the custom menu
     }
   }

@@ -1,27 +1,21 @@
-import { myTasks, newTaskForm, cancelTask, taskContainer, subTaskForm, projectForm } from "../..";
+import { myTasks, newTaskForm, cancelTask, subTaskForm, projectForm } from "../..";
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
-import { displayMenu } from "./taskMenu";
-
 
 function newTask(newTaskButton, page) {
-    // Position the form exactly where the button is
 
     cleanPage(newTaskButton);
-
     window.addEventListener('resize', function() {
         updateWidth(newTaskButton);
     });
 
     newTaskForm.onsubmit = function(e) {
-        console.log('submit new task clicked')
         addNewTask(newTaskButton, page); //create new task card
         e.preventDefault();
     };
 
     cancelTask.onclick = function(e) {
-        console.log('cancel task clicked')
         newTaskButton.style.display = 'block';
         newTaskForm.reset();
         newTaskForm.style.display = 'none';
@@ -54,7 +48,6 @@ function addNewTask(newTaskButton, page) {
     } else if (page == 'week') {
         loadWeek();
     }
-    console.log(myTasks);
 }
 
 function cleanPage(newTaskButton) {

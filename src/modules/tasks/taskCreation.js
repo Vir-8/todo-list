@@ -53,31 +53,6 @@ export function createTasks(i, page, taskContainerID) {
     mainTaskContainer.append(subTaskContainer);
 
     displayMenu(mainTaskContainer, page);
-
-    taskDate.addEventListener('change', function() {
-        task.mainTaskData.mainTaskDate = taskDate.value;
-        localStorage.setItem('myTasks', JSON.stringify(myTasks));
-
-        if (page == 'today') {
-            loadToday();
-        } else if (page == 'week') {
-            loadWeek();
-        }
-    });
-
-    taskDate.addEventListener('click', function() {
-        taskDate.showPicker();
-    });
-
-    taskName.addEventListener('change', function() {
-        task.mainTaskData.mainTaskName = taskName.value;
-        localStorage.setItem('myTasks', JSON.stringify(myTasks));
-    });
-
-    menuDropDown.addEventListener('click', function() {
-        loadMenu(mainTaskContainer, page, 'menuDropDown')
-    });
-
     taskList.append(mainTaskContainer);
 
     if (i == taskContainerID) {
@@ -111,7 +86,6 @@ export function createTasks(i, page, taskContainerID) {
 
         deleteSubTaskButton.addEventListener('click', function() {
             task.subTasks.splice(j, 1);
-            console.log("deleting subtask " + j);
             
             localStorage.setItem('myTasks', JSON.stringify(myTasks));
             newSubTask.classList.add('subTaskDelete-animation')
@@ -133,7 +107,7 @@ export function createTasks(i, page, taskContainerID) {
             check.checked = false;
             newSubTask.classList.remove('subTaskDone');
         }
-
+        
         check.addEventListener('change', function() {
             if (check.checked) {
                 // Mark task as completed
@@ -148,10 +122,33 @@ export function createTasks(i, page, taskContainerID) {
         });
     }
 
+    taskDate.addEventListener('change', function() {
+        task.mainTaskData.mainTaskDate = taskDate.value;
+        localStorage.setItem('myTasks', JSON.stringify(myTasks));
+
+        if (page == 'today') {
+            loadToday();
+        } else if (page == 'week') {
+            loadWeek();
+        }
+    });
+
+    taskDate.addEventListener('click', function() {
+        taskDate.showPicker();
+    });
+
+    taskName.addEventListener('change', function() {
+        task.mainTaskData.mainTaskName = taskName.value;
+        localStorage.setItem('myTasks', JSON.stringify(myTasks));
+    });
+
+    menuDropDown.addEventListener('click', function() {
+        loadMenu(mainTaskContainer, page, 'menuDropDown')
+    });
+
     check.addEventListener('change', function() {
         if (check.checked) {
         // Mark task as completed
-        console.log("checked task with id " + i + " and data-index " + mainTaskContainer.getAttribute("data-index"));
         myTasks.splice(i, 1);
 
         mainTaskContainer.classList.add('start-animation')
@@ -169,5 +166,4 @@ export function createTasks(i, page, taskContainerID) {
         } 
     });
 
-    console.log(myTasks[i]);
 }

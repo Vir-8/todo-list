@@ -1,11 +1,8 @@
 import { myProjects, projectForm, cancelProject, newTaskForm, subTaskForm } from "../..";
-import { loadProject } from "./loadProject";
 import { highLightButton, loadProjectSideBar } from "../sideBar.js";
 
 let currentProject;
-
 export const getCurrentProject = () => currentProject;
-
 export const setCurrentProject = (newProject) => {
   currentProject = newProject;
 };

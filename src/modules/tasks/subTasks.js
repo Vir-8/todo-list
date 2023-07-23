@@ -10,13 +10,11 @@ export function newSubTask(mainTaskContainer, pageID) {
     cleanPage();
 
     subTaskForm.onsubmit = function(e) {
-        console.log('submit subtask clicked')
         addNewSubTask(mainTaskContainer, pageID); //create new subtask card
         e.preventDefault();
     };
 
     cancelSubTask.onclick = function(e) {
-        console.log('cancel task clicked')
         subTaskForm.reset();
         subTaskForm.style.display = 'none';
         e.preventDefault();
@@ -34,7 +32,6 @@ function addNewSubTask(mainTaskContainer, pageID) {
             name: document.getElementById('subTaskName').value,
             isChecked: false
         }
-    
         myTasks[taskContainerID].subTasks.push(subTask);
     
         if (pageID == 'inbox') {
@@ -44,12 +41,8 @@ function addNewSubTask(mainTaskContainer, pageID) {
         } else if (pageID == 'week') {
             loadWeek(taskContainerID);
         }
-
         localStorage.setItem('myTasks', JSON.stringify(myTasks));
-    }
-    else {
-
-        console.log("project subtask???/")
+    } else {
         let subTask = {
             id: myProjects[pageID].tasks[taskContainerID].subTasks.length,
             name: document.getElementById('subTaskName').value,

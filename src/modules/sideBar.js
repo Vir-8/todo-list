@@ -4,14 +4,11 @@ import { loadProject } from "./projects/loadProject";
 import { getCurrentProject, setCurrentProject } from "./projects/createProject";
 
 export function highLightButton() {
-
     let buttons = document.querySelectorAll('.sideBarButton');
 
     buttons.forEach(button => {
-
         button.onclick = () => {
             buttons = document.querySelectorAll('.sideBarButton');
-
             buttons.forEach(button => button.classList.remove('highlight-button'));
             button.classList.add('highlight-button');
         };
@@ -47,7 +44,6 @@ export function loadProjectSideBar() {
 
         deleteProjectButton.addEventListener('click', function() {
             myProjects.splice(i, 1);
-            console.log("deleting task " + i);
 
             newProjectButton.classList.add('deleteProject-animation');
             deleteProjectButton.classList.add('deleteProject-animation');

@@ -1,13 +1,11 @@
-import { contentHeader, taskContainer, newTaskForm, cancelTask, taskList, newTaskButtonContainer, subTaskForm, myProjects } from "../..";
+import { contentHeader, newTaskForm, taskList, newTaskButtonContainer, subTaskForm, myProjects } from "../..";
 import { newProjectTask } from "./projectTask";
 import { displayMenu, loadMenu } from "../tasks/taskMenu";
 import { loadProjectSideBar } from "../sideBar";
 import menuImg from '../../assets/menu.svg';
 
 export const loadProject = (newProject, taskContainerID) => {
-
     cleanPage();
-
     projectHeader(newProject);
     showProjectTasks(newProject, taskContainerID);
 }
@@ -15,7 +13,6 @@ export const loadProject = (newProject, taskContainerID) => {
 function projectHeader(newProject) {
 
     contentHeader.textContent = "";
-
     let header = document.createElement('input')
     header.type = "text";
     header.value = newProject.name;
@@ -36,7 +33,6 @@ function projectHeader(newProject) {
             localStorage.setItem('myProjects', JSON.stringify(myProjects));
             loadProjectSideBar();
         }
-
     });
 }
 
@@ -94,25 +90,6 @@ function showProjectTasks(newProject, taskContainerID) {
         mainTaskContainer.append(subTaskContainer);
     
         displayMenu(mainTaskContainer, projectID);
-
-        taskDate.addEventListener('change', function() {
-            projectTask.mainTaskData.mainTaskDate = taskDate.value;
-            localStorage.setItem('myProjects', JSON.stringify(myProjects));
-        });
-
-        taskDate.addEventListener('click', function() {
-            taskDate.showPicker();
-        });
-
-        taskName.addEventListener('change', function() {
-            projectTask.mainTaskData.mainTaskName = taskName.value;
-            localStorage.setItem('myProjects', JSON.stringify(myProjects));
-        });
-    
-        menuDropDown.addEventListener('click', function() {
-            loadMenu(mainTaskContainer, projectID, 'menuDropDown');
-        });
-
         taskList.append(mainTaskContainer);
 
         if (i == taskContainerID) {
@@ -160,6 +137,24 @@ function showProjectTasks(newProject, taskContainerID) {
             });
         }
 
+        taskDate.addEventListener('change', function() {
+            projectTask.mainTaskData.mainTaskDate = taskDate.value;
+            localStorage.setItem('myProjects', JSON.stringify(myProjects));
+        });
+
+        taskDate.addEventListener('click', function() {
+            taskDate.showPicker();
+        });
+
+        taskName.addEventListener('change', function() {
+            projectTask.mainTaskData.mainTaskName = taskName.value;
+            localStorage.setItem('myProjects', JSON.stringify(myProjects));
+        });
+    
+        menuDropDown.addEventListener('click', function() {
+            loadMenu(mainTaskContainer, projectID, 'menuDropDown');
+        });
+
         check.addEventListener('change', function() {
             if (check.checked) {
             
@@ -188,7 +183,6 @@ function showProjectTasks(newProject, taskContainerID) {
 
 
 function cleanPage() {
-
     newTaskForm.reset();
     newTaskForm.style.display = 'none';
 

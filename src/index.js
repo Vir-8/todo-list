@@ -33,12 +33,10 @@ const addProject = document.getElementById('addProject');
 const cancelProject = document.getElementById('cancelProject');
 const menu = document.getElementById('custom-menu');
 
-
 const myTasks = [];
 const myProjects = [];
 
 getStoredData();
-
 
 let inboxButton = document.querySelector('.inbox');
 inboxButton.addEventListener('click', loadInbox);
@@ -53,8 +51,11 @@ let newProjectButton = document.querySelector('.newProject');
 newProjectButton.onclick = showProjectForm;
 
 highLightButton();
-console.log("works lol");
 
-export { contentHolder, myTasks, taskContainer, taskList, contentHeader, newTaskForm, submitNewTask, cancelTask,
+export { contentHeader, contentHolder, myTasks, taskContainer, taskList, 
+    newTaskForm, submitNewTask, cancelTask, subTaskForm, submitSubTask, cancelSubTask,
     myProjects, projectForm, addProject, cancelProject, projectContainer,
-    subTaskForm, submitSubTask, cancelSubTask, menu, newTaskButtonContainer };
+    menu, newTaskButtonContainer 
+};
+
+    
