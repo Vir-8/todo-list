@@ -63,6 +63,7 @@ function addNewSubTask(mainTaskContainer, pageID) {
 
 function cleanPage() {
     subTaskForm.style.display = 'block';
+    subTaskForm.reset();
     document.getElementById('subTaskName').focus();
 
     newTaskForm.reset();
