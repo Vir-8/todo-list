@@ -26,6 +26,11 @@ export function newSubTask(mainTaskContainer, pageID) {
 
 function addNewSubTask(mainTaskContainer, pageID) {
 
+    const scrollYPosition = window.scrollY;
+    document.addEventListener("DOMContentLoaded", function () {
+        window.scrollTo(0, scrollYPosition);
+    });
+
     let taskContainerID = mainTaskContainer.getAttribute("data-index");
 
     if(pageID === 'inbox' || pageID === 'today' || pageID === 'week') {

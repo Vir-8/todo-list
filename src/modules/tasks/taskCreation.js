@@ -98,7 +98,10 @@ export function createTasks(i, page, taskContainerID) {
             subTaskButtons.forEach(button => button.style.display = 'none');
             if (subTaskForm.style.display !== 'block') {
                 addSubTaskButton.style.display = 'flex';
-            }   
+            } else {
+                subTaskForm.style.display = 'none';
+                addSubTaskButton.style.display = 'flex';
+            }
         }
         e.stopPropagation();
     });
