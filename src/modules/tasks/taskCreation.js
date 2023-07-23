@@ -53,6 +53,11 @@ export function createTasks(i, page, taskContainerID) {
     mainTaskContainer.append(newTaskContainer);
     mainTaskContainer.append(subTaskContainer);
 
+    let addSubTaskButton = document.createElement('button');
+    addSubTaskButton.classList.add('addSubTaskButton');
+    addSubTaskButton.textContent = "+ Add Subtask";
+    mainTaskContainer.append(addSubTaskButton);
+
     displayMenu(mainTaskContainer, page);
     taskList.append(mainTaskContainer);
 
@@ -62,6 +67,79 @@ export function createTasks(i, page, taskContainerID) {
         document.getElementById('subTaskName').focus();
     }
 
+    loadSubtasks(task, mainTaskContainer, subTaskContainer, page, addSubTaskButton);
+
+    taskDate.addEventListener('change', function() {
+        task.mainTaskData.mainTaskDate = taskDate.value;
+        localStorage.setItem('myTasks', JSON.stringify(myTasks));
+
+        if (page == 'today') {
+            loadToday();
+        } else if (page == 'week') {
+            loadWeek();
+        }
+    });
+
+    taskDate.addEventListener('click', function() {
+        taskDate.showPicker();
+    });
+
+    taskName.addEventListener('change', function() {
+        task.mainTaskData.mainTaskName = taskName.value;
+        localStorage.setItem('myTasks', JSON.stringify(myTasks));
+    });
+
+    menuDropDown.addEventListener('click', function() {
+        loadMenu(mainTaskContainer, page, 'menuDropDown')
+    });
+
+    mainTaskContainer.addEventListener('click', function(e) {
+        if (e.target.type !== 'checkbox' && e.target.tagName !== 'BUTTON')
+        {
+            let subTaskButtons = document.querySelectorAll('.addSubTaskButton');
+            subTaskButtons.forEach(button => button.style.display = 'none');
+            if (subTaskForm.style.display !== 'block') {
+                addSubTaskButton.style.display = 'flex';
+            }   
+        }
+        e.stopPropagation();
+    });
+
+    addSubTaskButton.addEventListener('click', function() {
+        newSubTask(mainTaskContainer, page, addSubTaskButton, addSubTaskButton);
+        addSubTaskButton.style.display = 'none';
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!mainTaskContainer.contains(e.target)) {
+            addSubTaskButton.style.display = 'none';
+        }
+    });
+
+    check.addEventListener('change', function() {
+        if (check.checked) {
+        // Mark task as completed
+        myTasks.splice(i, 1);
+
+        mainTaskContainer.classList.add('start-animation')
+        mainTaskContainer.addEventListener('animationend', function() {
+            if (page == 'inbox') {
+                loadInbox();
+            } else if (page == 'today') {
+                loadToday();
+            } else if (page == 'week') {
+                loadWeek();
+            }
+          }, { once: true });
+
+        localStorage.setItem('myTasks', JSON.stringify(myTasks));
+        } 
+    });
+}
+
+
+function loadSubtasks(task, mainTaskContainer, subTaskContainer, page) {
+    subTaskContainer.textContent = "";
     for (let j = 0; j < task.subTasks.length; j++) 
     {
         let newSubTask = document.createElement('div');
@@ -108,8 +186,13 @@ export function createTasks(i, page, taskContainerID) {
 
         deleteSubTaskButton.addEventListener('click', function() {
             task.subTasks.splice(j, 1);
+            newSubTask.classList.add('subTaskDelete-animation');
+
             localStorage.setItem('myTasks', JSON.stringify(myTasks));
-            newSubTask.classList.add('subTaskDelete-animation')
+
+            newSubTask.addEventListener('animationend', function() {
+                loadSubtasks(task, mainTaskContainer, subTaskContainer, page);
+            });
 
             if (subTaskForm.style.display == 'block') {
                 document.getElementById('subTaskName').focus();
@@ -120,75 +203,4 @@ export function createTasks(i, page, taskContainerID) {
             }
         });
     }
-
-    let addSubTaskButton = document.createElement('button');
-    addSubTaskButton.classList.add('addSubTaskButton');
-    addSubTaskButton.textContent = "+ Add Subtask";
-    subTaskContainer.append(addSubTaskButton);
-
-    mainTaskContainer.addEventListener('click', function(e) {
-        if (e.target.type !== 'checkbox' && e.target.tagName !== 'BUTTON')
-        {
-            let subTaskButtons = document.querySelectorAll('.addSubTaskButton');
-            subTaskButtons.forEach(button => button.style.display = 'none');
-            if (subTaskForm.style.display !== 'block') {
-                addSubTaskButton.style.display = 'flex';
-            }   
-        }
-    });
-
-    addSubTaskButton.addEventListener('click', function() {
-        newSubTask(mainTaskContainer, page, addSubTaskButton);
-        addSubTaskButton.style.display = 'none';
-    });
-
-    document.addEventListener('click', function(e) {
-        if (!mainTaskContainer.contains(e.target)) {
-            addSubTaskButton.style.display = 'none';
-        }
-    });
-
-    taskDate.addEventListener('change', function() {
-        task.mainTaskData.mainTaskDate = taskDate.value;
-        localStorage.setItem('myTasks', JSON.stringify(myTasks));
-
-        if (page == 'today') {
-            loadToday();
-        } else if (page == 'week') {
-            loadWeek();
-        }
-    });
-
-    taskDate.addEventListener('click', function() {
-        taskDate.showPicker();
-    });
-
-    taskName.addEventListener('change', function() {
-        task.mainTaskData.mainTaskName = taskName.value;
-        localStorage.setItem('myTasks', JSON.stringify(myTasks));
-    });
-
-    menuDropDown.addEventListener('click', function() {
-        loadMenu(mainTaskContainer, page, 'menuDropDown')
-    });
-
-    check.addEventListener('change', function() {
-        if (check.checked) {
-        // Mark task as completed
-        myTasks.splice(i, 1);
-
-        mainTaskContainer.classList.add('start-animation')
-        mainTaskContainer.addEventListener('animationend', function() {
-            if (page == 'inbox') {
-                loadInbox();
-            } else if (page == 'today') {
-                loadToday();
-            } else if (page == 'week') {
-                loadWeek();
-            }
-          }, { once: true });
-
-        localStorage.setItem('myTasks', JSON.stringify(myTasks));
-        } 
-    });
 }

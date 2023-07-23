@@ -184,7 +184,7 @@ img {
 
 .newTaskContent {
     display: flex;
-    width: 90%;
+    width: 100%;
     justify-content: space-between;
     gap: 10px;
     padding-right: 5px;
@@ -193,6 +193,7 @@ img {
 
 .right-side {
     display: flex;
+    justify-content: space-between;
     gap: 8px;
 }
 
@@ -226,13 +227,22 @@ img {
 
 .newTask input[type=checkbox] {
     margin-left: 10px;
-    width: 20px;
-    height: 20px;
+    min-width: 22px;
+    height: 22px;
     align-self: center;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
+}
+
+input[type="checkbox"] {
+    opacity: 50%;
+    accent-color: #222f43;
+}
+
+input[type="checkbox"]:checked {
+    opacity: 100%;
 }
 
 .newTaskForm {
@@ -311,6 +321,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     min-height: 35px;
     font-size: 18px;
+    margin-left: 35px;
+    margin-top: 4px;
+    height: 40px;
+    width: calc(100% - 35px);
     padding-left: 15px;
     border: none;
     outline: none;
@@ -374,6 +388,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex-direction: row;
     align-items: center;
     height: 40px;
+    padding-right: 20px;
     background-color: #d4d4d812;
     border-top: 1px solid #ffffff75;
 }
@@ -382,12 +397,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
     visibility: hidden;
     align-items: center;
+    align-self: center;
     justify-content: center;
     border: none;
     color: white;
     background-color: rgb(223, 47, 47);
-    height: 20px;
-    width: 20px;
+    height: 25px;
+    min-width: 25px;
     padding: 0px;
     vertical-align: middle;
     text-align: center;
@@ -410,13 +426,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .subTask input[type=checkbox] {
     margin-left: 10px;
     margin-right: 20px;
-    width: 20px;
-    height: 20px;
+    min-width: 22px;
+    height: 22px;
     align-self: center;
 }
 
 .subTask input[type=text] {
-    width: 80%;
+    width: 95%;
     outline: none;
 }
 

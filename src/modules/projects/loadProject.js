@@ -91,100 +91,19 @@ function showProjectTasks(newProject, taskContainerID) {
         mainTaskContainer.append(newTaskContainer);
         mainTaskContainer.append(subTaskContainer);
     
+        let addSubTaskButton = document.createElement('button');
+        addSubTaskButton.classList.add('addSubTaskButton');
+        addSubTaskButton.textContent = "+ Add Subtask";
+        mainTaskContainer.append(addSubTaskButton);
+
         displayMenu(mainTaskContainer, projectID);
         taskList.append(mainTaskContainer);
 
         if (i == taskContainerID) {
-            mainTaskContainer.append(subTaskForm);
-            subTaskForm.style.display = 'block';
-            document.getElementById('subTaskName').focus();
+            newSubTask(mainTaskContainer, projectID, addSubTaskButton)
         }
 
-        for (let j = 0; j < projectTask.subTasks.length; j++) 
-        {
-            let newSubTask = document.createElement('div');
-            newSubTask.classList.add('subTask');
-            newSubTask.setAttribute("data-index", projectTask.subTasks[j].id);
-        
-            let check = document.createElement('input');
-            check.type = "checkbox";
-            newSubTask.append(check);
-        
-            let taskName = document.createElement('input');
-            taskName.type = 'text';
-            taskName.value = projectTask.subTasks[j].name;
-            newSubTask.append(taskName);
-
-            subTaskContainer.append(newSubTask);
-
-            let deleteSubTaskButton = document.createElement('button');
-            deleteSubTaskButton.textContent = "-";
-            deleteSubTaskButton.classList.add('deleteSubTaskButton');
-    
-            newSubTask.append(deleteSubTaskButton);
-
-            if(projectTask.subTasks[j].isChecked) {
-                check.checked = true;
-                newSubTask.classList.add('subTaskDone');
-            } else {
-                check.checked = false;
-                newSubTask.classList.remove('subTaskDone');
-            }
-
-            check.addEventListener('change', function() {
-                if (check.checked) {
-                    // Mark task as completed
-                    newSubTask.classList.add('subTaskDone');
-                    projectTask.subTasks[j].isChecked = true;
-                    localStorage.setItem('myProjects', JSON.stringify(myProjects));
-                } else {
-                    newSubTask.classList.remove('subTaskDone');
-                    projectTask.subTasks[j].isChecked = false;
-                    localStorage.setItem('myProjects', JSON.stringify(myProjects));
-                }
-            });
-
-            deleteSubTaskButton.addEventListener('click', function() {
-                projectTask.subTasks.splice(j, 1);
-                localStorage.setItem('myProjects', JSON.stringify(myProjects));
-                newSubTask.classList.add('subTaskDelete-animation')
-
-                if (subTaskForm.style.display == 'block') {
-                    document.getElementById('subTaskName').focus();
-                } else if (newTaskForm.style.display == 'block') {
-                    document.getElementById('taskName').focus();
-                } else if (projectForm.style.display == 'flex') {
-                    document.getElementById('projectName').focus();
-                }
-            });
-        }
-
-        let addSubTaskButton = document.createElement('button');
-        addSubTaskButton.classList.add('addSubTaskButton');
-        addSubTaskButton.textContent = "+ Add Subtask";
-        subTaskContainer.append(addSubTaskButton);
-    
-        mainTaskContainer.addEventListener('click', function(e) {
-            if (e.target.type !== 'checkbox' && e.target.tagName !== 'BUTTON')
-            {
-                let subTaskButtons = document.querySelectorAll('.addSubTaskButton');
-                subTaskButtons.forEach(button => button.style.display = 'none');
-                if (subTaskForm.style.display !== 'block') {
-                    addSubTaskButton.style.display = 'flex';
-                }   
-            }
-        });
-    
-        addSubTaskButton.addEventListener('click', function() {
-            newSubTask(mainTaskContainer, projectID, addSubTaskButton);
-            addSubTaskButton.style.display = 'none';
-        });
-    
-        document.addEventListener('click', function(e) {
-            if (!mainTaskContainer.contains(e.target)) {
-                addSubTaskButton.style.display = 'none';
-            }
-        });
+        loadSubtasks(projectTask, mainTaskContainer, subTaskContainer, projectID);
 
         taskDate.addEventListener('change', function() {
             projectTask.mainTaskData.mainTaskDate = taskDate.value;
@@ -202,6 +121,29 @@ function showProjectTasks(newProject, taskContainerID) {
     
         menuDropDown.addEventListener('click', function() {
             loadMenu(mainTaskContainer, projectID, 'menuDropDown');
+        });
+        
+        mainTaskContainer.addEventListener('click', function(e) {
+            if (e.target.type !== 'checkbox' && e.target.tagName !== 'BUTTON')
+            {
+                let subTaskButtons = document.querySelectorAll('.addSubTaskButton');
+                subTaskButtons.forEach(button => button.style.display = 'none');
+                if (subTaskForm.style.display !== 'block') {
+                    addSubTaskButton.style.display = 'flex';
+                }   
+            }
+            e.stopPropagation();
+        });
+
+        addSubTaskButton.addEventListener('click', function() {
+            newSubTask(mainTaskContainer, projectID, addSubTaskButton);
+            addSubTaskButton.style.display = 'none';
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!mainTaskContainer.contains(e.target)) {
+                addSubTaskButton.style.display = 'none';
+            }
         });
 
         check.addEventListener('change', function() {
@@ -228,6 +170,75 @@ function showProjectTasks(newProject, taskContainerID) {
 
     newProjectTaskButton.classList.add('newTaskButton');
     newTaskButtonContainer.append(newProjectTaskButton);
+}
+
+
+function loadSubtasks(projectTask, mainTaskContainer, subTaskContainer, projectID) {
+
+    subTaskContainer.textContent = "";
+    for (let j = 0; j < projectTask.subTasks.length; j++) 
+    {
+        let newSubTask = document.createElement('div');
+        newSubTask.classList.add('subTask');
+        newSubTask.setAttribute("data-index", projectTask.subTasks[j].id);
+    
+        let check = document.createElement('input');
+        check.type = "checkbox";
+        newSubTask.append(check);
+    
+        let taskName = document.createElement('input');
+        taskName.type = 'text';
+        taskName.value = projectTask.subTasks[j].name;
+        newSubTask.append(taskName);
+
+        subTaskContainer.append(newSubTask);
+
+        let deleteSubTaskButton = document.createElement('button');
+        deleteSubTaskButton.textContent = "-";
+        deleteSubTaskButton.classList.add('deleteSubTaskButton');
+
+        newSubTask.append(deleteSubTaskButton);
+
+        if(projectTask.subTasks[j].isChecked) {
+            check.checked = true;
+            newSubTask.classList.add('subTaskDone');
+        } else {
+            check.checked = false;
+            newSubTask.classList.remove('subTaskDone');
+        }
+
+        check.addEventListener('change', function() {
+            if (check.checked) {
+                // Mark task as completed
+                newSubTask.classList.add('subTaskDone');
+                projectTask.subTasks[j].isChecked = true;
+                localStorage.setItem('myProjects', JSON.stringify(myProjects));
+            } else {
+                newSubTask.classList.remove('subTaskDone');
+                projectTask.subTasks[j].isChecked = false;
+                localStorage.setItem('myProjects', JSON.stringify(myProjects));
+            }
+        });
+
+        deleteSubTaskButton.addEventListener('click', function() {
+            projectTask.subTasks.splice(j, 1);
+            newSubTask.classList.add('subTaskDelete-animation')
+
+            localStorage.setItem('myProjects', JSON.stringify(myProjects));
+
+            newSubTask.addEventListener('animationend', function() {
+                loadSubtasks(projectTask, mainTaskContainer, subTaskContainer, projectID);
+            });
+
+            if (subTaskForm.style.display == 'block') {
+                document.getElementById('subTaskName').focus();
+            } else if (newTaskForm.style.display == 'block') {
+                document.getElementById('taskName').focus();
+            } else if (projectForm.style.display == 'flex') {
+                document.getElementById('projectName').focus();
+            }
+        });
+    }
 }
 
 

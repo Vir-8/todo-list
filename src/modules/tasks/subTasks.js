@@ -4,10 +4,15 @@ import loadToday from "../today";
 import loadWeek from "../week";
 import { loadProject } from "../projects/loadProject";
 
-export function newSubTask(mainTaskContainer, pageID) {
+export function newSubTask(mainTaskContainer, pageID, addSubTaskButton) {
 
     mainTaskContainer.append(subTaskForm);
     cleanPage();
+
+    if (typeof addSubTaskButton === 'undefined')
+    {
+        addSubTaskButton = subTaskForm.previousElementSibling;
+    }
 
     subTaskForm.onsubmit = function(e) {
         addNewSubTask(mainTaskContainer, pageID); //create new subtask card
@@ -16,6 +21,7 @@ export function newSubTask(mainTaskContainer, pageID) {
 
     cancelSubTask.onclick = function(e) {
         subTaskForm.reset();
+        addSubTaskButton.style.display = 'flex';
         subTaskForm.style.display = 'none';
         e.preventDefault();
     }
@@ -57,7 +63,7 @@ function addNewSubTask(mainTaskContainer, pageID) {
     }
 }
 
-function cleanPage(addSubTaskButton) {
+function cleanPage() {
     subTaskForm.style.display = 'block';
     document.getElementById('subTaskName').focus();
 
