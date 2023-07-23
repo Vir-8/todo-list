@@ -1,5 +1,7 @@
 import { menu, myTasks, myProjects } from "../..";
 import loadInbox from "../inbox";
+import loadToday from "../today";
+import loadWeek from "../week";
 import { newSubTask } from "./subTasks";
 import { showProjectTasks } from "../projects/loadProject";
 import { loadProject } from "../projects/loadProject";
