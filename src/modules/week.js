@@ -37,6 +37,7 @@ const loadWeek = (taskContainerID) => {
     dateInput.min = minDate;
     dateInput.max = maxDate;
 
+
     for (let i = 0; i < myTasks.length; i++)
     {
         let task = myTasks[i];

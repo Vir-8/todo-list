@@ -50,6 +50,10 @@ function cleanPage() {
     contentHeader.style.display = "flex";
     contentHeader.textContent = "";
     contentHolder.scrollTop = 0;
+
+    const dateInput = document.getElementById('taskDate');
+    dateInput.min = '';
+    dateInput.max = '';
     resetDate();
 }
 

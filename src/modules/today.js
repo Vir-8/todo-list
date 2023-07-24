@@ -29,8 +29,6 @@ const loadToday = (taskContainerID) => {
 
 export function resetDate() {
     let dateInput = document.getElementById('taskDate');
-    dateInput.removeAttribute('min');
-    dateInput.removeAttribute('max');
 
     let currentDate = new Date();
     const year = currentDate.getFullYear();
