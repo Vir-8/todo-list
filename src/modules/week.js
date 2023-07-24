@@ -1,4 +1,4 @@
-import { contentHeader, myTasks, taskList, newTaskForm, subTaskForm, newTaskButtonContainer } from "..";
+import { contentHeader, contentHolder, myTasks, taskList, newTaskForm, subTaskForm, newTaskButtonContainer } from "..";
 import { createTasks } from "./tasks/taskCreation";
 import { setCurrentProject } from "./projects/createProject";
 import { newTask } from "./tasks/tasks";
@@ -66,6 +66,7 @@ function cleanPage() {
 
     contentHeader.style.display = "flex";
     contentHeader.textContent = "";
+    contentHolder.scrollTop = 0;
 
     let header = document.createElement('h1')
     header.textContent = "This Week";

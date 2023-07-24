@@ -1,8 +1,8 @@
-import { subTaskForm, cancelSubTask, myTasks, myProjects, newTaskForm, projectForm } from "../..";
+import { subTaskForm, cancelSubTask, myTasks, myProjects, newTaskForm, projectForm, contentHolder } from "../..";
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
-import { loadProject, showProjectTasks } from "../projects/loadProject";
+import { loadProject } from "../projects/loadProject";
 
 export function newSubTask(mainTaskContainer, pageID) {
 
@@ -26,10 +26,7 @@ export function newSubTask(mainTaskContainer, pageID) {
 
 function addNewSubTask(mainTaskContainer, pageID) {
 
-    const scrollYPosition = window.scrollY;
-    document.addEventListener("DOMContentLoaded", function () {
-        window.scrollTo(0, scrollYPosition);
-    });
+    let scrollYPosition = contentHolder.scrollTop;
 
     let taskContainerID = mainTaskContainer.getAttribute("data-index");
 
@@ -61,9 +58,9 @@ function addNewSubTask(mainTaskContainer, pageID) {
         localStorage.setItem('myProjects', JSON.stringify(myProjects));
 
         let newProject = myProjects[pageID];
-        showProjectTasks(newProject, taskContainerID);
-        console.log("loading shit with taskcontainerid " + taskContainerID);
+        loadProject(newProject, taskContainerID);
     }
+    contentHolder.scrollTop = scrollYPosition;
 }
 
 function cleanPage() {

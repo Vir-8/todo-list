@@ -139,7 +139,7 @@ export function createTasks(i, page, taskContainerID) {
 }
 
 
-function loadSubtasks(task, mainTaskContainer, subTaskContainer, page) {
+function loadSubtasks(task, mainTaskContainer, subTaskContainer) {
     subTaskContainer.textContent = "";
     for (let j = 0; j < task.subTasks.length; j++) 
     {
@@ -197,7 +197,7 @@ function loadSubtasks(task, mainTaskContainer, subTaskContainer, page) {
             localStorage.setItem('myTasks', JSON.stringify(myTasks));
 
             newSubTask.addEventListener('animationend', function() {
-                loadSubtasks(task, mainTaskContainer, subTaskContainer, page);
+                loadSubtasks(task, mainTaskContainer, subTaskContainer);
             });
 
             if (subTaskForm.style.display == 'block') {

@@ -1,4 +1,4 @@
-import { contentHeader, newTaskForm, taskList, newTaskButtonContainer, subTaskForm, myProjects, projectForm } from "../..";
+import { contentHeader, newTaskForm, taskList, newTaskButtonContainer, subTaskForm, myProjects, projectForm, contentHolder } from "../..";
 import { newProjectTask } from "./projectTask";
 import { displayMenu, loadMenu } from "../tasks/taskMenu";
 import { loadProjectSideBar } from "../sideBar";
@@ -38,7 +38,7 @@ function projectHeader(newProject) {
     });
 }
 
-export function showProjectTasks(newProject, taskContainerID) {
+function showProjectTasks(newProject, taskContainerID) {
     newTaskButtonContainer.textContent = "";
 
     let newProjectTaskButton = document.createElement('button');
@@ -116,15 +116,11 @@ export function showProjectTasks(newProject, taskContainerID) {
             // Code that might cause an error, including the part that uses taskContainerID
             if (typeof taskContainerID !== 'undefined' && taskContainerID == i) {
                 newSubTask(mainTaskContainer, projectID)
-                console.log("running new subtask");
             }
         } catch (error) {
             // Handle the error here or log it to the console
             console.error("An error occurred:", error);
         }
-
-
-        console.log("task container ID is " + taskContainerID);
 
         taskDate.addEventListener('change', function() {
             projectTask.mainTaskData.mainTaskDate = taskDate.value;
@@ -269,6 +265,7 @@ function cleanPage() {
 
     contentHeader.style.display = "flex";
     contentHeader.textContent = "";
+    contentHolder.scrollTop = 0;
 
     resetDate();
 }

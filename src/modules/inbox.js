@@ -1,4 +1,4 @@
-import { myTasks, contentHeader, taskList, newTaskButtonContainer, newTaskForm, subTaskForm } from "..";
+import { myTasks, contentHeader, contentHolder, taskList, newTaskButtonContainer, newTaskForm, subTaskForm } from "..";
 import { newTask } from "./tasks/tasks";
 import { createTasks } from "./tasks/taskCreation";
 import { setCurrentProject } from "./projects/createProject";
@@ -49,7 +49,7 @@ function cleanPage() {
 
     contentHeader.style.display = "flex";
     contentHeader.textContent = "";
-
+    contentHolder.scrollTop = 0;
     resetDate();
 }
 
