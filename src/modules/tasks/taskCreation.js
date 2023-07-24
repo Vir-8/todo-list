@@ -1,4 +1,4 @@
-import { myTasks, subTaskForm, taskList, newTaskForm, projectForm } from "../..";
+import { myTasks, subTaskForm, taskList, newTaskForm, projectForm, contentHolder } from "../..";
 import { displayMenu, loadMenu } from "./taskMenu";
 import loadInbox from "../inbox";
 import loadToday from "../today";
@@ -119,19 +119,21 @@ export function createTasks(i, page, taskContainerID) {
 
     check.addEventListener('change', function() {
         if (check.checked) {
-        // Mark task as completed
-        myTasks.splice(i, 1);
+            let scrollYPosition = contentHolder.scrollTop;
+            // Mark task as completed
+            myTasks.splice(i, 1);
 
-        mainTaskContainer.classList.add('start-animation')
-        mainTaskContainer.addEventListener('animationend', function() {
-            if (page == 'inbox') {
-                loadInbox();
-            } else if (page == 'today') {
-                loadToday();
-            } else if (page == 'week') {
-                loadWeek();
-            }
-          }, { once: true });
+            mainTaskContainer.classList.add('start-animation')
+            mainTaskContainer.addEventListener('animationend', function() {
+                if (page == 'inbox') {
+                    loadInbox();
+                } else if (page == 'today') {
+                    loadToday();
+                } else if (page == 'week') {
+                    loadWeek();
+                }
+                contentHolder.scrollTop = scrollYPosition;
+            }, { once: true });
 
         localStorage.setItem('myTasks', JSON.stringify(myTasks));
         } 

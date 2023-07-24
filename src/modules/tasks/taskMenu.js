@@ -1,4 +1,4 @@
-import { menu, myTasks, myProjects } from "../..";
+import { menu, myTasks, myProjects, contentHolder } from "../..";
 import loadInbox from "../inbox";
 import loadToday from "../today";
 import loadWeek from "../week";
@@ -73,6 +73,7 @@ export function loadMenu(mainTaskContainer, pageID, e) {
 function deleteTask(mainTaskContainer, pageID) {
 
   let taskContainerID = mainTaskContainer.getAttribute("data-index");
+  let scrollYPosition = contentHolder.scrollTop;
 
   if(pageID === 'inbox' || pageID === 'today' || pageID === 'week') {
 
@@ -80,15 +81,15 @@ function deleteTask(mainTaskContainer, pageID) {
     mainTaskContainer.classList.add('taskDelete-animation')
 
     mainTaskContainer.addEventListener('animationend', function() {
-        if (pageID == 'inbox') {
-            loadInbox();
-        } else if (pageID == 'today') {
-            loadToday();
-        } else if (pageID == 'week') {
-            loadWeek();
-        }
+      if (pageID == 'inbox') {
+        loadInbox();
+      } else if (pageID == 'today') {
+        loadToday();
+      } else if (pageID == 'week') {
+        loadWeek();
+      }
+      contentHolder.scrollTop = scrollYPosition;
     }, { once: true });
-
     localStorage.setItem('myTasks', JSON.stringify(myTasks));
   }
   else {
@@ -97,9 +98,9 @@ function deleteTask(mainTaskContainer, pageID) {
     mainTaskContainer.addEventListener('animationend', function() {
       let newProject = myProjects[pageID];
       loadProject(newProject);
+      contentHolder.scrollTop = scrollYPosition;
     });
     localStorage.setItem('myProjects', JSON.stringify(myProjects));
   }
-
   menu.style.display = 'none';  
 }

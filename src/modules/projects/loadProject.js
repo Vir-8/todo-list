@@ -164,13 +164,14 @@ function showProjectTasks(newProject, taskContainerID) {
         }, {once: true});
 
         check.addEventListener('change', function() {
+            let scrollYPosition = contentHolder.scrollTop;
             if (check.checked) {
-            
             newProject.tasks.splice(i, 1);
 
             mainTaskContainer.classList.add('start-animation')
             mainTaskContainer.addEventListener('animationend', function() {
                 loadProject(newProject);
+                contentHolder.scrollTop = scrollYPosition;
             }, { once: true });
               
             localStorage.setItem('myProjects', JSON.stringify(myProjects));

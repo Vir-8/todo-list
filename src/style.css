@@ -585,7 +585,7 @@ input[type="checkbox"]:checked {
 }
 
 .start-animation {
-    animation: doneAnimation 0.6s;
+    animation: doneAnimation 0.4s;
 }
 
 @keyframes subTaskDeleteAnimation {
@@ -606,7 +606,7 @@ input[type="checkbox"]:checked {
 }
 
 .taskDelete-animation {
-    animation: taskDeleteAnimation 0.6s;
+    animation: taskDeleteAnimation 0.4s;
 }
 
 @keyframes deleteProjectAnimation {
