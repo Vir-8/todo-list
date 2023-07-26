@@ -57,55 +57,7 @@ function showProjectTasks(newProject, taskContainerID) {
         let projectTask = newProject.tasks[i];
         let projectID = newProject.id;
 
-        let mainTaskContainer = document.createElement('div');
-        mainTaskContainer.setAttribute("data-index", i);
-        mainTaskContainer.classList.add('mainTaskContainer');
-    
-        let newTaskContainer = document.createElement('div');
-        newTaskContainer.classList.add('newTask');
-    
-        let check = document.createElement('input');
-        check.type = "checkbox";
-        newTaskContainer.append(check);
-    
-        let newTaskContent = document.createElement('div');
-        newTaskContent.classList.add('newTaskContent');
-    
-        let taskName = document.createElement('input');
-        taskName.type = 'text';
-        taskName.value = projectTask.mainTaskData.mainTaskName;
-        newTaskContent.append(taskName);
-    
-        let rightSide = document.createElement('div');
-        rightSide.classList.add('right-side');
-    
-        let taskDate = document.createElement('input');
-        taskDate.type = 'date';
-        taskDate.value = projectTask.mainTaskData.mainTaskDate;
-        rightSide.append(taskDate);
-    
-        let menuDropDown = document.createElement('div');
-        menuDropDown.classList.add('menuDropDown');
-        let svgImage = document.createElement('img');
-        svgImage.src = menuImg; 
-    
-        menuDropDown.appendChild(svgImage);
-    
-        rightSide.append(menuDropDown);
-
-        newTaskContent.append(rightSide);
-        newTaskContainer.append(newTaskContent);
-    
-        let subTaskContainer = document.createElement('div');
-        subTaskContainer.classList.add('subTaskContainer');
-    
-        mainTaskContainer.append(newTaskContainer);
-        mainTaskContainer.append(subTaskContainer);
-    
-        let addSubTaskButton = document.createElement('button');
-        addSubTaskButton.classList.add('addSubTaskButton');
-        addSubTaskButton.textContent = "+ Add Subtask";
-        mainTaskContainer.append(addSubTaskButton);
+        let {mainTaskContainer, subTaskContainer, check, taskName, taskDate, addSubTaskButton, menuDropDown} = createProjectTaskElement(projectTask, i);
 
         displayMenu(mainTaskContainer, projectID);
         taskList.append(mainTaskContainer);
@@ -186,26 +138,8 @@ function loadSubtasks(projectTask, mainTaskContainer, subTaskContainer, projectI
     subTaskContainer.textContent = "";
     for (let j = 0; j < projectTask.subTasks.length; j++) 
     {
-        let newSubTask = document.createElement('div');
-        newSubTask.classList.add('subTask');
-        newSubTask.setAttribute("data-index", projectTask.subTasks[j].id);
-    
-        let check = document.createElement('input');
-        check.type = "checkbox";
-        newSubTask.append(check);
-    
-        let taskName = document.createElement('input');
-        taskName.type = 'text';
-        taskName.value = projectTask.subTasks[j].name;
-        newSubTask.append(taskName);
-
+        let {newSubTask, taskName, check, deleteSubTaskButton} = createProjectSubTaskElements(projectTask, j);
         subTaskContainer.append(newSubTask);
-
-        let deleteSubTaskButton = document.createElement('button');
-        deleteSubTaskButton.textContent = "-";
-        deleteSubTaskButton.classList.add('deleteSubTaskButton');
-
-        newSubTask.append(deleteSubTaskButton);
 
         if(projectTask.subTasks[j].isChecked) {
             check.checked = true;
@@ -254,6 +188,82 @@ function loadSubtasks(projectTask, mainTaskContainer, subTaskContainer, projectI
     }
 }
 
+function createProjectTaskElement(projectTask, i) {
+    let mainTaskContainer = document.createElement('div');
+    mainTaskContainer.setAttribute("data-index", i);
+    mainTaskContainer.classList.add('mainTaskContainer');
+
+    let newTaskContainer = document.createElement('div');
+    newTaskContainer.classList.add('newTask');
+
+    let check = document.createElement('input');
+    check.type = "checkbox";
+
+    let newTaskContent = document.createElement('div');
+    newTaskContent.classList.add('newTaskContent');
+
+    let taskName = document.createElement('input');
+    taskName.type = 'text';
+    taskName.value = projectTask.mainTaskData.mainTaskName;
+
+    let rightSide = document.createElement('div');
+    rightSide.classList.add('right-side');
+
+    let taskDate = document.createElement('input');
+    taskDate.type = 'date';
+    taskDate.value = projectTask.mainTaskData.mainTaskDate;
+
+    let menuDropDown = document.createElement('div');
+    menuDropDown.classList.add('menuDropDown');
+    let svgImage = document.createElement('img');
+    svgImage.src = menuImg; 
+
+    let subTaskContainer = document.createElement('div');
+    subTaskContainer.classList.add('subTaskContainer');
+
+    let addSubTaskButton = document.createElement('button');
+    addSubTaskButton.classList.add('addSubTaskButton');
+    addSubTaskButton.textContent = "+ Add Subtask";
+
+    newTaskContainer.append(check);
+    newTaskContainer.append(newTaskContent);
+
+    newTaskContent.append(taskName);
+    newTaskContent.append(rightSide);
+
+    rightSide.append(taskDate);
+    rightSide.append(menuDropDown);
+    menuDropDown.appendChild(svgImage);
+
+    mainTaskContainer.append(newTaskContainer);
+    mainTaskContainer.append(subTaskContainer);
+    mainTaskContainer.append(addSubTaskButton);
+
+    return {mainTaskContainer, subTaskContainer, check, taskName, taskDate, addSubTaskButton, menuDropDown};
+}
+
+function createProjectSubTaskElements(projectTask, j) {
+    let newSubTask = document.createElement('div');
+    newSubTask.classList.add('subTask');
+    newSubTask.setAttribute("data-index", projectTask.subTasks[j].id);
+
+    let check = document.createElement('input');
+    check.type = "checkbox";
+
+    let taskName = document.createElement('input');
+    taskName.type = 'text';
+    taskName.value = projectTask.subTasks[j].name;
+
+    let deleteSubTaskButton = document.createElement('button');
+    deleteSubTaskButton.textContent = "-";
+    deleteSubTaskButton.classList.add('deleteSubTaskButton');
+
+    newSubTask.append(check);
+    newSubTask.append(taskName);
+    newSubTask.append(deleteSubTaskButton);
+
+    return {newSubTask, taskName, check, deleteSubTaskButton};
+}
 
 function cleanPage() {
     newTaskForm.reset();
